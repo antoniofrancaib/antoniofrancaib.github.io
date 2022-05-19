@@ -2,11 +2,11 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Javier Rando # the website title (if blank, full name will be used instead)
-first_name: Javier
+title: Antonio Franca # the website title (if blank, full name will be used instead)
+first_name: Antonio
 middle_name:
-last_name: Rando
-email: javirandor@gmail.com
+last_name: Franca
+email: antoniofrancaib@gmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Welcome to my webpage. I am Antonio Franca!
 footer_text: >
@@ -57,7 +57,7 @@ og_image: # The site-wide (default for all links) Open Graph preview image
 github_username: antoniofrancaib # your GitHub user name
 gitlab_username: # your GitLab user name
 twitter_username: antoniofrancaib # your Twitter handle
-linkedin_username: javier-rando # your LinkedIn user name
+linkedin_username: antonio-franca-ibáñez-a37623198 # your LinkedIn user name
 scholar_userid: # your Google Scholar ID
 orcid_id: # your ORCID ID
 medium_username: # your Medium username
