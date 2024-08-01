@@ -120,17 +120,37 @@
 
         <h1>Course Projects</h1>
 
-        <div class="project">
-            <div class="project-image">
-                <img src="../assets/img/kidney.png" alt="card-img-top project-img">
-            </div>
-            <div class="project-info">
-                <h2>Segmenting Glomeruli Functional Tissue Units</h2>
-                <p>Project developed as part of the final project for the Machine Learning (CX4041) class by Prof Ke Yiping, Kelly at NTU Singapore, Fall 2023.</p>
-                <p>Code available at <a href="https://github.com/antoniofrancaib/hacking-the-kidney/tree/main">github.com/antoniofrancaib/hacking-the-kidney</a> and project available <a href="../assets/pdf/hacking-kidney.pdf">here</a>.</p>
-            </div>
-        </div>
-      </div>
+      <!-- Add this CSS to your stylesheet or in a <style> tag in the <head> -->
+        <style>
+          .project {
+              display: flex;
+              align-items: flex-start;
+              margin-bottom: 30px;
+          }
+          .project-image {
+              flex: 0 0 200px; /* Adjust this width as needed */
+              margin-right: 20px;
+          }
+          .project-image img {
+              width: 100%;
+              height: auto;
+          }
+          .project-info {
+              flex: 1;
+          }
+          </style>
+          
+          <!-- Update your HTML structure like this -->
+          <div class="project">
+              <div class="project-image">
+                  <img src="../assets/img/kidney.png" alt="Kidney Project Image">
+              </div>
+              <div class="project-info">
+                  <h2>Segmenting Glomeruli Functional Tissue Units</h2>
+                  <p>Project developed as part of the final project for the Machine Learning (CX4041) class by Prof Ke Yiping, Kelly at NTU Singapore, Fall 2023.</p>
+                  <p>Code available at <a href="https://github.com/antoniofrancaib/hacking-the-kidney/tree/main">github.com/antoniofrancaib/hacking-the-kidney</a> and project available <a href="../assets/pdf/hacking-kidney.pdf">here</a>.</p>
+              </div>
+          </div>
 
   <ul class="post-list">
 
