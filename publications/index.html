@@ -118,26 +118,57 @@
             <p class="post-description">Some of the projects I worked on.</p>
         </header>
 
-        <h1>Course Projects</h1>
+        <h2>Course Projects</h2>
 
       <!-- Add this CSS to your stylesheet or in a <style> tag in the <head> -->
         <style>
-          .project {
-              display: flex;
-              align-items: flex-start;
-              margin-bottom: 30px;
-          }
-          .project-image {
-              flex: 0 0 200px; /* Adjust this width as needed */
-              margin-right: 20px;
-          }
-          .project-image img {
-              width: 100%;
-              height: auto;
-          }
-          .project-info {
-              flex: 1;
-          }
+          /* Adjust the main container for wider margins */
+      .container {
+          max-width: 900px; /* Adjust this value as needed */
+          margin-left: auto;
+          margin-right: auto;
+          padding-left: 30px; /* Increase side padding */
+          padding-right: 30px;
+      }
+
+      /* Adjust the project layout for wider margins */
+      .project {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 40px; /* Increased bottom margin */
+          padding: 20px; /* Add padding around each project */
+          background-color: #f9f9f9; /* Optional: adds a subtle background */
+          border-radius: 8px; /* Optional: rounds the corners */
+      }
+
+      .project-image {
+          flex: 0 0 180px; /* Slightly reduced to accommodate margins */
+          margin-right: 30px; /* Increased margin between image and text */
+      }
+
+      .project-image img {
+          width: 100%;
+          height: auto;
+          border-radius: 4px; /* Optional: slightly rounds image corners */
+      }
+
+      .project-info {
+          flex: 1;
+      }
+
+      /* Adjust typography for better readability */
+      body {
+          line-height: 1.6;
+      }
+
+      h1, h2 {
+          margin-bottom: 0.5em;
+      }
+
+      p {
+          margin-bottom: 1em;
+      }
+          
           </style>
           
           <!-- Update your HTML structure like this -->
@@ -146,7 +177,7 @@
                   <img src="../assets/img/kidney.png" alt="Kidney Project Image">
               </div>
               <div class="project-info">
-                  <h2>Segmenting Glomeruli Functional Tissue Units</h2>
+                  <h3>Segmenting Glomeruli Functional Tissue Units</h3>
                   <p>Project developed as part of the final project for the Machine Learning (CX4041) class by Prof Ke Yiping, Kelly at NTU Singapore, Fall 2023.</p>
                   <p>Code available at <a href="https://github.com/antoniofrancaib/hacking-the-kidney/tree/main">github.com/antoniofrancaib/hacking-the-kidney</a> and project available <a href="../assets/pdf/hacking-kidney.pdf">here</a>.</p>
               </div>
