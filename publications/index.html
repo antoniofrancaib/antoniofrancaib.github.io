@@ -168,7 +168,34 @@
       p {
           margin-bottom: 1em;
       }
-          
+      
+            /* Responsive adjustments */
+      @media (min-width: 768px) {
+          .project {
+              display: flex;
+              align-items: center;
+          }
+
+          .project-image {
+              flex: 0 0 200px;
+          }
+
+          .project-info {
+              flex: 1;
+              padding: 20px;
+          }
+      }
+
+      /* Additional adjustments for very small screens */
+      @media (max-width: 320px) {
+          .project-info h2 {
+              font-size: 1rem;
+          }
+
+          .project-info p {
+              font-size: 0.8rem;
+          }
+      }
           </style>
           
           <!-- Update your HTML structure like this -->
