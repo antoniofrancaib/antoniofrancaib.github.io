@@ -109,6 +109,58 @@
       </nav>
     </header>
 
+     <!-- Add this CSS to your stylesheet or in a <style> tag in the <head> -->
+      <style>
+    .blog-entries {
+      margin-top: 2rem;
+    }
+
+    .blog-entry {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .blog-entry:last-child {
+      border-bottom: none;
+    }
+
+    .blog-entry-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-entry-title a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .blog-entry-title a:hover {
+      color: #007bff;
+    }
+
+    .blog-entry-meta {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-entry-summary {
+      margin-bottom: 0.5rem;
+    }
+
+    .read-more {
+      font-weight: bold;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .read-more:hover {
+      text-decoration: underline;
+    }
+    
+        </style>
+
     <!-- Content -->
     <div class="container mt-5">
       <div class="post">
@@ -118,23 +170,27 @@
             <p class="post-description">Some posts I did on several issues (more coming soon).</p>
         </header>
 
-        <div class="clearfix">
-          <hr class="solid">
-          <h2 id="mathematical-neuroscience"><a href="mathematical-neuroscience.html"> On the Amari Neural Field Equation </a> </h2>
-          <p> A theoretical analysis, numerical methods, and experimental reproductions to validate the Amari neural field model's efficacy in mirroring real-world neural behavior. </p>
-        </div>
+        <!-- Blog entries section -->
+    <div class="blog-entries">
+      <!-- Single blog entry -->
+      <article class="blog-entry">
+        <h2 class="blog-entry-title"><a href="/blog/first-post">My First Blog Post</a></h2>
+        <p class="blog-entry-meta">Posted on January 1, 2024 | Category: Technology</p>
+        <p class="blog-entry-summary">This is a brief summary of my first blog post. It covers topics related to artificial intelligence and its impact on society.</p>
+        <a href="/blog/first-post" class="read-more">Read more</a>
+      </article>
 
-        <div class="clearfix">
-          <hr class="solid">
-          <h2 id="deriving-black-scholes"><a href="deriving-black-scholes.html"> Deriving the Black-Scholes Model </a> </h2>
-          <p> An in-depth exploration of the mathematical underpinnings and modeling process that lead to the derivation of the renowned Black-Scholes formula for option pricing. </p>
-        </div>
+      <!-- Another blog entry -->
+      <article class="blog-entry">
+        <h2 class="blog-entry-title"><a href="/blog/second-post">Exploring Machine Learning Algorithms</a></h2>
+        <p class="blog-entry-meta">Posted on February 15, 2024 | Category: Machine Learning</p>
+        <p class="blog-entry-summary">In this post, I dive deep into various machine learning algorithms and their applications in real-world scenarios.</p>
+        <a href="/blog/second-post" class="read-more">Read more</a>
+      </article>
 
-        <div class="clearfix">
-          <hr class="solid">
-          <h2 id="existential-catastrophe"><a href="existential-catastrophe.html">Power-Seeking AI and Existential Risk</a> </h2>
-          <p> Some people are concerned that the advancement of Artificial Intelligence may lead to an existential catastrophe, that is, the destruction of humanity’s long-term potential. </p>
-        </div>
+      <!-- Add more blog entries as needed -->
+    </div>
+
 
 
   <ul class="post-list">
