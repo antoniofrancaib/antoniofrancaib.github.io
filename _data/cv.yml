@@ -1,0 +1,111 @@
+- title: General Information
+  type: map
+  contents:
+    - name: Full Name
+      value: Javier Rando Ramirez
+    - name: Languages
+      value: English, Spanish
+    - name: My research in one line
+      value: Figuring out what can go wrong when we deploy AI in real-world applications
+
+- title: Experience
+  type: time_table
+  contents:
+    - title: Doctoral Student
+      institution: ETH Zurich - ETH AI Center
+      year: 2023 - ongoing
+      description:
+        - Advised by Prof. Florian Tramèr axnd Prof. Mrinmaya Sachan.
+        - 🏆 Awarded with the ETH AI Center Doctoral Fellowship.
+
+    - title: Independent Contractor
+      institution: OpenAI Red Teaming Network (Jan 2024 - Current)
+      year: Jan 2024 - ongoing
+      description:
+        - Participating in OpenAI led red teaming efforts to assess the risks and safety profile of OpenAI models and systems.
+
+    - title: Visiting Researcher
+      institution: New York University
+      year: 2022 - 2023
+      description:
+        - Research on LLM truthfulness in the CILVR under the supervision of Prof. He He.
+
+    - title: Co-Founder and CTO
+      institution: EXPAI
+      year: 2020 - 2023
+      description:
+        - Explainable AI startup. Provides a tool to understand AI predictions to boost efficiency and trust.
+
+    - title: Data Science and Engineering Intern
+      institution: Telefonica
+      year: 2020
+      description:
+        - Global department developing ML models for different use cases. Contributions to corporate Business Intelligence solutions.
+
+    - title: Research Assistant
+      institution: Pompeu Fabra University
+      year: 2019
+      description:
+        - Supervised by Prof. Carlos Castillo (Web Science and Social Computing Research Group) and Valerio Lorini (Joint Research Centre, European Comission).
+        - Project funded with a Maria de Maetzu award for talented undergraduate students.
+
+- title: Education
+  type: time_table
+  contents:
+    - title: MSc in Computer Science
+      institution: ETH Zurich, Zurich, Switzerland.
+      year: 2021 - 2023
+      description:
+        - Major in Machine Intelligence.
+        - Funded by an Open Philanthropy grant for individuals working to improve long-term future.
+        - title: Research projects.
+          contents:
+            - Language Models for password modeling (Prof. Fernando Perez-Cruz).
+            - Poisoning Reinforcement Learning from Human Feedback (Prof. Florian Tramèr).
+
+    - title: BSc in Mathematical Engineering in Data Science
+      institution: Pompeu Fabra University, Barcelona, Spain.
+      year: 2017 - 2021
+      description:
+        - 🏆 First in class. Best Academic Record. 4-year degree in English.
+        - Year abroad in the Technical University of Munich (TUM).
+
+- title: Teaching
+  type: time_table
+  contents:
+    - title: ETH Zurich
+      year: 2023
+      description: Teaching assistant for Information Security Lab. Module on LLM safety.
+    - title: NYU AI School
+      year: 2023
+      description: Teaching assistant for introductory lab courses to AI.
+    - title: Pompeu Fabra University
+      year: 2021
+      description: Guest lectures (4h). Visual Analytics undergraduate course.
+    - title: Pompeu Fabra University
+      year: 2021
+      description: Guest lectures (2h). Entrepreneurship undergraduate course.
+
+- title: Honors and Awards
+  type: time_table
+  contents:
+    - year: 2023
+      items: 
+        - ETH AI Center Doctoral Fellowship.
+        - $25k grant from Open Philanthropy for the competition I organise in SaTML 2024.
+    - year: 2022
+      items: 
+        - Best Paper Award at NeurIPS ML Safety Workshop.
+        - Junior Researcher. Future of Life Institute.
+        - Research grant ($30K) to join NYU as Visiting Researcher. Long-Term Future Fund.
+    - year: 2021
+      items:
+        - Early career scholarship for MSc funding ($30K). Open Philanthropy Project.
+        - Best Academic Record Award. BSc Mathematical Engineering in Data Science (9.1/10). Pompeu Fabra University.
+    - year: 2020
+      items:
+        - TALENTUM internship Telefonica. Internship to join an applied research team. Telefonica.
+    - year: 2019
+      items:
+        - Collaboration scholarship at units of excellence "María De Maeztu". Research assistant funding at Pompeu Fabra University. Spanish Science Ministry.
+        - Best Academic Record Award. BSc in Mathematics (9.1/10). Pompeu Fabra University.

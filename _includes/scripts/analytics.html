@@ -1,0 +1,35 @@
+{%- if site.enable_google_analytics -%}
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+    // Define dataLayer and the gtag function.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Set default consent to 'denied' as a placeholder
+    // Determine actual values based on your own requirements
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+  </script>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}', {
+      client_storage: 'none'
+    });
+  </script>
+{%- endif -%}
+{%- if site.enable_cronitor_analytics -%}
+  <!-- Cronitor RUM -->
+  <script async src="https://rum.cronitor.io/script.js"></script>
+  <script>
+    window.cronitor = window.cronitor || function() { (window.cronitor.q = window.cronitor.q || []).push(arguments); };
+    cronitor('config', { clientKey: '{{site.cronitor_analytics}}' });
+  </script>
+{%- endif -%}

@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://antoniofrancaib.github.io/sitemap.xml
