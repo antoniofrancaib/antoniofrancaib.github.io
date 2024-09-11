@@ -122,33 +122,32 @@
         <style>
           /* Adjust the main container for wider margins */
           .container {
-              max-width: 900px; /* Adjust this value as needed */
+              max-width: 900px;
               margin-left: auto;
               margin-right: auto;
-              padding-left: 30px; /* Increase side padding */
+              padding-left: 30px;
               padding-right: 30px;
           }
         
           /* Adjust the project layout */
           .project {
               display: flex;
-              align-items: flex-start;
+              align-items: stretch; /* Make the project and image container stretch to the height of the content */
               margin-bottom: 40px;
               background-color: #f9f9f9;
               border-radius: 8px;
           }
         
           .project-image {
-              flex: 0 0 180px;
-              height: auto; /* Allow the image container to adjust dynamically */
+              flex: 0 0 180px; /* Fix the width of the image container */
               margin-right: 30px;
               overflow: hidden;
           }
         
           .project-image img {
               width: 100%;
-              height: auto; /* Allow the image to keep its aspect ratio */
-              object-fit: cover;
+              height: 100%; /* Make the image take up the full height of its container */
+              object-fit: cover; /* Ensure the image maintains its aspect ratio and covers the entire container */
               border-radius: 4px;
           }
         
@@ -168,7 +167,7 @@
           p {
               margin-bottom: 1em;
           }
-        </style>
+        </style>        
         
           
           <!-- Update your HTML structure like this -->
