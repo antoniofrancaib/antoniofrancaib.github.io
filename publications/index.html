@@ -117,61 +117,59 @@
             <p class="post-description">Some of the projects I worked on.</p>
         </header>
 
-        <h2>Course Projects</h2>
+        <h2>Projects</h2>
 
-      <!-- Add this CSS to your stylesheet or in a <style> tag in the <head> -->
         <style>
           /* Adjust the main container for wider margins */
-      .container {
-          max-width: 900px; /* Adjust this value as needed */
-          margin-left: auto;
-          margin-right: auto;
-          padding-left: 30px; /* Increase side padding */
-          padding-right: 30px;
-      }
-
-      /* Adjust the project layout for wider margins */
-      .project {
-          display: flex;
-          align-items: flex-start;
-          margin-bottom: 40px; /* Increased bottom margin */
-          /*padding: 20px; /* Add padding around each project */
-          background-color: #f9f9f9; /* Optional: adds a subtle background */
-          border-radius: 8px; /* Optional: rounds the corners */
-      }
-
-      .project-image {
-      flex: 0 0 180px; /* Set width of the image container */
-      height: 180px; /* Set the height of the image */
-      margin-right: 30px;
-      overflow: hidden; /* Ensure no overflow for varying image sizes */
-      }
-
-      .project-image img {
-          width: 100%; /* Force the image to take up the full width of its container */
-          height: 100%; /* Force the image to fill the container height */
-          object-fit: cover; /* Maintain the aspect ratio, crop if necessary */
-          border-radius: 4px;
-      }
-
-      .project-info {
-          flex: 1;
-      }
-
-      /* Adjust typography for better readability */
-      body {
-          line-height: 1.6;
-      }
-
-      h1, h2 {
-          margin-bottom: 0.5em;
-      }
-
-      p {
-          margin-bottom: 1em;
-      }
-      
-          </style>
+          .container {
+              max-width: 900px; /* Adjust this value as needed */
+              margin-left: auto;
+              margin-right: auto;
+              padding-left: 30px; /* Increase side padding */
+              padding-right: 30px;
+          }
+        
+          /* Adjust the project layout */
+          .project {
+              display: flex;
+              align-items: flex-start;
+              margin-bottom: 40px;
+              background-color: #f9f9f9;
+              border-radius: 8px;
+          }
+        
+          .project-image {
+              flex: 0 0 180px;
+              height: auto; /* Allow the image container to adjust dynamically */
+              margin-right: 30px;
+              overflow: hidden;
+          }
+        
+          .project-image img {
+              width: 100%;
+              height: auto; /* Allow the image to keep its aspect ratio */
+              object-fit: cover;
+              border-radius: 4px;
+          }
+        
+          .project-info {
+              flex: 1;
+          }
+        
+          /* Adjust typography for better readability */
+          body {
+              line-height: 1.6;
+          }
+        
+          h1, h2 {
+              margin-bottom: 0.5em;
+          }
+        
+          p {
+              margin-bottom: 1em;
+          }
+        </style>
+        
           
           <!-- Update your HTML structure like this -->
           <div class="project">
