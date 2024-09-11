@@ -141,14 +141,17 @@
       }
 
       .project-image {
-          flex: 0 0 180px; /* Slightly reduced to accommodate margins */
-          margin-right: 30px; /* Increased margin between image and text */
+      flex: 0 0 180px; /* Set width of the image container */
+      height: 180px; /* Set the height of the image */
+      margin-right: 30px;
+      overflow: hidden; /* Ensure no overflow for varying image sizes */
       }
 
       .project-image img {
-          width: 100%;
-          height: auto;
-          border-radius: 4px; /* Optional: slightly rounds image corners */
+          width: 100%; /* Force the image to take up the full width of its container */
+          height: 100%; /* Force the image to fill the container height */
+          object-fit: cover; /* Maintain the aspect ratio, crop if necessary */
+          border-radius: 4px;
       }
 
       .project-info {
@@ -176,7 +179,7 @@
                 <img src="../assets/img/thesis.png" alt="quenched-variability-role Project Image">
             </div>
             <div class="project-info">
-                <h3>The Role of Quenched Variability in Enhancing Memory Storage in Neuronal Networks</h3>
+                <h3>Enhancing Memory Storage in Neuronal Networks</h3>
                 <p>Project developed as part of my research internship supervised by Dr Alex Roxin at CRM Barcelona, and Prof Daniele Avitabile at VU Amsterdam, Spring 2024.</p>
                 <p>Code available at <a href="https://github.com/antoniofrancaib/quenched-variability-role">github.com/antoniofrancaib</a> and project available <a href="../assets/pdf/thesis.pdf">here</a>.</p>
             </div>
@@ -198,7 +201,7 @@
                 <img src="../assets/img/cross-domain.png" alt="cross-domain project image">
             </div>
             <div class="project-info">
-                <h3>Cross-Domain Sentiment Classification with Domain-Adaptive Neural Networks</h3>
+                <h3>Cross-Domain Sentiment Classification</h3>
                 <p>Project developed as part of the final project for the Deep Learning & Neural Networks (CZ4042) (<a href="../assets/pdf/dl-notes.pdf">notes</a>) class by Prof Jagath Rajapakse at NTU Singapore, Fall 2023.</p>
                 <p>Project report available <a href="../assets/pdf/cross-domain.pdf">here</a>.</p>
               </div>
