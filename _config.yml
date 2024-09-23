@@ -3,9 +3,7 @@
 # -----------------------------------------------------------------------------
 
 title: Antonio Franca # the website title (if blank, full name will be used instead)
-first_name: Antonio
-middle_name:
-last_name: Franca
+author: Antonio Franca
 email: antoniofrancaib@gmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Welcome to my webpage. I am Antonio Franca!
