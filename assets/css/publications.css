@@ -1,10 +1,10 @@
 /* Adjust the main container for wider margins */
 .container {
-    max-width: 900px;
+    max-width: 1000px; /* Set to 1000px to match the first style */
     margin-left: auto;
     margin-right: auto;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 15px; /* Add padding for some space, but less than 30px */
+    padding-right: 15px;
 }
 
 /* Adjust the project layout */
