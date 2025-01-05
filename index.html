@@ -10,28 +10,51 @@ title: Home
   </header>
 
   <article>
-    <div class="profile float-right">
+    <!-- Remove "float-right" so the image can follow the .profile img { max-width: ... } rule -->
+    <div class="profile">
       <figure>
-
         <picture>
-          <source media="(max-width: 480px)" srcset="/assets/img/prof_pic-480.webp"></source>
-          <source media="(max-width: 800px)" srcset="/assets/img/prof_pic-800.webp"></source>
-          <source media="(max-width: 1400px)" srcset="/assets/img/prof_pic-1400.webp"></source>
+          <source media="(max-width: 480px)" srcset="/assets/img/prof_pic-480.webp">
+          <source media="(max-width: 800px)" srcset="/assets/img/prof_pic-800.webp">
+          <source media="(max-width: 1400px)" srcset="/assets/img/prof_pic-1400.webp">
           <!-- Fallback to the original file -->
-          <img class="img-fluid z-dept-1 rounded" src="/assets/img/prof_pic.jpg" alt="prof_pic.jpg">
-
+          <img class="img-fluid rounded" src="/assets/img/prof_pic.jpg" alt="Profile Picture">
         </picture>
-
       </figure>
     </div>
 
     <div class="clearfix">
-      <p style="text-align:justify"> I am Antonio, an MPhil student in Machine Learning and Machine Intelligence at Cambridge University. Before starting my master's, I completed a BSc in Mathematics at VU Amsterdam, where I worked on my thesis in collaboration with CRM Barcelona, researching how variability in synaptic connectivity can enhance the memory storage capabilities of recurrent neural networks (CA3 region of the hippocampus). I also completed a research internship at Artificial Neural Computing, focusing on modeling the boundary dynamics of neural networks. Additionally, I co-founded altan.ai, a startup aimed at automating workflows using AI, and I had the opportunity to teach courses in Single Variable Calculus, Probability Theory, and Linear Algebra as a Teaching Assistant at VU Amsterdam.</p>
-      <p style="text-align:justify"> I am interested in exploring the computational principles of natural and artificial intelligence, aiming to "reverse engineer" the brain's algorithms, both to learn about how our brains work and to build more effective AI systems. In the long term, my goal is to leverage AI to help people gain greater agency over their circumstances and reach their full potential. I particularly want to focus my research on areas such as neural representations and computational dynamics in the brain, learning algorithms that enable continual and efficient skill acquisition, meta-learning and online learning frameworks, understanding the theoretical underpinnings of deep learning, studying knowledge representation and hierarchical abstraction in neural networks, and advancing reinforcement learning techniques for adaptive behavior. </p>
-      <p style="text-align:justify"> To recharge my batteries, I spend time outdoors running, working out, surfing, rock climbing, boxing, making and playing music, traveling, reading and hanging out with friends.</p>
-      <p style="text-align:justify"> NEWS: I will be applying for PhD positions for the Fall 2025 admit!</p>
+      <p style="text-align:justify">
+        I am Antonio, an MPhil student in Machine Learning and Machine Intelligence at Cambridge University.
+        Before starting my master's, I completed a BSc in Mathematics at VU Amsterdam, where I worked on my thesis
+        in collaboration with CRM Barcelona, researching how variability in synaptic connectivity can enhance the
+        memory storage capabilities of recurrent neural networks (CA3 region of the hippocampus). I also completed
+        a research internship at Artificial Neural Computing, focusing on modeling the boundary dynamics of neural networks.
+        Additionally, I co-founded altan.ai, a startup aimed at automating workflows using AI, and I had the opportunity
+        to teach courses in Single Variable Calculus, Probability Theory, and Linear Algebra as a Teaching Assistant
+        at VU Amsterdam.
+      </p>
+
+      <p style="text-align:justify">
+        I am interested in exploring the computational principles of natural and artificial intelligence,
+        aiming to "reverse engineer" the brain's algorithms, both to learn about how our brains work and
+        to build more effective AI systems. In the long term, my goal is to leverage AI to help people gain
+        greater agency over their circumstances and reach their full potential. I particularly want to focus
+        my research on areas such as neural representations and computational dynamics in the brain, learning
+        algorithms that enable continual and efficient skill acquisition, meta-learning and online learning
+        frameworks, understanding the theoretical underpinnings of deep learning, studying knowledge representation
+        and hierarchical abstraction in neural networks, and advancing reinforcement learning techniques for
+        adaptive behavior.
+      </p>
+
+      <p style="text-align:justify">
+        To recharge my batteries, I spend time outdoors running, working out, surfing, rock climbing, boxing,
+        making and playing music, traveling, reading and hanging out with friends.
+      </p>
+
+      <p style="text-align:justify">
+        NEWS: I will be applying for PhD positions for the Fall 2025 admit!
+      </p>
     </div>
-
   </article>
-
 </div>
