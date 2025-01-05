@@ -159,3 +159,12 @@
     text-decoration: none;
   }
   
+  @media (max-width: 768px) {
+    .float-left {
+      float: none !important;
+      margin-right: 0 !important;
+      margin-bottom: 1rem !important;
+      display: block;
+    }
+  }
+  

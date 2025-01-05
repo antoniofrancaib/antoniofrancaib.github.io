@@ -6,59 +6,57 @@ title: Home
 <div class="post">
   <header class="post-header">
     <h1 class="post-title">Antonio Franca</h1>
-    <p class="desc">Machine Learning at Cambridge University | Striving to exploit the plasticity of the human brain</p>
+    <p class="desc">
+      Machine Learning at Cambridge University | Striving to exploit the plasticity of the human brain
+    </p>
   </header>
 
   <article>
-    <!-- Use a Bootstrap row/column approach. -->
-    <div class="row">
-      <!-- The image in one column. On small screens (xs), it’s full width; on md+ screens, it's a fixed column. -->
-      <div class="col-12 col-md-auto mb-3 mb-md-0">
-        <figure>
-          <picture>
-            <source media="(max-width: 480px)" srcset="/assets/img/prof_pic-480.webp">
-            <source media="(max-width: 800px)" srcset="/assets/img/prof_pic-800.webp">
-            <source media="(max-width: 1400px)" srcset="/assets/img/prof_pic-1400.webp">
-            <!-- Fallback to the original file -->
-            <img class="img-fluid rounded" src="/assets/img/prof_pic.jpg" alt="Profile Picture" style="max-width: 250px;">
-          </picture>
-        </figure>
-      </div>
 
-      <!-- The text in another column. On small screens it stacks below; on md+ screens, it’s side-by-side. -->
-      <div class="col">
-        <p style="text-align:justify">
-          I am Antonio, an MPhil student in Machine Learning and Machine Intelligence at Cambridge University.
-          Before starting my master's, I completed a BSc in Mathematics at VU Amsterdam, where I worked on my thesis
-          in collaboration with CRM Barcelona, researching how variability in synaptic connectivity can enhance the
-          memory storage capabilities of recurrent neural networks (CA3 region of the hippocampus). I also completed
-          a research internship at Artificial Neural Computing, focusing on modeling the boundary dynamics of neural networks.
-          Additionally, I co-founded altan.ai, a startup aimed at automating workflows using AI, and I had the opportunity
-          to teach courses in Single Variable Calculus, Probability Theory, and Linear Algebra as a Teaching Assistant
-          at VU Amsterdam.
-        </p>
-
-        <p style="text-align:justify">
-          I am interested in exploring the computational principles of natural and artificial intelligence,
-          aiming to "reverse engineer" the brain's algorithms, both to learn about how our brains work and
-          to build more effective AI systems. In the long term, my goal is to leverage AI to help people gain
-          greater agency over their circumstances and reach their full potential. I particularly want to focus
-          my research on areas such as neural representations and computational dynamics in the brain, learning
-          algorithms that enable continual and efficient skill acquisition, meta-learning and online learning
-          frameworks, understanding the theoretical underpinnings of deep learning, studying knowledge representation
-          and hierarchical abstraction in neural networks, and advancing reinforcement learning techniques for
-          adaptive behavior.
-        </p>
-
-        <p style="text-align:justify">
-          To recharge my batteries, I spend time outdoors running, working out, surfing, rock climbing, boxing,
-          making and playing music, traveling, reading and hanging out with friends.
-        </p>
-
-        <p style="text-align:justify">
-          NEWS: I will be applying for PhD positions for the Fall 2025 admit!
-        </p>
-      </div>
+    <!-- Floated image for large screens -->
+    <div class="profile float-left" style="max-width:250px; margin-right:20px; margin-bottom:20px;">
+      <figure>
+        <picture>
+          <source media="(max-width:480px)" srcset="/assets/img/prof_pic-480.webp">
+          <source media="(max-width:800px)" srcset="/assets/img/prof_pic-800.webp">
+          <source media="(max-width:1400px)" srcset="/assets/img/prof_pic-1400.webp">
+          <!-- Fallback to original -->
+          <img class="img-fluid rounded" src="/assets/img/prof_pic.jpg" alt="Profile Picture">
+        </picture>
+      </figure>
     </div>
+
+    <p style="text-align:justify">
+      I am Antonio, an MPhil student in Machine Learning and Machine Intelligence at Cambridge University.
+      Before starting my master's, I completed a BSc in Mathematics at VU Amsterdam, where I worked on my thesis
+      in collaboration with CRM Barcelona, researching how variability in synaptic connectivity can enhance
+      the memory storage capabilities of recurrent neural networks (CA3 region of the hippocampus). I also
+      completed a research internship at Artificial Neural Computing, focusing on modeling the boundary dynamics
+      of neural networks. Additionally, I co-founded altan.ai, a startup aimed at automating workflows using AI,
+      and I had the opportunity to teach courses in Single Variable Calculus, Probability Theory, and Linear Algebra
+      as a Teaching Assistant at VU Amsterdam.
+    </p>
+
+    <p style="text-align:justify">
+      I am interested in exploring the computational principles of natural and artificial intelligence,
+      aiming to "reverse engineer" the brain's algorithms, both to learn about how our brains work and
+      to build more effective AI systems. In the long term, my goal is to leverage AI to help people
+      gain greater agency over their circumstances and reach their full potential. I particularly want
+      to focus my research on areas such as neural representations and computational dynamics in the brain,
+      learning algorithms that enable continual and efficient skill acquisition, meta-learning and online
+      learning frameworks, understanding the theoretical underpinnings of deep learning, studying knowledge
+      representation and hierarchical abstraction in neural networks, and advancing reinforcement learning
+      techniques for adaptive behavior.
+    </p>
+
+    <p style="text-align:justify">
+      To recharge my batteries, I spend time outdoors running, working out, surfing, rock climbing, boxing,
+      making and playing music, traveling, reading and hanging out with friends.
+    </p>
+
+    <p style="text-align:justify">
+      NEWS: I will be applying for PhD positions for the Fall 2025 admit!
+    </p>
+
   </article>
 </div>
