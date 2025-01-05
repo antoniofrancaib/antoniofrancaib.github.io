@@ -4,6 +4,8 @@ title: "No Rompas Tus Ventanas"
 date: 2023-12-20 10:00:00 +0000
 ---
 
+# No Rompas Tus Ventanas
+
 La teoría de las ventanas rotas sostiene que pequeños signos de deterioro, como una ventana rota en un edificio abandonado, pueden desencadenar más caos y desorden si no se reparan a tiempo. En el ámbito sociológico, un ejemplo ilustrativo podría ser la hipótesis de cómo la acumulación de suciedad en las calles de Barcelona podría haber contribuido a un aumento en la delincuencia. 
 
 En el plano individual, cada hábito incumplido, detalle descuidado o acto de dejadez es como una ventana rota en nuestro sistema de disciplina. Si permitimos que estas fisuras permanezcan, se vuelven puntos de entrada para el desorden en otras áreas de nuestra vida. El caos, al igual que en la teoría original, se alimenta de la negligencia.
