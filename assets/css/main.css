@@ -1,26 +1,24 @@
 /* main.css */
 
-/* 1) Global transitions (so color/theme changes feel smooth) */
+/* 1) Global transitions so color/theme changes feel smooth */
 * {
     transition: background-color 0.3s, color 0.3s;
   }
   
   /* 2) Color palette + shared CSS variables */
   :root {
-    --global-bg-color: #fdfdfd;            /* Off-white background */
-    --global-text-color: #222;             /* Darker gray text */
-    --global-text-color-light: #555;       /* Used for subtitles & lighter text */
-    --global-theme-color: #27c9c2;         /* Teal accent */
-    --global-hover-color: #22b2ac;         /* Hover teal */
-    --global-footer-bg-color: #f0f0f0;     /* Lighter footer background */
-    --global-footer-text-color: #666;      /* Footer text color */
+    --global-bg-color: #fdfdfd;    /* Off-white background */
+    --global-text-color: #222;     /* Darker gray text */
+    --global-text-color-light: #555;
+    --global-theme-color: #27c9c2; /* Teal accent */
+    --global-hover-color: #22b2ac; 
+    --global-footer-bg-color: #f0f0f0;
+    --global-footer-text-color: #666;
     --global-footer-link-color: #27c9c2;
     --global-distill-app-color: #828282;
-    --global-divider-color: #ddd;          /* gentler than black */
+    --global-divider-color: #ddd; 
     --global-card-bg-color: #fff;
     --global-code-bg-color: rgba(39,201,194,0.05);
-  
-    /* If you want, keep dark mode toggles: */
   }
   
   /* On dark mode, override them here */
@@ -50,16 +48,30 @@
     line-height: 1.6;
   }
   
-  /* Make headings stand out a bit */
+  /* Container: unify the width on all pages */
+  .container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;  /* narrower padding for consistent layout */
+    padding-right: 1rem;
+  }
+  
+  /* HEADINGS */
   h1, h2, h3, h4, h5, h6 {
     margin-top: 1.2em;
     margin-bottom: 0.5em;
     font-weight: 600;
     color: var(--global-text-color);
-    scroll-margin-top: 66px;
+    scroll-margin-top: 66px; /* So anchor links don't hide under the nav */
   }
   
-  /* For code blocks or inline code, we keep the teal highlight */
+  /* Add a bit of top margin to .post so it doesn't collide with nav on some layouts */
+  .post {
+    margin-top: 2rem; /* ensures space below the navbar */
+  }
+  
+  /* For code blocks or inline code */
   code, pre {
     color: var(--global-theme-color);
     background-color: var(--global-code-bg-color);
@@ -74,7 +86,7 @@
   }
   a:hover {
     color: var(--global-hover-color);
-    text-decoration: underline; /* subtle underline on hover */
+    text-decoration: underline;
   }
   
   /* The navbar */
@@ -122,10 +134,20 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
   
-  /* Some spacing for images */
-  .post img, .project img, .card img {
+  /* Image in the home page - revert to your older smaller size */
+  .profile img {
+    max-width: 300px; /* or whatever you had before: 30% etc. */
+    height: auto;
+    border-radius: 6px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  /* By default, .post images can scale up to container width */
+  .post img {
     max-width: 100%;
-    border-radius: 4px;
+    height: auto;
+    border-radius: 6px;
   }
   
   /* Footer */
@@ -145,16 +167,8 @@
     text-decoration: none;
   }
   
-  /* Minimally adjusting .profile images if needed */
-  .profile img {
-    width: 100%;
-    border-radius: 6px;
-    display: block;
-  }
+  /* Optional: if you have other classes for the blog, publications, etc. add them here. */
   
-  /* Optional: Animate theme toggles (done above with transitions) */
-  
-  /* Optional: If you have code highlighting or other elements, style them here. */
-  
-  /* Done. Enjoy your new indie hacker style! */
+  /* Done: the above ensures consistent container width, smaller home image, 
+     some top spacing for blog posts, and all pages share the same nav alignment. */
   

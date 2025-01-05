@@ -1,15 +1,7 @@
 /* publications.css */
 
-/* Adjust the main container for wider margins */
-.container {
-    max-width: 1000px; /* Keep or adjust as needed */
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-}
+/* If you need some grid or special styling, keep it minimal: */
 
-/* Project layout on desktop */
 .project {
     display: flex;
     align-items: stretch;
@@ -35,7 +27,7 @@
     flex: 1;
 }
 
-/* On mobile, stack columns instead of rows */
+/* On mobile, stack columns */
 @media (max-width: 768px) {
   .project {
     flex-direction: column;
@@ -43,26 +35,11 @@
   }
   .project-image {
     margin-right: 0;
-    width: 100%;
-    max-width: 400px; /* prevent huge images on big phones */
+    max-width: 400px;
     margin-bottom: 1rem;
   }
   .project-info {
     margin-top: 1rem;
-    text-align: center; /* optional, but looks nice on mobile */
+    text-align: center;
   }
-}
-
-/* Adjust typography for better readability in publications page */
-body {
-    line-height: 1.6;
-    /* We'll keep the main site's font in main.css. */
-}
-
-h1, h2 {
-    margin-bottom: 0.5em;
-}
-
-p {
-    margin-bottom: 1em;
 }
