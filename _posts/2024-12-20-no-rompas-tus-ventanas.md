@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Don't Break Your Windows"
+title: "don't break your windows"
 date: 2024-12-20 10:00:00 +0000
 ---
 
