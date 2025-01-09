@@ -26,6 +26,6 @@ When we live outside that momentum, we fall into a state of life suboptimality. 
 
 That’s why every habit counts. Every small action you take reinforces a narrative: either you’re moving toward your best self, or you’re allowing the broken windows of procrastination and laziness to multiply.
 
-The key to living fully is to gain momentum, sustain it, and leverage it to the fullest. Doing hard things isn’t a punishment; it’s a privilege that empowers us to be better every day. In discipline lies true freedom.
+The key to thriving in all areas of life is to build momentum, maintain it, and leverage it to the fullest, taking full advantage of the power of compound interest. Doing hard things isn’t a punishment; it’s a privilege that empowers us to be better every day. In discipline lies true freedom.
 
 So, prepare in advance so that when you face moments of weakness, you’ll remember: don’t break your windows (nor let others break them).
