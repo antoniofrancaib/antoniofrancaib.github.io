@@ -6,7 +6,7 @@ date: 2024-12-20 10:00:00 +0000
 
 # Don't Break Your Windows
 
-The broken windows theory posits that small signs of deterioration, like a broken window in an abandoned building, can lead to more chaos and disorder if not repaired promptly. In sociology, a compelling example could be the hypothesis that the accumulation of trash on the streets of Barcelona might have contributed to an increase in crime.
+The [broken windows theory](https://en.wikipedia.org/wiki/Broken_windows_theory) suggests that small signs of deterioration, like a broken window in an abandoned building, can lead to more chaos and disorder if not repaired promptly. In sociology, a compelling example could be the hypothesis that the accumulation of trash on the streets of Barcelona might have contributed to an increase in crime.
 
 On a personal level, every missed habit, overlooked detail, or act of negligence is like a broken window in our system of discipline. If we allow these cracks to remain, they become entry points for disorder in other areas of our life. Chaos, much like in the original theory, thrives on neglect.
 
