@@ -12,7 +12,7 @@ On a personal level, every missed habit, overlooked detail, or act of negligence
 
 In my experience, I've seen how small, everyday actions can have a disproportionate impact on achieving larger goals. Something as simple as tidying up your room, making your bed at the start of the day, or dressing well not only organizes your environment but also your mind.
 
-These actions create a sense of order that propels us to face the day with greater clarity. When these small victories are strung together, they put us in a state of optimal performance that can transform our daily goals.
+These actions create a sense of order that drives us to face the day with greater clarity. When these small victories are strung together, they put us in a state of optimal performance that can transform our daily goals.
 
 Of course, there are habits of greater significance, such as exercising regularly, eating healthily, or maintaining good hygiene—both physical and sleep-related. These not only improve our health but also strengthen our character.
 
@@ -20,7 +20,7 @@ Breaking a healthy habit might seem insignificant in the moment, but that small 
 
 Why does it make sense to wake up at 6 a.m., take cold showers, or tackle uncomfortable tasks? Beyond the tangible impact of these actions on our lives, the reason is simple: every time we confront something that takes effort, we gain control over our mind. These actions are not (just) an end in themselves; they are training for mental resilience.
 
-It’s a virtuous cycle: the more consistent we are in doing challenging things, the easier it becomes to stay in a state of excellence. Each challenge overcome reinforces our sense of accomplishment, fueling positive momentum that elevates us to a higher state of consciousness. That momentum—a chain of small personal victories—is what enables us to operate at our best.
+It’s a virtuous cycle: the more consistent we are in doing challenging things, the easier it becomes to stay in a state of excellence. Each challenge overcome reinforces our sense of accomplishment, driving positive momentum that elevates us to a higher state of consciousness. That momentum—a chain of small personal victories—is what enables us to operate at our best.
 
 When we live outside that momentum, we fall into a state of life suboptimality. It’s a place where our aspirations fade, where we settle for what is easy and comfortable, but also where dissatisfaction takes root. Suboptimality isn’t necessarily a visible disaster; it’s simply a silent underutilization of our potential.
 
