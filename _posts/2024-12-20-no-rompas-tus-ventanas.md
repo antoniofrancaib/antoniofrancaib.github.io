@@ -8,7 +8,7 @@ date: 2024-12-20 10:00:00 +0000
 
 The [broken windows theory](https://en.wikipedia.org/wiki/Broken_windows_theory) suggests that small signs of deterioration, like a broken window in an abandoned building, can lead to more chaos and disorder if not repaired promptly. In sociology, a compelling example could be the hypothesis that the accumulation of trash on the streets of Barcelona might have contributed to an increase in crime ([article](https://ddd.uab.cat/pub/artpub/2023/287681/intjougeo_a2023_v12n449.pdf)).
 
-On a personal level, every missed habit, overlooked detail, or act of negligence is like a broken window in our system of discipline. If we allow these cracks to remain, they become entry points for disorder in other areas of our life. Chaos, much like in the original theory, thrives on neglect.
+On a personal level, every time you fail to commit to yourself, it's like a broken window in your system of discipline. If we allow these cracks to remain, they become entry points for disorder in other areas of life. Chaos, much like in the original theory, thrives on neglect.
 
 In my experience, I've seen how small, everyday actions can have a disproportionate impact on achieving larger goals. Something as simple as tidying up your room, making your bed at the start of the day, or dressing well not only organizes your environment but also your mind.
 
