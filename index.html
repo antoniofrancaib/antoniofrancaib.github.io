@@ -1,99 +1,446 @@
----
-layout: default
-title: Antonio Franca | ML Researcher
-home_active: true
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antonio Franca</title>
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+    <style>
+        /* Minimal Design CSS - Inspired by clean, single-page aesthetics */
 
-<main>
-    <section id="home" class="intro">
-        <div class="container">
-            <div class="intro-header">
-                <h1>Hi, I'm Antonio <span class="wave">👋</span></h1>
-                
-                <div class="social-links">
-                    <a href="https://x.com/antoniofrancaib" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg>
-                    </a>
-                    <a href="https://github.com/antoniofrancaib" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/antonio-franca-ibáñez-a37623198/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    </a>
-                    <a href="mailto:antoniofrancaib@gmail.com" aria-label="Email">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998a12.078 12.078 0 01.665-6.479L12 14z"></path><path d="M12 14l-6.16-3.422a12.083 12.083 0 010-6.156A11.952 11.952 0 0112 1.945a11.952 11.952 0 016.824 2.998a12.078 12.078 0 010 6.156L12 14z"></path></svg>
-                    </a>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            color: #111;
+            background-color: #ffffff;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Links */
+        a { color: #000; text-decoration: none; transition: opacity 0.2s ease; }
+        a:hover { opacity: 0.6; text-decoration: none; }
+
+        /* Page container */
+        .page-container {
+            max-width: none;
+            margin: 0;
+            padding: 24px;
+        }
+
+        /* Update site title */
+        .site-title {
+            font-size: 1.2rem;
+            font-weight: 450;
+            margin: 0 0 60px 0;
+            text-align: left;
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .site-header {
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Remove any unwanted lines/borders globally */
+        header, h1, h2, h3, h4, h5, h6 {
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Two-column layout for sections */
+        .about-section,
+        .work-section,
+        .notes-section,
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 12fr 1fr;
+            margin-bottom: 80px;
+            align-items: flex-start;
+        }
+
+        .about-section:first-of-type {
+            margin-top: 0;
+        }
+
+        .section-label {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+            grid-column: 1;
+            margin: 0;
+        }
+
+        .section-content {
+            grid-column: 2;
+            max-width: none;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        /* Section content styles */
+        .section-content p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Work section */
+        .work-list { margin-bottom: 32px; }
+        .work-item { margin-bottom: 40px; border-bottom: 1px solid #f0f0f0; padding-bottom: 32px; }
+        .work-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+        .work-item h3 { font-size: 1.1rem; font-weight: 500; margin-bottom: 8px; color: #000; line-height: 1.4; }
+        .work-item p { color: #666; line-height: 1.6; margin-bottom: 12px; }
+        .work-link, .view-all-link { color: #000; text-decoration: none; font-size: 0.95rem; transition: opacity 0.2s ease; }
+        .work-link:hover, .view-all-link:hover { opacity: 0.6; text-decoration: none; }
+        .work-status { color: #888; font-size: 0.9rem; font-style: italic; }
+        .view-all-link { display: inline-block; margin-top: 16px; }
+
+        /* Post rows (date + content) */
+        .post-row { display: grid; grid-template-columns: 100px 1fr; gap: 16px; margin-bottom: 24px; }
+        .post-row .date { color: #888; font-size: 0.9rem; white-space: nowrap; }
+
+        /* Notes section */
+        .notes-list { margin-bottom: 32px; }
+        .note-item { display: flex; margin-bottom: 24px; align-items: flex-start; gap: 20px; }
+        .note-item:last-child { margin-bottom: 0; }
+        .note-date { font-size: 0.9rem; color: #888; min-width: 80px; font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace; }
+        .note-content h3 { font-size: 1rem; font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
+        .note-content h3 a { color: #000; text-decoration: none; transition: opacity 0.2s ease; }
+        .note-content h3 a:hover { opacity: 0.6; }
+        .note-content p { color: #666; font-size: 0.95rem; line-height: 1.5; }
+
+        /* Contact section */
+        .contact-list { margin-bottom: 60px; }
+        .contact-item { display: flex; margin-bottom: 12px; align-items: baseline; }
+        .contact-item:last-child { margin-bottom: 0; }
+        .contact-label { font-size: 0.95rem; color: #888; min-width: 80px; margin-right: 20px; }
+        .contact-item a { color: #000; text-decoration: none; font-size: 0.95rem; transition: opacity 0.2s ease; }
+        .contact-item a:hover { opacity: 0.6; }
+
+        /* Spotify */
+        .contact-item .stack { display: grid; gap: 6px }
+        .spotify-now { color:#888; font-size:0.95rem }
+
+        /* Project titles as links */
+        .post-row .excerpt a{ color:inherit; text-decoration:none; transition: opacity 0.2s ease }
+        .post-row .excerpt a:hover{ opacity:0.6; text-decoration:none }
+
+        /* Footer */
+        .footer-note { padding-top: 24px; margin-top: 24px; }
+        .footer-note p { color: #999; font-size: 0.9rem; line-height: 1.5; margin-bottom: 8px; }
+        .footer-note p:last-child { margin-bottom: 0; }
+        .footer-credit { font-style: italic; }
+
+        /* Quotes */
+        .site-quote { margin-top: 12px; margin-bottom: 60px; padding-left: 24px; }
+        .site-quote-line { color:#666; font-style: italic; }
+        .site-quote-action { color:#888; text-decoration:none; margin-left: 24px; }
+        .site-quote-action:hover { opacity:.6; text-decoration:none }
+
+        /* Guestbook */
+        .guestbook-section { margin-top: 32px; }
+        .guestbook-intro { color: #333; margin-bottom: 24px; }
+        .guestbook-form { max-width: 600px; }
+        .guestbook-input-container { position: relative; border: 1px solid #e0e0e0; border-radius: 4px; background: #fafafa; display: flex; align-items: center; }
+        .guestbook-input-container:focus-within { border-color: #ccc; background: #fff; }
+        .guestbook-input { flex: 1; padding: 12px; border: none; background: transparent; font-family: inherit; font-size: 14px; outline: none; }
+        .guestbook-submit { background: none; color: #ccc; border: none; padding: 12px 16px; cursor: not-allowed; font-size: 14px; transition: color 0.2s ease; }
+        .guestbook-submit:not(:disabled) { color: #000; cursor: pointer; }
+        .guestbook-submit:not(:disabled):hover { opacity: 0.7; }
+        .guestbook-status { font-size: 14px; margin-top: 8px; }
+        .guestbook-success { color: #28a745; }
+        .guestbook-error { color: #dc3545; }
+
+        /* Problem list */
+        .problem-list { list-style: none; margin: 20px 0; padding: 0; }
+        .problem-item { margin-bottom: 16px; position: relative; padding-left: 20px; }
+        .problem-item::before { 
+            content: "•"; 
+            position: absolute; 
+            left: 0; 
+            color: #999; 
+            font-size: 1.2em; 
+            line-height: 1.2; 
+        }
+        .problem-title { color: #000; cursor: pointer; transition: opacity 0.2s ease; border-bottom: 1px dotted #999; }
+        .problem-title:hover { opacity: 0.6; }
+        .problem-note { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.3s ease, padding 0.3s ease; 
+            color: #666; 
+            font-style: italic; 
+            line-height: 1.6; 
+            padding: 0 0 0 16px; 
+            margin-left: 8px;
+            border-left: 2px solid #f0f0f0;
+        }
+        .problem-note.expanded { 
+            padding: 12px 0 12px 16px; 
+            border-left-color: #ddd;
+        }
+
+        /* Remove underline from specific links */
+        .section-content a:hover { text-decoration: none; }
+
+        /* Responsive design */
+        @media (max-width: 1000px) {
+            .page-container { padding: 40px 24px; }
+            .about-section, .work-section, .notes-section, .contact-section { gap: 60px; }
+            .section-label { width: 120px; }
+        }
+        @media (max-width: 768px) {
+            .page-container { max-width: 100%; padding: 40px 24px; }
+            .site-title { font-size: 1.75rem; margin-bottom: 40px; }
+            .about-section, .work-section, .notes-section, .contact-section { flex-direction: column; gap: 24px; margin-bottom: 60px; }
+            .section-label { min-width: auto; }
+            .note-item { flex-direction: column; gap: 8px; }
+            .note-date { min-width: auto; }
+            .contact-item { flex-direction: column; gap: 4px; margin-bottom: 16px; }
+            .contact-label { min-width: auto; margin-right: 0; }
+        }
+        @media (min-width: 1400px) {
+            .about-section, .work-section, .notes-section, .contact-section { gap: 320px; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <!-- Header/Name Section -->
+    <header class="site-header">
+        <h1 class="site-title">Antonio Franca</h1>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h2 class="section-label">About</h2>
+        <div class="section-content">
+            <p>I'm a founding engineer at <a href="https://altan.ai/" target="_blank">AltanLabs</a>, building the infrastructure for enabling agents to accomplish <em>complex</em> tasks <em>autonomously</em>. Previously, I worked on machine learning and computational neuroscience research at several institutions.</p>
+            
+            <p>Some problems I find interesting:</p>
+            
+            <ul class="problem-list">
+                <li class="problem-item">
+                    <span class="problem-title" data-note="data-distributions">How can we model/sample arbitrary data distributions (i.e. generative modeling)</span>
+                    <div class="problem-note" id="note-data-distributions">I see this as one of the most ambitious frontiers. At the limit, it would mean generating anything on demand (images, video, proteins, drugs, and if we aim further: organs, new life forms, buildings, or entire cities) at least in simulation first (which we might later translate into atoms with printer-like tech). I find this problem the most exciting because it can be <em>hugely impactful</em> and it is often mathematically elegant (think transport maps via diffusion or flows with strong physics inductive biases, and other clever sampling methods to overcome the curse of dimensionality, rather than just autoregressive models that work via scaling deep learning architectures).<br><br></div>
+                </li>
+                <li class="problem-item">
+                    <span class="problem-title" data-note="ai-science">How can we leverage AI to accelerate science</span>
+                    <div class="problem-note" id="note-ai-science">I see two main paths towards this:<br><br>(1) Training new foundation models in unexplored domains (genomes, molecules, materials) to do for science what LLMs did for language. We already found scaling data and architectures works: a few years ago, people thought text was too complex to model, and yet here we are. Language was the low-hanging fruit thanks to the Internet as a huge text hub, now it's a great time to push this same playbook into current data-scarce domains.<br><br>(2) Leveraging LLM-based agency for more aggressive exploration/validation of the hypothesis space. Einstein once supposedly said "genius is 1% talent and 99% hard work", and I find that quote especially inspiring in this regard. Suppose an autonomous agent that can take a high-level idea and then actually code, run experiments, debug, analyse results, scan research literature, and suggest what to try next. Even crazier, tie this with embodied AI, and it can even run wet lab experiments. Though I don't think we'll get fully autonomous researchers anytime soon, what's way more realistic in the near term are tireless research assistants that amplify the impact of a sharp PI who guides them appropriately. We're already seeing early sparks of this (see <a href="https://arxiv.org/pdf/2507.18074" target="_blank">research paper</a>, <a href="https://platform.futurehouse.org/" target="_blank">AI scientist startup</a>). <br><br></div>
+                </li>
+                <li class="problem-item">
+                    <span class="problem-title" data-note="computational-intelligence">What are the computational principles of intelligence</span>
+                    <div class="problem-note" id="note-computational-intelligence">What does it take to explain abstraction, reasoning, even consciousness, in computational terms? Given neurons and synapses give rise to human-level cognition, what are the universal principles we need to capture to develop algorithms capable of autonomous abstraction (i.e. general intelligence).<br><br></div>
+                </li>
+                <li class="problem-item">
+                    <span class="problem-title" data-note="human-biology">How can we engineer human biology</span>
+                    <div class="problem-note" id="note-human-biology">Think of designing interventions to repair and improve our bodies, and monitor these satisfactorily once they are implemented. At the limit of <a href="https://pubmed.ncbi.nlm.nih.gov/26940610/" target="_blank">medicine 3.0</a>, I imagine nanorobots circulating through our bloodstream, constantly tracking cellular function and flagging risks before they become problems. These might interface with AI doctors capable of proposing personalized therapies (e.g. some of them drugs generated on demand). Building the hardware–software infrastructure for this will be <em>hard</em>, but so was sending humans to the Moon.<br><br></div>
+                </li>
+                <li class="problem-item">
+                    <span class="problem-title" data-note="geopolitical-governance">How to redesign geopolitical governance to avoid wars, and promote economic prosperity</span>
+                    <div class="problem-note" id="note-geopolitical-governance">Hint: VLLC!<br><br></div>
+                </li>
+            </ul>
+            
+            <p>I'm based in Barcelona, where it's currently <span data-barcelona-time>00:00:00</span>.</p>
+            
+            <p>In my spare time, I run, swim, surf, lift, explore nature, eat, code, travel, and read.</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="work-section">
+        <h2 class="section-label">Projects</h2>
+        <div class="section-content">
+            <div class="projects-list">
+                <div class="post-row">
+                    <div class="date">2025 08</div>
+                    <div class="excerpt"><strong><a href="https://github.com/antoniofrancaib/accelerate-md" target="_blank">Accelerating molecular sampling</a></strong> (<a href="../assets/Franca_Transferable_2025.pdf" target="_blank">report</a>) Using generative models to speed up parallel tempering by learning transports between Boltzmann distributions.</div>
+                </div>
+
+                <div class="post-row">
+                    <div class="date">2025 06</div>
+                    <div class="excerpt"><strong><a href="https://github.com/antoniofrancaib/grnadex" target="_blank">RNA design models</a> </strong> (<a href="../assets/grnadex.pdf" target="_blank">preprint</a>) Improving RNA inverse folding with greater expressivity and biologically inspired priors (an enhanced <a href="https://arxiv.org/pdf/2305.14749" target="_blank">gRNAde</a>).</div>
+                </div>
+
+                <div class="post-row">
+                    <div class="date">2024 08</div>
+                    <div class="excerpt"><strong><a href="https://github.com/antoniofrancaib/quenched-variability" target="_blank"> Memory in recurrent networks</a></strong> (<a href="../assets/quenched-variability-role.pdf" target="_blank">report</a>) Exploring how “quenched variability” in neural connectivity can expand memory storage capacity.</div>
+                </div>
+            </div>
+            <a href="projects/" class="view-all-link">View all projects →</a>
+        </div>
+    </section>
+
+    <!-- Posts Section -->
+    <section class="notes-section">
+        <h2 class="section-label">Posts</h2>
+        <div class="section-content">
+            <div class="notes-list">
+                <div class="note-item">
+                    <span class="note-date">Feb 10, 2025</span>
+                    <div class="note-content">
+                        <h3><a href="blog/dont-break-your-windows/">Don't break your windows</a></h3>
+                        <p>On how letting small cracks erode character.</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="profile-image">
-                <img src="assets/images/profile_pic.jpeg" alt="Antonio Franca" />
+            <span class="view-all-link">View all posts →</span>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2 class="section-label">Contact</h2>
+        <div class="section-content">
+            <div class="contact-list">
+                <div class="contact-item">
+                    <span class="contact-label">CV</span>
+                    <a href="assets/cv.pdf" target="_blank">View PDF</a>
+                </div>
+                
+                <div class="contact-item">
+                    <span class="contact-label">Email</span>
+                    <a href="mailto:antoniofrancaib@gmail.com">antoniofrancaib@gmail.com</a>
+                </div>
+                
+                <div class="contact-item">
+                    <span class="contact-label">LinkedIn</span>
+                    <a href="https://www.linkedin.com/in/antonio-franca-ibáñez-a37623198/" target="_blank">antonio-franca-ibáñez</a>
+                </div>
+                
+                <div class="contact-item">
+                    <span class="contact-label">X</span>
+                    <a href="https://x.com/antoniofrancaib" target="_blank">antoniofrancaib</a>
+                </div>
+                
+                <div class="contact-item">
+                    <span class="contact-label">GitHub</span>
+                    <a href="https://github.com/antoniofrancaib" target="_blank">antoniofrancaib</a>
+                </div>
+
+                <div class="contact-item">
+                    <span class="contact-label">Spotify</span>
+                    <div class="stack">
+                        <a href="https://open.spotify.com/user/zn3zy8b7ozcxhuvz7y6sxpu4j?si=7d4693bc414245ce" target="_blank">antoniofranca</a>
+                        <div class="spotify-now" data-spotify-now></div>
+                    </div>
+                </div>
             </div>
             
-            <div class="bio">
-                <p>
-                    I am an aspiring scientist, a builder at heart, and passionate learner, currently pursuing a Machine Learning master's at the University of Cambridge. 
-                    I aim to explore the computational principles of intelligence—both natural and artificial—decode the language of life, 
-                    and contribute to building a future where we can cure disease, enhance cognition, and make biology programmable.
-                    My biggest driver is the desire to help unlock unprecedented eras of abundance through science, intelligence, and technology.
-                </p>
-
-                <p>
-                    When I'm not researching, I enjoy spending time outdoors running, surfing, rock climbing, and boxing. I also love making and playing music, 
-                    traveling, reading, hanging out with friends, and sharing meaningful moments with my wonderful girlfriend.
-                </p>
+            <div class="guestbook-section">
+                <p class="guestbook-intro">Leave a message in my guestbook.</p>
+                <form class="guestbook-form" id="guestbook-form">
+                    <div class="guestbook-input-container">
+                        <input type="text" class="guestbook-input" id="guestbook-message" placeholder="Message" required maxlength="500">
+                        <button type="submit" class="guestbook-submit" disabled>Send</button>
+                    </div>
+                    <div class="guestbook-status" id="guestbook-status"></div>
+                </form>
             </div>
         </div>
     </section>
+</div> 
+    <div id="site-quote" class="site-quote" hidden>
+        <p class="site-quote-line"><span data-quote-full></span><a href="#" class="site-quote-action" data-quote-next>View another</a></p>
+    </div>
+    <script>
+        (function(){
+          function tick(el){
+            const f=new Intl.DateTimeFormat([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Europe/London'});
+            const run=()=>{ el.textContent=f.format(new Date()); };
+            run(); setInterval(run, 1000);
+          }
+          const el=document.querySelector('[data-london-time]');
+          if(el) tick(el);
+        })();
 
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2>Featured Projects</h2>
-            {% include featured-projects.html %}
-        </div>
-    </section>
-
-</main>
-
-<script>
-    // Simple script to determine if we're viewing locally
-    document.addEventListener('DOMContentLoaded', function() {
-        if (window.location.protocol === 'file:') {
-            // Find all blog post links (except Cambridge) and disable them
-            const blogLinks = document.querySelectorAll('.blog-post h3 a:not([href="blog-post.html?post=cambridge"])');
-            blogLinks.forEach(link => {
-                link.href = "#";
-                link.title = "When viewing locally, only the Cambridge post is available";
-                link.style.opacity = "0.7";
+        // Spotify: show latest played track if access token present in config.json
+        (async function(){
+          try{
+            const holder=document.querySelector('[data-spotify-now]');
+            if(!holder) return;
+            const cfgResp=await fetch('./config.json');
+            const cfg=await cfgResp.json();
+            const token=cfg && cfg.spotify && cfg.spotify.accessToken;
+            if(!token){ holder.textContent=''; return; }
+            const r=await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1',{
+              headers:{ Authorization:'Bearer '+token }
             });
-        }
-    });
-</script>
+            if(!r.ok) throw new Error('Spotify API error');
+            const data=await r.json();
+            const item=(data.items&&data.items[0])||null;
+            if(!item){ holder.textContent=''; return; }
+            const name=item.track && item.track.name || '';
+            const artist=item.track && item.track.artists && item.track.artists[0] && item.track.artists[0].name || '';
+            const playedAt=item.played_at? new Date(item.played_at):null;
+            const ago=(function(){ if(!playedAt) return ''; const d=Math.floor((Date.now()-playedAt.getTime())/1000); if(d<60) return d+'s ago'; const m=Math.floor(d/60); if(m<60) return m+'m ago'; const h=Math.floor(m/60); if(h<24) return h+'h ago'; const days=Math.floor(h/24); return days+'d ago'; })();
+            holder.textContent='“'+name+'” by '+artist+(ago?('  '+ago):'');
+          }catch(err){ /* silent */ }
+        })();
 
-<style>
-    /* Blog section styles */
-    .blog-post-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        flex-wrap: wrap;
-        gap: var(--space-4);
-        margin-bottom: var(--space-2);
-    }
-    
-    .blog-post-content h3 {
-        font-size: 1.4rem;
-        margin-bottom: 0;
-        margin-right: var(--space-4);
-    }
-    
-    .blog-post-date {
-        font-family: var(--font-mono);
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        white-space: nowrap;
-    }
-</style> 
+        // Barcelona time
+        (function(){
+          function tick(el){
+            const f=new Intl.DateTimeFormat([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Europe/Madrid'});
+            const run=()=>{ el.textContent=f.format(new Date()); };
+            run(); setInterval(run, 1000);
+          }
+          const el=document.querySelector('[data-barcelona-time]');
+          if(el) tick(el);
+        })();
+
+        // Problem notes toggle
+        (function(){
+          const titles = document.querySelectorAll('.problem-title');
+          titles.forEach(title => {
+            title.addEventListener('click', function() {
+              const noteId = 'note-' + this.getAttribute('data-note');
+              const note = document.getElementById(noteId);
+              if (!note) return;
+              const willExpand = !note.classList.contains('expanded');
+              note.classList.toggle('expanded');
+              if (willExpand) {
+                // Expand to full content height
+                note.style.maxHeight = note.scrollHeight + 'px';
+              } else {
+                // Collapse smoothly
+                note.style.maxHeight = '0px';
+              }
+            });
+          });
+        })();
+    </script>
+    <script src="./assets/js/quotes.js"></script>
+    <script src="./assets/js/guestbook.js"></script>
+</body>
+</html> 

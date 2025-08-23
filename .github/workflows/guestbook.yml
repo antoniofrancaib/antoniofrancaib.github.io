@@ -1,0 +1,26 @@
+name: Handle Guestbook Submission
+
+on:
+  repository_dispatch:
+    types: [guestbook-submission]
+
+jobs:
+  create-guestbook-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub Issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GUESTBOOK_TOKEN }}
+          script: |
+            const { name, message } = context.payload.client_payload;
+            const sanitizedName = name ? name.trim().substring(0, 50) : 'Anonymous';
+            const sanitizedMessage = message.trim().substring(0, 500);
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Guestbook entry from ${sanitizedName}`,
+              body: `**From:** ${sanitizedName}\n**Message:**\n\n${sanitizedMessage}\n\n---\n*Submitted via guestbook on ${new Date().toISOString()}*`,
+              labels: ['guestbook']
+            });
