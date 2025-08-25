@@ -40,27 +40,15 @@
         browser: navigator.userAgent.substring(0, 100)
       };
 
-      // Try Netlify function first, then fallback
-      let response;
-      try {
-        // Try Netlify function endpoint
-        response = await fetch('/.netlify/functions/notion-guestbook', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(notionData)
-        });
-      } catch (netlifyError) {
-        // Fallback to alternative API endpoint (if you set one up later)
-        response = await fetch('/api/notion-guestbook', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(notionData)
-        });
-      }
+      // Always call the Netlify function using its absolute URL
+      // This works even when the site itself is hosted on GitHub Pages
+      const response = await fetch('https://websiteguestbook.netlify.app/.netlify/functions/notion-guestbook', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(notionData)
+      });
 
       if (response.ok) {
         showStatus('Thank you! Your message has been submitted successfully.', 'success');
