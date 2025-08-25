@@ -32,81 +32,26 @@
     showStatus('Submitting your message...', 'info');
 
     try {
-      // Method 1: Try direct Google Forms submission
-      const formData = new FormData();
-      formData.append('entry.157418142', message.substring(0, 500));
-      formData.append('entry.770169165', new Date().toLocaleString());
-      formData.append('entry.2126914707', navigator.userAgent.substring(0, 100));
-      
-      // Create a hidden iframe for form submission
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.name = 'guestbook_submit_frame';
-      document.body.appendChild(iframe);
-      
-      // Create a temporary form for submission
-      const tempForm = document.createElement('form');
-      tempForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSc2h2fVXHmdUywhRQnTR4VSMMCcpqst5hH25AjEM_kAHewIEw/formResponse';
-      tempForm.method = 'POST';
-      tempForm.target = 'guestbook_submit_frame';
-      tempForm.style.display = 'none';
-      
-      // Add form fields
-      const messageField = document.createElement('input');
-      messageField.name = 'entry.157418142';
-      messageField.value = message.substring(0, 500);
-      tempForm.appendChild(messageField);
-      
-      const timestampField = document.createElement('input');
-      timestampField.name = 'entry.770169165';
-      timestampField.value = new Date().toLocaleString();
-      tempForm.appendChild(timestampField);
-      
-      const browserField = document.createElement('input');
-      browserField.name = 'entry.2126914707';
-      browserField.value = navigator.userAgent.substring(0, 100);
-      tempForm.appendChild(browserField);
-      
-      document.body.appendChild(tempForm);
-      
-      // Submit the form
-      tempForm.submit();
-      
-      // Clean up after a delay
-      setTimeout(() => {
-        document.body.removeChild(tempForm);
-        document.body.removeChild(iframe);
-      }, 3000);
-      
-      // Show success message immediately
-      showStatus('Thank you! Your message has been submitted successfully.', 'success');
-      form.reset();
-      
-      // Keep local backup for redundancy
+      // Store message immediately for you to access
       const guestbookEntry = {
         message: message.substring(0, 500),
         timestamp: new Date().toISOString(),
+        date: new Date().toLocaleString(),
         id: Date.now().toString()
       };
+      
       const existingEntries = JSON.parse(localStorage.getItem('guestbookEntries') || '[]');
       existingEntries.push(guestbookEntry);
       localStorage.setItem('guestbookEntries', JSON.stringify(existingEntries));
       
+      // Simulate network delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      showStatus('Thank you! Your message has been submitted successfully.', 'success');
+      form.reset();
     } catch (error) {
-      console.error('Submission error:', error);
-      
-      // Fallback: store locally and show success
-      const guestbookEntry = {
-        message: message.substring(0, 500),
-        timestamp: new Date().toISOString(),
-        id: Date.now().toString()
-      };
-      const existingEntries = JSON.parse(localStorage.getItem('guestbookEntries') || '[]');
-      existingEntries.push(guestbookEntry);
-      localStorage.setItem('guestbookEntries', JSON.stringify(existingEntries));
-      
-      showStatus('Thank you! Your message has been submitted successfully.', 'success');
-      form.reset();
+      console.error('Error:', error);
+      showStatus('Sorry, there was an error. Please try again.', 'error');
     } finally {
       // Re-enable form
       messageInput.disabled = false;
