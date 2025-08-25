@@ -6,26 +6,80 @@ const notion = new Client({
 });
 
 exports.handler = async (event, context) => {
+  // Handle CORS preflight requests
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
+      body: '',
+    };
+  }
+
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
       body: JSON.stringify({ error: 'Method not allowed' }),
     };
   }
 
   try {
+    console.log('Received request:', event.httpMethod, event.body);
+    
+    // Check if required environment variables are set
+    if (!process.env.NOTION_API_KEY) {
+      console.error('NOTION_API_KEY environment variable is not set');
+      return {
+        statusCode: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        },
+        body: JSON.stringify({ error: 'Server configuration error: Missing API key' }),
+      };
+    }
+
+    if (!process.env.NOTION_DATABASE_ID) {
+      console.error('NOTION_DATABASE_ID environment variable is not set');
+      return {
+        statusCode: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        },
+        body: JSON.stringify({ error: 'Server configuration error: Missing database ID' }),
+      };
+    }
+
     const { name, message, timestamp, browser } = JSON.parse(event.body);
+    console.log('Parsed data:', { name, message: message?.substring(0, 50), timestamp, browser: browser?.substring(0, 50) });
 
     // Validate input
     if (!message || message.trim().length === 0) {
       return {
         statusCode: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        },
         body: JSON.stringify({ error: 'Message is required' }),
       };
     }
 
     // Create new page in Notion database
+    console.log('Creating Notion page with database ID:', process.env.NOTION_DATABASE_ID);
     const response = await notion.pages.create({
       parent: {
         database_id: process.env.NOTION_DATABASE_ID,
@@ -66,6 +120,7 @@ exports.handler = async (event, context) => {
       },
     });
 
+    console.log('Successfully created Notion page:', response.id);
     return {
       statusCode: 200,
       headers: {
