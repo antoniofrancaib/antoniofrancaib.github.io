@@ -16,7 +16,7 @@
   messageInput.addEventListener('input', updateButtonState);
   messageInput.addEventListener('keyup', updateButtonState);
 
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const message = messageInput.value.trim();
@@ -26,57 +26,44 @@
       return;
     }
 
-    setLoading(true);
-    
-    try {
-      // Use GitHub repository dispatch to trigger secure workflow
-      const response = await fetch('https://api.github.com/repos/antoniofrancaib/antoniofrancaib.github.io/dispatches', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          event_type: 'guestbook-submission',
-          client_payload: {
-            name: 'Anonymous',
-            message: message.substring(0, 500)
-          }
-        })
-      });
+    // Create GitHub issue URL with pre-filled content
+    const issueTitle = 'Guestbook entry from visitor';
+    const issueBody = `**Message:**
 
-      if (response.status === 204) {
-        showStatus('Message sent successfully! Thank you.', 'success');
-        form.reset();
-        updateButtonState(); // Update button state after reset
-      } else {
-        throw new Error('Failed to submit message');
-      }
-      
-    } catch (error) {
-      console.error('Guestbook submission error:', error);
-      showStatus('Failed to send message. Please try again later.', 'error');
-    } finally {
-      setLoading(false);
-    }
+${message.substring(0, 500)}
+
+---
+*Submitted via guestbook on ${new Date().toISOString().split('T')[0]}*`;
+
+    const githubUrl = `https://github.com/antoniofrancaib/antoniofrancaib.github.io/issues/new?` +
+      `title=${encodeURIComponent(issueTitle)}&` +
+      `body=${encodeURIComponent(issueBody)}&` +
+      `labels=guestbook`;
+
+    // Show confirmation message
+    showStatus('Opening GitHub to submit your message...', 'info');
+    
+    // Open GitHub issue creation page in new tab
+    window.open(githubUrl, '_blank');
+    
+    // Clear form after a delay
+    setTimeout(() => {
+      form.reset();
+      updateButtonState();
+      showStatus('', '');
+    }, 2000);
   });
 
   function showStatus(message, type) {
     status.textContent = message;
     status.className = `guestbook-status guestbook-${type}`;
-    setTimeout(() => {
-      status.textContent = '';
-      status.className = 'guestbook-status';
-    }, 5000);
-  }
-
-  function setLoading(loading) {
-    if (loading) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-    } else {
-      submitBtn.textContent = 'Send';
-      updateButtonState();
+    if (type !== '') {
+      setTimeout(() => {
+        if (status.className === `guestbook-status guestbook-${type}`) {
+          status.textContent = '';
+          status.className = 'guestbook-status';
+        }
+      }, 5000);
     }
   }
 
