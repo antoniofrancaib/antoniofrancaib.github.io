@@ -42,6 +42,8 @@
 
       // Always call the Netlify function using its absolute URL
       // This works even when the site itself is hosted on GitHub Pages
+      console.log('🚀 Submitting to Notion:', notionData);
+      
       const response = await fetch('https://websiteguestbook.netlify.app/.netlify/functions/notion-guestbook', {
         method: 'POST',
         headers: {
@@ -49,32 +51,45 @@
         },
         body: JSON.stringify(notionData)
       });
+      
+      console.log('📡 Response status:', response.status);
+      console.log('📡 Response ok:', response.ok);
 
       if (response.ok) {
         showStatus('Thank you! Your message has been submitted successfully.', 'success');
         form.reset();
       } else {
-        // Fallback to localStorage if Notion fails
-        throw new Error('Notion submission failed');
+        // Surface detailed error information to help diagnose
+        let errorDetail = '';
+        try {
+          const raw = await response.text();
+          try {
+            const parsed = JSON.parse(raw);
+            errorDetail = parsed.details || parsed.error || raw;
+          } catch(_) {
+            errorDetail = raw;
+          }
+        } catch(_) { /* ignore */ }
+        throw new Error(`Notion submission failed (HTTP ${response.status}). ${errorDetail}`);
       }
       
     } catch (error) {
-      console.error('Notion submission failed, storing locally:', error);
-      
-      // Fallback: store in localStorage
-      const guestbookEntry = {
-        message: message.substring(0, 500),
-        timestamp: new Date().toISOString(),
-        date: new Date().toLocaleString(),
-        id: Date.now().toString()
-      };
-      
-      const existingEntries = JSON.parse(localStorage.getItem('guestbookEntries') || '[]');
-      existingEntries.push(guestbookEntry);
-      localStorage.setItem('guestbookEntries', JSON.stringify(existingEntries));
-      
-      showStatus('Thank you! Your message has been received and stored.', 'success');
-      form.reset();
+      console.error('Guestbook submission error:', error);
+
+      // Keep a local backup so the message isn't lost, but show an error to the user
+      try {
+        const guestbookEntry = {
+          message: message.substring(0, 500),
+          timestamp: new Date().toISOString(),
+          date: new Date().toLocaleString(),
+          id: Date.now().toString()
+        };
+        const existingEntries = JSON.parse(localStorage.getItem('guestbookEntries') || '[]');
+        existingEntries.push(guestbookEntry);
+        localStorage.setItem('guestbookEntries', JSON.stringify(existingEntries));
+      } catch (_) { /* ignore local backup errors */ }
+
+      showStatus(`Sorry, your message couldn't be saved to Notion. ${error.message}`, 'error');
     } finally {
       // Re-enable form
       messageInput.disabled = false;
