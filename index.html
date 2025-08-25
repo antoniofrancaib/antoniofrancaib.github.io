@@ -220,12 +220,26 @@
         @media (max-width: 768px) {
             .page-container { max-width: 100%; padding: 40px 24px; }
             .site-title { font-size: 1.75rem; margin-bottom: 40px; }
-            .about-section, .work-section, .notes-section, .contact-section { flex-direction: column; gap: 24px; margin-bottom: 60px; }
+            .about-section, .work-section, .notes-section, .contact-section { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 24px; 
+                margin-bottom: 60px; 
+            }
             .section-label { min-width: auto; }
             .note-item { flex-direction: column; gap: 8px; }
             .note-date { min-width: auto; }
             .contact-item { flex-direction: column; gap: 4px; margin-bottom: 16px; }
             .contact-label { min-width: auto; margin-right: 0; }
+            .post-row { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 8px; 
+            }
+            .post-row .date { 
+                order: -1; 
+                margin-bottom: 4px; 
+            }
         }
         @media (min-width: 1400px) {
             .about-section, .work-section, .notes-section, .contact-section { gap: 320px; }
