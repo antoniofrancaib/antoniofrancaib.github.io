@@ -1,0 +1,20 @@
+{
+  "name": "antonio-franca-website",
+  "version": "1.0.0",
+  "description": "Personal website with Notion-powered guestbook",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build required'",
+    "start": "echo 'Static site - use live server'"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antoniofrancaib/antoniofrancaib.github.io.git"
+  },
+  "author": "Antonio Franca",
+  "license": "MIT"
+}

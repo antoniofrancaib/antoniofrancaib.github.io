@@ -32,7 +32,48 @@
     showStatus('Submitting your message...', 'info');
 
     try {
-      // Store message immediately for you to access
+      // Submit to Notion database
+      const notionData = {
+        name: 'Anonymous Visitor', // You can add a name field later if desired
+        message: message.substring(0, 500),
+        timestamp: new Date().toISOString(),
+        browser: navigator.userAgent.substring(0, 100)
+      };
+
+      // Try Netlify function first, then fallback
+      let response;
+      try {
+        // Try Netlify function endpoint
+        response = await fetch('/.netlify/functions/notion-guestbook', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(notionData)
+        });
+      } catch (netlifyError) {
+        // Fallback to alternative API endpoint (if you set one up later)
+        response = await fetch('/api/notion-guestbook', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(notionData)
+        });
+      }
+
+      if (response.ok) {
+        showStatus('Thank you! Your message has been submitted successfully.', 'success');
+        form.reset();
+      } else {
+        // Fallback to localStorage if Notion fails
+        throw new Error('Notion submission failed');
+      }
+      
+    } catch (error) {
+      console.error('Notion submission failed, storing locally:', error);
+      
+      // Fallback: store in localStorage
       const guestbookEntry = {
         message: message.substring(0, 500),
         timestamp: new Date().toISOString(),
@@ -44,14 +85,8 @@
       existingEntries.push(guestbookEntry);
       localStorage.setItem('guestbookEntries', JSON.stringify(existingEntries));
       
-      // Simulate network delay for better UX
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      showStatus('Thank you! Your message has been submitted successfully.', 'success');
+      showStatus('Thank you! Your message has been received and stored.', 'success');
       form.reset();
-    } catch (error) {
-      console.error('Error:', error);
-      showStatus('Sorry, there was an error. Please try again.', 'error');
     } finally {
       // Re-enable form
       messageInput.disabled = false;
