@@ -32,27 +32,53 @@
     showStatus('Submitting your message...', 'info');
 
     try {
-      // Submit to Google Forms invisibly
+      // Method 1: Try direct Google Forms submission
       const formData = new FormData();
+      formData.append('entry.157418142', message.substring(0, 500));
+      formData.append('entry.770169165', new Date().toLocaleString());
+      formData.append('entry.2126914707', navigator.userAgent.substring(0, 100));
       
-      // Google Form field IDs extracted from your form
-      formData.append('entry.157418142', message.substring(0, 500)); // Message field
-      formData.append('entry.770169165', new Date().toLocaleString()); // Timestamp field
-      formData.append('entry.2126914707', navigator.userAgent.substring(0, 100)); // Browser info field
+      // Create a hidden iframe for form submission
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.name = 'guestbook_submit_frame';
+      document.body.appendChild(iframe);
       
-      // Submit to Google Forms with your actual form ID
-      const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc2h2fVXHmdUywhRQnTR4VSMMCcpqst5hH25AjEM_kAHewIEw/formResponse';
+      // Create a temporary form for submission
+      const tempForm = document.createElement('form');
+      tempForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSc2h2fVXHmdUywhRQnTR4VSMMCcpqst5hH25AjEM_kAHewIEw/formResponse';
+      tempForm.method = 'POST';
+      tempForm.target = 'guestbook_submit_frame';
+      tempForm.style.display = 'none';
       
-      // Use fetch with no-cors mode to avoid CORS issues
-      await fetch(googleFormUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      });
+      // Add form fields
+      const messageField = document.createElement('input');
+      messageField.name = 'entry.157418142';
+      messageField.value = message.substring(0, 500);
+      tempForm.appendChild(messageField);
       
-      // Since no-cors doesn't let us check response, assume success after a delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const timestampField = document.createElement('input');
+      timestampField.name = 'entry.770169165';
+      timestampField.value = new Date().toLocaleString();
+      tempForm.appendChild(timestampField);
       
+      const browserField = document.createElement('input');
+      browserField.name = 'entry.2126914707';
+      browserField.value = navigator.userAgent.substring(0, 100);
+      tempForm.appendChild(browserField);
+      
+      document.body.appendChild(tempForm);
+      
+      // Submit the form
+      tempForm.submit();
+      
+      // Clean up after a delay
+      setTimeout(() => {
+        document.body.removeChild(tempForm);
+        document.body.removeChild(iframe);
+      }, 3000);
+      
+      // Show success message immediately
       showStatus('Thank you! Your message has been submitted successfully.', 'success');
       form.reset();
       
@@ -69,7 +95,7 @@
     } catch (error) {
       console.error('Submission error:', error);
       
-      // Fallback: still show success and store locally
+      // Fallback: store locally and show success
       const guestbookEntry = {
         message: message.substring(0, 500),
         timestamp: new Date().toISOString(),
