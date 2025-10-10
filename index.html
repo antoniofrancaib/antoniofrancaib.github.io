@@ -17,18 +17,18 @@
 
         html {
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-            color: #111;
-            background-color: #ffffff;
+            font-family: 'Lyon Text', 'Freight Text', 'Crimson Pro', Georgia, serif;
+            color: #000;
+            background-color: #FAFAFA;
             font-weight: 400;
-            font-size: 16px;
-            line-height: 1.6;
+            font-size: 17px;
+            line-height: 1.65;
         }
 
         /* Links */
@@ -44,8 +44,9 @@
 
         /* Update site title */
         .site-title {
-            font-size: 1.2rem;
-            font-weight: 450;
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
             margin: 0 0 60px 0;
             text-align: left;
             border: none !important;
@@ -72,9 +73,10 @@
         .notes-section,
         .contact-section {
             display: grid;
-            grid-template-columns: 1fr 12fr 1fr;
+            grid-template-columns: 1fr 3fr 1fr;
             margin-bottom: 80px;
             align-items: flex-start;
+            gap: 40px;
         }
 
         .about-section:first-of-type {
@@ -82,11 +84,14 @@
         }
 
         .section-label {
-            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
             font-weight: 400;
-            color: #666;
+            color: #999;
             grid-column: 1;
             margin: 0;
+            text-align: left;
+            padding-left: 0;
         }
 
         .section-content {
@@ -118,20 +123,32 @@
         .work-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
         .work-item h3 { font-size: 1.1rem; font-weight: 500; margin-bottom: 8px; color: #000; line-height: 1.4; }
         .work-item p { color: #666; line-height: 1.6; margin-bottom: 12px; }
-        .work-link, .view-all-link { color: #000; text-decoration: none; font-size: 0.95rem; transition: opacity 0.2s ease; }
+        .work-link, .view-all-link { color: #000; text-decoration: none; font-size: 15px; transition: opacity 0.2s ease; }
         .work-link:hover, .view-all-link:hover { opacity: 0.6; text-decoration: none; }
-        .work-status { color: #888; font-size: 0.9rem; font-style: italic; }
-        .view-all-link { display: inline-block; margin-top: 16px; }
+        .work-status { color: #999; font-size: 13px; font-style: italic; }
+        .view-all-link { display: inline-block; margin-top: 20px; }
 
         /* Post rows (date + content) */
         .post-row { display: grid; grid-template-columns: 100px 1fr; gap: 16px; margin-bottom: 24px; }
-        .post-row .date { color: #888; font-size: 0.9rem; white-space: nowrap; }
+        .post-row .date { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            color: #999; 
+            font-size: 13px; 
+            font-weight: 400;
+            white-space: nowrap; 
+        }
 
         /* Notes section */
         .notes-list { margin-bottom: 32px; }
         .note-item { display: flex; margin-bottom: 24px; align-items: flex-start; gap: 20px; }
         .note-item:last-child { margin-bottom: 0; }
-        .note-date { font-size: 0.9rem; color: #888; min-width: 80px; font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace; }
+        .note-date { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px; 
+            color: #999; 
+            font-weight: 400;
+            min-width: 80px; 
+        }
         .note-content h3 { font-size: 1rem; font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
         .note-content h3 a { color: #000; text-decoration: none; transition: opacity 0.2s ease; }
         .note-content h3 a:hover { opacity: 0.6; }
@@ -141,13 +158,25 @@
         .contact-list { margin-bottom: 60px; }
         .contact-item { display: flex; margin-bottom: 12px; align-items: baseline; }
         .contact-item:last-child { margin-bottom: 0; }
-        .contact-label { font-size: 0.95rem; color: #888; min-width: 80px; margin-right: 20px; }
+        .contact-label { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px; 
+            color: #999; 
+            font-weight: 400;
+            min-width: 80px; 
+            margin-right: 20px; 
+        }
         .contact-item a { color: #000; text-decoration: none; font-size: 0.95rem; transition: opacity 0.2s ease; }
         .contact-item a:hover { opacity: 0.6; }
 
         /* Spotify */
         .contact-item .stack { display: grid; gap: 6px }
-        .spotify-now { color:#888; font-size:0.95rem }
+        .spotify-now { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            color: #999; 
+            font-size: 13px;
+            font-weight: 400;
+        }
 
         /* Project titles as links */
         .post-row .excerpt a{ color:inherit; text-decoration:none; transition: opacity 0.2s ease }
@@ -215,8 +244,9 @@
         /* Responsive design */
         @media (max-width: 1000px) {
             .page-container { padding: 40px 24px; }
-            .about-section, .work-section, .notes-section, .contact-section { gap: 60px; }
-            .section-label { width: 120px; }
+            .about-section, .work-section, .notes-section, .contact-section { 
+                gap: 20px; 
+            }
         }
         @media (max-width: 768px) {
             .page-container { max-width: 100%; padding: 40px 24px; }
@@ -227,7 +257,11 @@
                 gap: 24px; 
                 margin-bottom: 60px; 
             }
-            .section-label { min-width: auto; }
+            .section-label { 
+                min-width: auto; 
+                text-align: left;
+                padding-left: 0;
+            }
             .note-item { flex-direction: column; gap: 8px; }
             .note-date { min-width: auto; }
             .contact-item { flex-direction: column; gap: 4px; margin-bottom: 16px; }
@@ -243,7 +277,7 @@
             }
         }
         @media (min-width: 1400px) {
-            .about-section, .work-section, .notes-section, .contact-section { gap: 320px; }
+            .about-section, .work-section, .notes-section, .contact-section { gap: 60px; }
         }
     </style>
 </head>
@@ -259,7 +293,7 @@
         <h2 class="section-label">About</h2>
         <div class="section-content">
 
-            <p>I'm an AI researcher working at the intersection of generative modeling, geometric deep learning, and molecular design. I build models that inverse-design molecules (proteins, drugs, materials) by learning to navigate high-dimensional chemical and biological spaces. I hold an MPhil in Machine Learning from Cambridge (Distinction) and a BSc in Mathematics from VU Amsterdam (Cum Laude).</p>
+            <p>I'm an AI researcher working at the intersection of generative modeling, geometric deep learning, and molecular design. I build models that inverse-design molecules (proteins, drugs, materials) by learning to navigate high-dimensional chemical and biological spaces. I also do freelance engineering consulting. I hold an MPhil in Machine Learning from Cambridge (Distinction) and a BSc in Mathematics from VU Amsterdam (Cum Laude).</p>
             
             <p>Some problems I find interesting:</p>
             
