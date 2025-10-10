@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "build": "echo 'Static site - no build required'",
-    "start": "echo 'Static site - use live server'"
+    "start": "echo 'Static site - use live server'",
+    "dev": "python3 -m http.server 8000",
+    "dev:netlify": "netlify dev"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15"

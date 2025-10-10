@@ -258,18 +258,23 @@
     <section class="about-section">
         <h2 class="section-label">About</h2>
         <div class="section-content">
-            <p>I'm a founding engineer at <a href="https://altan.ai/" target="_blank">AltanLabs</a>, building the infrastructure for enabling agents to accomplish <em>complex</em> tasks <em>autonomously</em>. Previously, I worked on machine learning and computational neuroscience research at several institutions.</p>
+
+            <p>I'm an AI researcher working at the intersection of generative modeling, geometric deep learning, and molecular design. I build models that inverse-design molecules (proteins, drugs, materials) by learning to navigate high-dimensional chemical and biological spaces. I hold an MPhil in Machine Learning from Cambridge (Distinction) and a BSc in Mathematics from VU Amsterdam (Cum Laude).</p>
             
             <p>Some problems I find interesting:</p>
             
             <ul class="problem-list">
                 <li class="problem-item">
-                    <span class="problem-title" data-note="data-distributions">How can we model/sample arbitrary data distributions (i.e. generative modeling)</span>
-                    <div class="problem-note" id="note-data-distributions">I see this as one of the most ambitious frontiers. At the limit, it would mean generating anything on demand (images, video, proteins, drugs, and if we aim further: organs, new life forms, buildings, or entire cities) at least in simulation first (which we might later translate into atoms with printer-like tech). I find this problem the most exciting because it can be <em>hugely impactful</em> and it is often mathematically elegant (think transport maps via diffusion or flows with strong physics inductive biases, and other clever sampling methods to overcome the curse of dimensionality, rather than just autoregressive models that work via scaling deep learning architectures).<br><br></div>
+                    <span class="problem-title" data-note="data-distributions">Modeling and sampling arbitrary data distributions</span>
+                    <div class="problem-note" id="note-data-distributions">Generative modeling represents one of the most ambitious frontiers in AI. At its limit, it would enable generating anything on demand (images, video, proteins, molecular therapeutics) initially in simulation (bits), later translated to physical reality (atoms) through printer-like tech. I find this problem one of the most exciting ones because it can be hugely impactful and it is often mathematically elegant (think transport maps via diffusion or flows with strong physics inductive biases, and other clever sampling methods to overcome the curse of dimensionality, rather than just autoregressive models that work via scaling deep learning architectures).<br><br></div>
                 </li>
                 <li class="problem-item">
                     <span class="problem-title" data-note="ai-science">How can we leverage AI to accelerate science</span>
-                    <div class="problem-note" id="note-ai-science">I see two main paths towards this:<br><br>(1) Training new foundation models in unexplored domains (genomes, molecules, materials) to do for science what LLMs did for language. We already found scaling data and architectures works: a few years ago, people thought text was too complex to model, and yet here we are. Language was the low-hanging fruit thanks to the Internet as a huge text hub, now it's a great time to push this same playbook into current data-scarce domains.<br><br>(2) Leveraging LLM-based agency for more aggressive exploration/validation of the hypothesis space. Einstein once supposedly said "genius is 1% talent and 99% hard work", and I find that quote especially inspiring in this regard. Suppose an autonomous agent that can take a high-level idea and then actually code, run experiments, debug, analyse results, scan research literature, and suggest what to try next. Even crazier, tie this with embodied AI, and it can even run wet lab experiments. Though I don't think we'll get fully autonomous researchers anytime soon, what's way more realistic in the near term are tireless research assistants that amplify the impact of a sharp PI who guides them appropriately. We're already seeing early sparks of this (see <a href="https://arxiv.org/pdf/2507.18074" target="_blank">research paper</a>, <a href="https://platform.futurehouse.org/" target="_blank">AI scientist startup</a>). <br><br></div>
+                    <div class="problem-note" id="note-ai-science">I see two main paths towards AI-accelerated science:<br><br><strong>Foundation models for science.</strong> In a world where scaling laws work, language was the low-hanging fruit (i.e. internet text made LLMs feasible). Now it is the time to apply the same playbook to data-scarce domains (genomes, molecules, proteins, materials), and build foundation models that do for biology and chemistry what GPT did for language.<br><br><strong>Agentic exploration of the hypothesis space.</strong> Einstein once supposedly said genius is 1% talent and 99% hard work. Suppose an autonomous agent that can take a high-level idea and then actually code, run experiments, debug, analyse results, scan research literature, and suggest what to try next. Even crazier, tie this with embodied AI, and it can even run wet lab experiments. Though I don't think we'll get fully autonomous researchers anytime soon, what's way more realistic in the near term are tireless research assistants that amplify the impact of a sharp PI who guides them appropriately. We're already seeing early sparks of this (see <a href="https://arxiv.org/pdf/2507.18074" target="_blank">research paper</a>, <a href="https://platform.futurehouse.org/" target="_blank">AI scientist startup</a>).<br><br></div>
+                </li>
+                <li class="problem-item">
+                    <span class="problem-title" data-note="verifiable-rewards">How we can leverage verifiable rewards to unlock RL at scale</span>
+                    <div class="problem-note" id="note-verifiable-rewards">The <em><a href="https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law" target="_blank">verifier's rule</a></em> states that the ease of training AI to solve a task is proportional to how verifiable the task is. This asymmetry (where verification is orders of magnitude easier than generation) is becoming one of the most powerful levers in AI. Think: Sudoku takes minutes to solve but seconds to verify; Instagram took years to build but anyone can check if it works; complex proofs are hard to discover but (relatively) straightforward to validate. What excites me: we're entering an era where any problem with <strong>objective truth</strong>, <strong>fast verification</strong>, and <strong>scalable feedback</strong> becomes tractable.<br><br></div>
                 </li>
                 <li class="problem-item">
                     <span class="problem-title" data-note="computational-intelligence">What are the computational principles of intelligence</span>
@@ -281,11 +286,11 @@
                 </li>
                 <li class="problem-item">
                     <span class="problem-title" data-note="geopolitical-governance">How to redesign geopolitical governance to avoid wars, and promote economic prosperity</span>
-                    <div class="problem-note" id="note-geopolitical-governance">Hint: VLLC!<br><br></div>
+                    <div class="problem-note" id="note-geopolitical-governance">The Westphalian system of nation-states creates perverse incentives: wars emerge not from irrationality but from misaligned structures where conflict can be profitable. The question isn't "how do we find better leaders?" but "how do we design systems where rational actors can't profit from conflict?". Real progress requires mechanisms over mandates: network states that enable governance-as-a-service, forcing institutions to compete for citizens; asymmetric economic interdependence where warfare becomes suicidal for all parties; and algorithmic institutions (smart contracts, prediction markets, executable policy) that replace opacity with legibility. The uncomfortable truth is achieving this demands either voluntary adoption by existing powers (unlikely) or parallel institution-building that gradually outcompetes legacy systems (generational).<br><br></div>
                 </li>
             </ul>
             
-            <p>I'm based in Barcelona, where it's currently <span data-barcelona-time>00:00:00</span>.</p>
+            <p>I'm based in London, where it's currently <span data-london-time>00:00:00</span>.</p>
             
             <p>In my spare time, I run, swim, surf, lift, explore nature, eat, code, travel, and read.</p>
         </div>
@@ -338,11 +343,6 @@
         <h2 class="section-label">Contact</h2>
         <div class="section-content">
             <div class="contact-list">
-                <div class="contact-item">
-                    <span class="contact-label">CV</span>
-                    <a href="assets/cv.pdf" target="_blank">View PDF</a>
-                </div>
-                
                 <div class="contact-item">
                     <span class="contact-label">Email</span>
                     <a href="mailto:antoniofrancaib@gmail.com">antoniofrancaib@gmail.com</a>
@@ -425,16 +425,6 @@
           }catch(err){ /* silent */ }
         })();
 
-        // Barcelona time
-        (function(){
-          function tick(el){
-            const f=new Intl.DateTimeFormat([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Europe/Madrid'});
-            const run=()=>{ el.textContent=f.format(new Date()); };
-            run(); setInterval(run, 1000);
-          }
-          const el=document.querySelector('[data-barcelona-time]');
-          if(el) tick(el);
-        })();
 
         // Problem notes toggle
         (function(){
