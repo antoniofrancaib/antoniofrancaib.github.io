@@ -17,22 +17,68 @@
 
         html {
             font-size: 16px;
-            line-height: 1.65;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* CSS Custom Properties for Theming */
         body {
-            font-family: 'Lyon Text', 'Freight Text', 'Crimson Pro', Georgia, serif;
-            color: #000;
-            background-color: #FAFAFA;
+            /* Light theme (default) */
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #fff;
+            --bg-tertiary: #fafafa;
+            --text-primary: #000;
+            --text-secondary: #333;
+            --text-tertiary: #666;
+            --text-muted: #999;
+            --text-faint: #888;
+            --border-color: #f0f0f0;
+            --border-color-medium: #e0e0e0;
+            --border-color-strong: #ddd;
+            --border-color-subtle: #ccc;
+            --link-color: #000;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --info-color: #007bff;
+        }
+
+        /* Dark theme */
+        body[data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #1f1f1f;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #b0b0b0;
+            --text-muted: #808080;
+            --text-faint: #707070;
+            --border-color: #2a2a2a;
+            --border-color-medium: #333;
+            --border-color-strong: #3a3a3a;
+            --border-color-subtle: #444;
+            --link-color: #f5f5f5;
+            --success-color: #4ade80;
+            --error-color: #f87171;
+            --info-color: #60a5fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
             font-weight: 400;
             font-size: 17px;
-            line-height: 1.65;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Links */
-        a { color: #000; text-decoration: none; transition: opacity 0.2s ease; }
+        a { 
+            color: var(--link-color); 
+            text-decoration: none; 
+            transition: opacity 0.2s ease, color 0.3s ease; 
+        }
         a:hover { opacity: 0.6; text-decoration: none; }
 
         /* Page container */
@@ -44,7 +90,7 @@
 
         /* Update site title */
         .site-title {
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             font-size: 15px;
             font-weight: 400;
             margin: 0 0 60px 0;
@@ -52,6 +98,8 @@
             border: none !important;
             border-bottom: none !important;
             box-shadow: none !important;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
 
         .site-header {
@@ -84,14 +132,15 @@
         }
 
         .section-label {
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             font-size: 15px;
             font-weight: 400;
-            color: #999;
+            color: var(--text-muted);
             grid-column: 1;
             margin: 0;
             text-align: left;
             padding-left: 0;
+            transition: color 0.3s ease;
         }
 
         .section-content {
@@ -101,16 +150,18 @@
 
         .section-subtitle {
             font-size: 0.95rem;
-            color: #888;
+            color: var(--text-faint);
             margin-bottom: 32px;
             font-style: italic;
+            transition: color 0.3s ease;
         }
 
         /* Section content styles */
         .section-content p {
             margin-bottom: 20px;
-            line-height: 1.7;
-            color: #333;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
 
         .section-content p:last-child {
@@ -119,23 +170,51 @@
 
         /* Work section */
         .work-list { margin-bottom: 32px; }
-        .work-item { margin-bottom: 40px; border-bottom: 1px solid #f0f0f0; padding-bottom: 32px; }
+        .work-item { 
+            margin-bottom: 40px; 
+            border-bottom: 1px solid var(--border-color); 
+            padding-bottom: 32px; 
+            transition: border-color 0.3s ease;
+        }
         .work-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
-        .work-item h3 { font-size: 1.1rem; font-weight: 500; margin-bottom: 8px; color: #000; line-height: 1.4; }
-        .work-item p { color: #666; line-height: 1.6; margin-bottom: 12px; }
-        .work-link, .view-all-link { color: #000; text-decoration: none; font-size: 15px; transition: opacity 0.2s ease; }
+        .work-item h3 { 
+            font-size: 1.1rem; 
+            font-weight: 500; 
+            margin-bottom: 8px; 
+            color: var(--text-primary); 
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+        .work-item p { 
+            color: var(--text-tertiary); 
+            line-height: 1.6; 
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+        .work-link, .view-all-link { 
+            color: var(--link-color); 
+            text-decoration: none; 
+            font-size: 15px; 
+            transition: opacity 0.2s ease, color 0.3s ease; 
+        }
         .work-link:hover, .view-all-link:hover { opacity: 0.6; text-decoration: none; }
-        .work-status { color: #999; font-size: 13px; font-style: italic; }
+        .work-status { 
+            color: var(--text-muted); 
+            font-size: 13px; 
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
         .view-all-link { display: inline-block; margin-top: 20px; }
 
         /* Post rows (date + content) */
         .post-row { display: grid; grid-template-columns: 100px 1fr; gap: 16px; margin-bottom: 24px; }
         .post-row .date { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-            color: #999; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-muted); 
             font-size: 13px; 
             font-weight: 400;
-            white-space: nowrap; 
+            white-space: nowrap;
+            transition: color 0.3s ease;
         }
 
         /* Notes section */
@@ -143,71 +222,173 @@
         .note-item { display: flex; margin-bottom: 24px; align-items: flex-start; gap: 20px; }
         .note-item:last-child { margin-bottom: 0; }
         .note-date { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             font-size: 13px; 
-            color: #999; 
+            color: var(--text-muted); 
             font-weight: 400;
-            min-width: 80px; 
+            min-width: 100px;
+            transition: color 0.3s ease;
         }
-        .note-content h3 { font-size: 1rem; font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
-        .note-content h3 a { color: #000; text-decoration: none; transition: opacity 0.2s ease; }
+        .note-content h3 { 
+            font-size: 1rem; 
+            font-weight: 400; 
+            margin-bottom: 0; 
+            line-height: 1.6;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .note-content h3 span {
+            font-weight: 400;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .note-content h3 strong {
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .note-content h3 a { 
+            color: var(--link-color); 
+            text-decoration: none; 
+            transition: opacity 0.2s ease, color 0.3s ease; 
+        }
         .note-content h3 a:hover { opacity: 0.6; }
-        .note-content p { color: #666; font-size: 0.95rem; line-height: 1.5; }
+        .note-content p { 
+            color: var(--text-tertiary); 
+            font-size: 0.95rem; 
+            line-height: 1.5;
+            transition: color 0.3s ease;
+        }
 
         /* Contact section */
         .contact-list { margin-bottom: 60px; }
         .contact-item { display: flex; margin-bottom: 12px; align-items: baseline; }
         .contact-item:last-child { margin-bottom: 0; }
         .contact-label { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             font-size: 13px; 
-            color: #999; 
+            color: var(--text-muted); 
             font-weight: 400;
             min-width: 80px; 
-            margin-right: 20px; 
+            margin-right: 20px;
+            transition: color 0.3s ease;
         }
-        .contact-item a { color: #000; text-decoration: none; font-size: 0.95rem; transition: opacity 0.2s ease; }
+        .contact-item a { 
+            color: var(--link-color); 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            transition: opacity 0.2s ease, color 0.3s ease; 
+        }
         .contact-item a:hover { opacity: 0.6; }
 
         /* Spotify */
         .contact-item .stack { display: grid; gap: 6px }
         .spotify-now { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-            color: #999; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-muted); 
             font-size: 13px;
             font-weight: 400;
+            transition: color 0.3s ease;
         }
 
         /* Project titles as links */
-        .post-row .excerpt a{ color:inherit; text-decoration:none; transition: opacity 0.2s ease }
-        .post-row .excerpt a:hover{ opacity:0.6; text-decoration:none }
+        .post-row .excerpt a{ 
+            color: inherit; 
+            text-decoration: none; 
+            transition: opacity 0.2s ease, color 0.3s ease; 
+        }
+        .post-row .excerpt a:hover{ opacity: 0.6; text-decoration: none; }
 
         /* Footer */
         .footer-note { padding-top: 24px; margin-top: 24px; }
-        .footer-note p { color: #999; font-size: 0.9rem; line-height: 1.5; margin-bottom: 8px; }
+        .footer-note p { 
+            color: var(--text-muted); 
+            font-size: 0.9rem; 
+            line-height: 1.5; 
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
         .footer-note p:last-child { margin-bottom: 0; }
         .footer-credit { font-style: italic; }
 
         /* Quotes */
         .site-quote { margin-top: 12px; margin-bottom: 60px; padding-left: 24px; }
-        .site-quote-line { color:#666; font-style: italic; }
-        .site-quote-action { color:#888; text-decoration:none; margin-left: 24px; }
-        .site-quote-action:hover { opacity:.6; text-decoration:none }
+        .site-quote-line { 
+            color: var(--text-tertiary); 
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+        .site-quote-action { 
+            color: var(--text-faint); 
+            text-decoration: none; 
+            margin-left: 24px;
+            transition: color 0.3s ease;
+        }
+        .site-quote-action:hover { opacity: 0.6; text-decoration: none; }
 
         /* Guestbook */
         .guestbook-section { margin-top: 32px; }
-        .guestbook-intro { color: #333; margin-bottom: 24px; }
+        .guestbook-intro { 
+            color: var(--text-secondary); 
+            margin-bottom: 24px;
+            transition: color 0.3s ease;
+        }
         .guestbook-form { max-width: 600px; }
-        .guestbook-input-container { position: relative; border: 1px solid #e0e0e0; border-radius: 4px; background: #fafafa; display: flex; align-items: center; }
-        .guestbook-input-container:focus-within { border-color: #ccc; background: #fff; }
-        .guestbook-input { flex: 1; padding: 12px; border: none; background: transparent; font-family: inherit; font-size: 14px; outline: none; }
-        .guestbook-submit { background: none; color: #ccc; border: none; padding: 12px 16px; cursor: not-allowed; font-size: 14px; transition: color 0.2s ease; }
-        .guestbook-submit:not(:disabled) { color: #000; cursor: pointer; }
+        .guestbook-input-container { 
+            position: relative; 
+            border: 1px solid var(--border-color-medium); 
+            border-radius: 4px; 
+            background: var(--bg-tertiary); 
+            display: flex; 
+            align-items: center;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .guestbook-input-container:focus-within { 
+            border-color: var(--border-color-subtle); 
+            background: var(--bg-secondary); 
+        }
+        .guestbook-input { 
+            flex: 1; 
+            padding: 12px; 
+            border: none; 
+            background: transparent; 
+            font-family: inherit; 
+            font-size: 14px; 
+            outline: none;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .guestbook-input::placeholder {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        .guestbook-submit { 
+            background: none; 
+            color: var(--text-muted); 
+            border: none; 
+            padding: 12px 16px; 
+            cursor: not-allowed; 
+            font-size: 14px; 
+            transition: color 0.3s ease, opacity 0.2s ease; 
+        }
+        .guestbook-submit:not(:disabled) { 
+            color: var(--text-primary); 
+            cursor: pointer; 
+        }
         .guestbook-submit:not(:disabled):hover { opacity: 0.7; }
         .guestbook-status { font-size: 14px; margin-top: 8px; }
-        .guestbook-success { color: #28a745; }
-        .guestbook-error { color: #dc3545; }
-        .guestbook-info { color: #007bff; }
+        .guestbook-success { 
+            color: var(--success-color);
+            transition: color 0.3s ease;
+        }
+        .guestbook-error { 
+            color: var(--error-color);
+            transition: color 0.3s ease;
+        }
+        .guestbook-info { 
+            color: var(--info-color);
+            transition: color 0.3s ease;
+        }
 
         /* Problem list */
         .problem-list { list-style: none; margin: 20px 0; padding: 0; }
@@ -216,26 +397,40 @@
             content: "•"; 
             position: absolute; 
             left: 0; 
-            color: #999; 
+            color: var(--text-muted); 
             font-size: 1.2em; 
-            line-height: 1.2; 
+            line-height: 1.2;
+            transition: color 0.3s ease;
         }
-        .problem-title { color: #000; cursor: pointer; transition: opacity 0.2s ease; border-bottom: 1px dotted #999; }
+        .problem-title { 
+            color: var(--text-primary); 
+            cursor: pointer; 
+            transition: opacity 0.2s ease, color 0.3s ease; 
+            border-bottom: 1px dotted var(--text-muted); 
+        }
         .problem-title:hover { opacity: 0.6; }
         .problem-note { 
             max-height: 0; 
             overflow: hidden; 
-            transition: max-height 0.3s ease, padding 0.3s ease; 
-            color: #666; 
+            transition: max-height 0.3s ease, padding 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+            color: var(--text-tertiary); 
             font-style: italic; 
             line-height: 1.6; 
             padding: 0 0 0 16px; 
             margin-left: 8px;
-            border-left: 2px solid #f0f0f0;
+            border-left: 2px solid var(--border-color);
         }
         .problem-note.expanded { 
             padding: 12px 0 12px 16px; 
-            border-left-color: #ddd;
+            border-left-color: var(--border-color-strong);
+        }
+        .problem-note a {
+            color: var(--link-color);
+            text-decoration: underline;
+            transition: opacity 0.2s ease, color 0.3s ease;
+        }
+        .problem-note a:hover {
+            opacity: 0.6;
         }
 
         /* Remove underline from specific links */
@@ -354,21 +549,43 @@
         </div>
     </section>
 
+    <!-- Notes Section -->
+    <section class="notes-section">
+        <h2 class="section-label">Notes</h2>
+        <div class="section-content">
+            <div class="notes-list">
+                <div class="note-item">
+                    <span class="note-date">Fri, 28 Aug</span>
+                    <div class="note-content">
+                        <h3><span style="cursor: default;">The world is a messy place, full of contradictions and noise. Before science, we lean on observation and intuition. These notes gather some of my contrarian beliefs.</span></h3>
+                    </div>
+                </div>
+                <div class="note-item">
+                    <span class="note-date">Fri, 21 Jul</span>
+                    <div class="note-content">
+                        <h3><span style="cursor: default;">The best way to predict the future is to think about desire. The problem with desire is that it tends to be bounded by what’s actually possible. But who cares about what is reasonable? Here’s what I want.</span></h3>
+                    </div>
+                </div>
+            </div>
+            
+            <span class="view-all-link" style="cursor: default; opacity: 0.6;">View all notes →</span>
+        </div>
+    </section>
+
     <!-- Posts Section -->
     <section class="notes-section">
         <h2 class="section-label">Posts</h2>
         <div class="section-content">
             <div class="notes-list">
                 <div class="note-item">
-                    <span class="note-date">Feb 10, 2025</span>
+                    <span class="note-date">2025 07</span>
                     <div class="note-content">
-                        <h3><a href="blog/dont-break-your-windows/">Don't break your windows</a></h3>
-                        <p>On how letting small cracks erode character.</p>
+                        <h3><span style="cursor: default;"><strong>How diffusion works.</strong> Notes on how I came to understand Diffusion Models.</span></h3>
                     </div>
                 </div>
             </div>
             
-            <span class="view-all-link">View all posts →</span>
+            <span class="view-all-link" style="cursor: default; opacity: 0.6;">View all posts →</span>
         </div>
     </section>
 
@@ -425,6 +642,19 @@
         <p class="site-quote-line"><span data-quote-full></span><a href="#" class="site-quote-action" data-quote-next>View another</a></p>
     </div>
     <script>
+        // Time-based theme switching (6am-6pm = light, 6pm-6am = dark)
+        (function(){
+          function applyTheme(){
+            const hour = new Date().getHours();
+            const isDark = hour < 6 || hour >= 18;
+            document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+          }
+          applyTheme();
+          // Re-check every minute in case user keeps page open across time boundaries
+          setInterval(applyTheme, 60000);
+        })();
+
+        // London time display
         (function(){
           function tick(el){
             const f=new Intl.DateTimeFormat([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Europe/London'});
