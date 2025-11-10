@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Dashboard - Antonio Franca</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Reset and base styles matching main site */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Theme variables */
+        body {
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #fff;
+            --bg-tertiary: #fafafa;
+            --text-primary: #000;
+            --text-secondary: #333;
+            --text-tertiary: #666;
+            --text-muted: #999;
+            --border-color: #f0f0f0;
+            --border-color-medium: #e0e0e0;
+            --border-color-strong: #ddd;
+            --shadow-subtle: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-medium: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        body[data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #1f1f1f;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #b0b0b0;
+            --text-muted: #808080;
+            --border-color: #2a2a2a;
+            --border-color-medium: #333;
+            --border-color-strong: #3a3a3a;
+            --shadow-subtle: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-medium: 0 4px 16px rgba(0,0,0,0.4);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Links */
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        a:hover {
+            opacity: 0.6;
+            text-decoration: none;
+        }
+
+        /* Main container */
+        .health-container {
+            max-width: none;
+            margin: 0;
+            padding: 24px;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 0;
+        }
+
+        .site-title {
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0 0 60px 0;
+            text-align: left;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        /* Bottom tabs navigation */
+        .tabs-container {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-primary);
+            z-index: 100;
+            padding: 24px 0 16px 0;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 16px;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab:hover {
+            color: var(--text-secondary);
+        }
+
+        .tab.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--text-primary);
+        }
+
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .tab-label {
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        /* Content area */
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        /* Centered card view */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color-medium);
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: var(--shadow-subtle);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Upload button */
+        .upload-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color-medium);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 32px;
+        }
+
+        .upload-button:hover {
+            color: var(--text-primary);
+            border-color: var(--border-color-strong);
+        }
+
+        /* Table styles */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color-medium);
+        }
+
+        td {
+            padding: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .biomarker-label {
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        .biomarker-unit {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .value-cell {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .emoji {
+            font-size: 16px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-family: inherit;
+            border: 1px solid var(--border-color-medium);
+            border-radius: 6px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--border-color-strong);
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: #dc3545;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-error.active {
+            display: block;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-family: inherit;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color-medium);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--border-color-strong);
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .health-container {
+                padding: 40px 24px;
+            }
+
+            .tabs {
+                gap: 24px;
+            }
+
+            .tab {
+                padding: 8px 8px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th, td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="health-container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="site-title"><a href="/">Antonio Franca</a></h1>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="blood">
+                    <i data-lucide="droplet" class="tab-icon"></i>
+                    <span class="tab-label">Blood</span>
+                </div>
+                <div class="tab" data-tab="sleep">
+                    <i data-lucide="moon" class="tab-icon"></i>
+                    <span class="tab-label">Sleep</span>
+                </div>
+                <div class="tab" data-tab="exercise">
+                    <i data-lucide="dumbbell" class="tab-icon"></i>
+                    <span class="tab-label">Exercise</span>
+                </div>
+                <div class="tab" data-tab="food">
+                    <i data-lucide="utensils" class="tab-icon"></i>
+                    <span class="tab-label">Food</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blood Tab -->
+        <div class="content active" id="blood-content">
+            <div class="card">
+                <button class="upload-button" id="upload-btn">
+                    <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+                    Upload Results
+                </button>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BIOMARKER</th>
+                                <th>May 01, 2024</th>
+                                <th>May 08, 2025</th>
+                                <th>Aug 23, 2025</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="biomarker-label">Blood Sugar</div>
+                                    <span class="biomarker-unit">(mg/dL)</span>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>78.0</span>
+                                    </div>
+                                </td>
+                                <td>—</td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>82.0</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="biomarker-label">Triglycerides</div>
+                                    <span class="biomarker-unit">(mg/dL)</span>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>66.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">⚠️</span>
+                                        <span>83.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>71.0</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="biomarker-label">HDL Cholesterol</div>
+                                    <span class="biomarker-unit">(mg/dL)</span>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">⚠️</span>
+                                        <span>59.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>78.5</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>75.0</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="biomarker-label">LDL Cholesterol</div>
+                                    <span class="biomarker-unit">(mg/dL)</span>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">⚠️</span>
+                                        <span>128.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>98.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>105.0</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="biomarker-label">Triglycerides/HDL Ratio</div>
+                                    <span class="biomarker-unit"></span>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">⚠️</span>
+                                        <span>1.1</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>1.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>0.9</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="biomarker-label">Total Cholesterol</div>
+                                    <span class="biomarker-unit">(mg/dL)</span>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>187.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>193.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>195.0</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="biomarker-label">Blood Pressure (Systolic)</div>
+                                    <span class="biomarker-unit">(mmHg)</span>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>111.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>115.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>108.0</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="biomarker-label">Blood Pressure (Diastolic)</div>
+                                    <span class="biomarker-unit">(mmHg)</span>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>72.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>75.0</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="value-cell">
+                                        <span class="emoji">👍</span>
+                                        <span>70.0</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleep Tab -->
+        <div class="content" id="sleep-content">
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>TIME ASLEEP</th>
+                                <th>SCORE</th>
+                                <th>HRV</th>
+                                <th>RHR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Aug 26, 2024</td>
+                                <td>7h 56m</td>
+                                <td>95%</td>
+                                <td>102</td>
+                                <td>41</td>
+                            </tr>
+                            <tr>
+                                <td>Aug 25, 2024</td>
+                                <td>7h 55m</td>
+                                <td>98%</td>
+                                <td>108</td>
+                                <td>41</td>
+                            </tr>
+                            <tr>
+                                <td>Aug 24, 2024</td>
+                                <td>8h 12m</td>
+                                <td>92%</td>
+                                <td>95</td>
+                                <td>43</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Tab -->
+        <div class="content" id="exercise-content">
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>ACTIVITY</th>
+                                <th>DURATION</th>
+                                <th>CALORIES</th>
+                                <th>AVG HR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nov 9, 2024</td>
+                                <td>🏋️ Weightlifting</td>
+                                <td>55m</td>
+                                <td>312</td>
+                                <td>92 bpm</td>
+                            </tr>
+                            <tr>
+                                <td>Nov 9, 2024</td>
+                                <td>🏃 Running</td>
+                                <td>22m</td>
+                                <td>198</td>
+                                <td>128 bpm</td>
+                            </tr>
+                            <tr>
+                                <td>Nov 8, 2024</td>
+                                <td>🏊 Swimming</td>
+                                <td>45m</td>
+                                <td>385</td>
+                                <td>115 bpm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Food Tab -->
+        <div class="content" id="food-content">
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>CALORIES</th>
+                                <th>PROTEIN</th>
+                                <th>CARBS</th>
+                                <th>FAT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nov 9, 2024</td>
+                                <td>3039 / 3000 kcal</td>
+                                <td>167 / 150 g</td>
+                                <td>391 / 330 g</td>
+                                <td>115 / 110 g</td>
+                            </tr>
+                            <tr>
+                                <td>Nov 8, 2024</td>
+                                <td>2875 / 3000 kcal</td>
+                                <td>145 / 150 g</td>
+                                <td>352 / 330 g</td>
+                                <td>98 / 110 g</td>
+                            </tr>
+                            <tr>
+                                <td>Nov 7, 2024</td>
+                                <td>3120 / 3000 kcal</td>
+                                <td>158 / 150 g</td>
+                                <td>378 / 330 g</td>
+                                <td>122 / 110 g</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div class="modal-overlay" id="upload-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Upload Results</h3>
+                <button class="modal-close" id="modal-close">
+                    <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+                </button>
+            </div>
+            <form id="upload-form">
+                <div class="form-group">
+                    <label class="form-label" for="date-input">Date</label>
+                    <input type="date" class="form-input" id="date-input" required>
+                    <div class="form-error" id="date-error">Please select a date</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="biomarker-select">Biomarker</label>
+                    <select class="form-select" id="biomarker-select" required>
+                        <option value="">Select a biomarker</option>
+                        <option value="blood-sugar">Blood Sugar</option>
+                        <option value="triglycerides">Triglycerides</option>
+                        <option value="hdl">HDL Cholesterol</option>
+                        <option value="ldl">LDL Cholesterol</option>
+                        <option value="total-cholesterol">Total Cholesterol</option>
+                        <option value="blood-pressure-sys">Blood Pressure (Systolic)</option>
+                        <option value="blood-pressure-dia">Blood Pressure (Diastolic)</option>
+                    </select>
+                    <div class="form-error" id="biomarker-error">Please select a biomarker</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="value-input">Value</label>
+                    <input type="number" step="0.1" class="form-input" id="value-input" required placeholder="Enter value">
+                    <div class="form-error" id="value-error">Please enter a valid number</div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Theme switching based on time (matching main site)
+        (function(){
+            function applyTheme(){
+                const hour = new Date().getHours();
+                const isDark = hour < 6 || hour >= 18;
+                document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            }
+            applyTheme();
+            setInterval(applyTheme, 60000);
+        })();
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(`${targetTab}-content`).classList.add('active');
+            });
+        });
+
+        // Modal functionality
+        const uploadBtn = document.getElementById('upload-btn');
+        const modal = document.getElementById('upload-modal');
+        const modalClose = document.getElementById('modal-close');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const uploadForm = document.getElementById('upload-form');
+
+        uploadBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+            lucide.createIcons();
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+            uploadForm.reset();
+            clearErrors();
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            uploadForm.reset();
+            clearErrors();
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                uploadForm.reset();
+                clearErrors();
+            }
+        });
+
+        // Form validation using basic validation (similar to zod concept)
+        uploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const dateInput = document.getElementById('date-input');
+            const biomarkerSelect = document.getElementById('biomarker-select');
+            const valueInput = document.getElementById('value-input');
+            
+            clearErrors();
+            
+            let isValid = true;
+            
+            // Validate date
+            if (!dateInput.value) {
+                showError('date-error');
+                isValid = false;
+            }
+            
+            // Validate biomarker
+            if (!biomarkerSelect.value) {
+                showError('biomarker-error');
+                isValid = false;
+            }
+            
+            // Validate value
+            if (!valueInput.value || isNaN(parseFloat(valueInput.value))) {
+                showError('value-error');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                const formData = {
+                    date: dateInput.value,
+                    biomarker: biomarkerSelect.value,
+                    value: parseFloat(valueInput.value)
+                };
+                
+                console.log('Form submitted:', formData);
+                
+                // Close modal and reset form
+                modal.classList.remove('active');
+                uploadForm.reset();
+            }
+        });
+
+        function showError(errorId) {
+            document.getElementById(errorId).classList.add('active');
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.form-error').forEach(error => {
+                error.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>
+
