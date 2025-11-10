@@ -382,6 +382,104 @@
             opacity: 0.85;
         }
 
+        /* Protocols tab specific styles */
+        .protocols-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .protocols-section {
+            margin-bottom: 48px;
+        }
+
+        .protocols-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .section-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .habits-list {
+            margin: 20px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .habits-list li {
+            margin-bottom: 16px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .habits-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+            font-size: 1.2em;
+        }
+
+        .habits-list li strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .nutrition-list {
+            margin: 20px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nutrition-item {
+            margin-bottom: 24px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .nutrition-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+            font-size: 1.2em;
+        }
+
+        .nutrition-item strong {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .nutrition-item-description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        code {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            background: var(--border-color);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--text-primary);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .health-container {
@@ -407,6 +505,10 @@
             th, td {
                 padding: 12px 8px;
             }
+
+            .protocols-section {
+                margin-bottom: 40px;
+            }
         }
     </style>
 </head>
@@ -420,9 +522,13 @@
         <!-- Tabs Navigation -->
         <div class="tabs-container">
             <div class="tabs">
-                <div class="tab active" data-tab="blood">
-                    <i data-lucide="droplet" class="tab-icon"></i>
-                    <span class="tab-label">Blood</span>
+                <div class="tab active" data-tab="protocols">
+                    <i data-lucide="file-text" class="tab-icon"></i>
+                    <span class="tab-label">Protocols</span>
+                </div>
+                <div class="tab" data-tab="food">
+                    <i data-lucide="utensils" class="tab-icon"></i>
+                    <span class="tab-label">Food</span>
                 </div>
                 <div class="tab" data-tab="sleep">
                     <i data-lucide="moon" class="tab-icon"></i>
@@ -432,15 +538,15 @@
                     <i data-lucide="dumbbell" class="tab-icon"></i>
                     <span class="tab-label">Exercise</span>
                 </div>
-                <div class="tab" data-tab="food">
-                    <i data-lucide="utensils" class="tab-icon"></i>
-                    <span class="tab-label">Food</span>
+                <div class="tab" data-tab="blood">
+                    <i data-lucide="droplet" class="tab-icon"></i>
+                    <span class="tab-label">Blood</span>
                 </div>
             </div>
         </div>
 
         <!-- Blood Tab -->
-        <div class="content active" id="blood-content">
+        <div class="content" id="blood-content">
             <div class="card">
                 <button class="upload-button" id="upload-btn">
                     <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
@@ -773,6 +879,73 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Protocols Tab -->
+        <div class="content active" id="protocols-content">
+            <div class="card">
+                <div class="protocols-content">
+                    <div class="protocols-section">
+                        <h3 class="section-title">Health Protocols</h3>
+                        <p class="section-text">Welcome to my personal health dashboard. This mini-app at <code>/health</code> tracks my blood biomarkers, sleep, exercise, and food intake. This transparency motivates me to optimize my health iteratively, drawing from evidence-based practices in nutrition, fitness, and wellness research.</p>
+                    </div>
+
+                    <div class="protocols-section">
+                        <h3 class="section-title">Workout Planning</h3>
+                        <p class="section-text">I structure workouts heuristically: 3-4 strength sessions weekly (e.g., compound lifts like squats, deadlifts) alternating with 2-3 cardio days (HIIT or steady-state running). Volume progresses based on recovery metrics from wearables, aiming for 10-15% weekly increases. This aligns with recent meta-analyses on progressive overload for metabolic health.</p>
+                    </div>
+
+                    <div class="protocols-section">
+                        <h3 class="section-title">Heuristic Approach to Health</h3>
+                        <p class="section-text">I treat health as an n-of-1 experiment: monitor biomarkers quarterly, adjust based on trends (e.g., reduce carbs if triglycerides rise). Decisions are data-driven, prioritizing interventions with strong mechanistic evidence, like anti-inflammatory diets to mitigate chronic risks.</p>
+                    </div>
+
+                    <div class="protocols-section">
+                        <h3 class="section-title">Daily Habits</h3>
+                        <ul class="habits-list">
+                            <li><strong>Sleep:</strong> 7-9 hours, tracked via Oura ring; blue-light block post-8 PM.</li>
+                            <li><strong>Hydration:</strong> 2-3L water, infused with electrolytes.</li>
+                            <li><strong>Mindfulness:</strong> 10-min meditation; intermittent fasting (16:8 window) for metabolic flexibility.</li>
+                            <li><strong>Movement:</strong> 10k steps daily, plus mobility work.</li>
+                        </ul>
+                        <p class="section-text">These habits stem from longitudinal studies showing cumulative benefits for hormonal balance and longevity.</p>
+                    </div>
+
+                    <div class="protocols-section">
+                        <h3 class="section-title">Nutrition Protocols</h3>
+                        <p class="section-text">I incorporate evidence-backed foods for anti-inflammation, metabolism, and hormonal support, based on 2023-2025 research. Portions: 1-2 servings daily per food.</p>
+                        
+                        <ul class="nutrition-list">
+                            <li class="nutrition-item">
+                                <strong>Nori Seaweed:</strong>
+                                <div class="nutrition-item-description">Rich in polysaccharides; supports gut health and vitamin B12 in vegetarians. Daily: 5g in salads or wraps to ameliorate colitis via microbiota modulation.</div>
+                            </li>
+                            <li class="nutrition-item">
+                                <strong>Turmeric:</strong>
+                                <div class="nutrition-item-description">Curcumin drives anti-aging and metabolic benefits; I consume 1g with piperine. In teas or curries for longevity effects via oxidative stress reduction.</div>
+                            </li>
+                            <li class="nutrition-item">
+                                <strong>Lion's Mane Mushroom:</strong>
+                                <div class="nutrition-item-description">Neuroprotective; enhances cognition and mood. 1g extract in coffee for acute mental energy.</div>
+                            </li>
+                            <li class="nutrition-item">
+                                <strong>Matcha:</strong>
+                                <div class="nutrition-item-description">Catechins boost mood and anti-inflammatory activity. 2g daily in lattes for stress reduction and neuroprotective effects.</div>
+                            </li>
+                            <li class="nutrition-item">
+                                <strong>Pure Cacao:</strong>
+                                <div class="nutrition-item-description">Flavanols support bone health; 20g dark (85%+) for fracture risk reduction. In smoothies for cardiovascular benefits.</div>
+                            </li>
+                            <li class="nutrition-item">
+                                <strong>Goji Berry:</strong>
+                                <div class="nutrition-item-description">Polyphenols promote anti-photoaging and neuroprotection. 20g in yogurt for Parkinson's-like symptom mitigation via lipid peroxidation inhibition.</div>
+                            </li>
+                        </ul>
+
+                        <p class="section-text" style="font-style: italic; margin-top: 24px;">Protocols evolve with new data—check back for updates!</p>
+                    </div>
                 </div>
             </div>
         </div>

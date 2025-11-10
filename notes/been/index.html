@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Places I've Been - Antonio Franca</title>
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* CSS Custom Properties for Theming */
+        body {
+            /* Light theme (default) */
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #fff;
+            --bg-tertiary: #fafafa;
+            --text-primary: #000;
+            --text-secondary: #333;
+            --text-tertiary: #666;
+            --text-muted: #999;
+            --text-faint: #888;
+            --border-color: #f0f0f0;
+            --border-color-medium: #e0e0e0;
+            --border-color-strong: #ddd;
+            --border-color-subtle: #ccc;
+            --link-color: #000;
+            --map-default: #d3d3d3;
+            --map-visited: #E5A557;
+        }
+
+        /* Dark theme */
+        body[data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #1f1f1f;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #b0b0b0;
+            --text-muted: #808080;
+            --text-faint: #707070;
+            --border-color: #2a2a2a;
+            --border-color-medium: #333;
+            --border-color-strong: #3a3a3a;
+            --border-color-subtle: #444;
+            --link-color: #f5f5f5;
+            --map-default: #505050;
+            --map-visited: #E5A557;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Links */
+        a { 
+            color: var(--link-color); 
+            text-decoration: none; 
+            transition: opacity 0.2s ease, color 0.3s ease; 
+        }
+        a:hover { opacity: 0.6; text-decoration: none; }
+
+        /* Page container - matches landing page */
+        .page-container {
+            max-width: none;
+            margin: 0;
+            padding: 24px;
+        }
+
+        /* Site title - matches landing page exactly */
+        .site-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0 0 60px 0;
+            text-align: left;
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .site-header {
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Note section - uses same grid as landing page */
+        .note-section {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            margin-bottom: 80px;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .section-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-muted);
+            grid-column: 1;
+            margin: 0;
+            text-align: left;
+            padding-left: 0;
+            transition: color 0.3s ease;
+        }
+
+        .section-content {
+            grid-column: 2;
+            max-width: none;
+        }
+
+        .note-date {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 24px;
+            transition: color 0.3s ease;
+        }
+
+        /* Note content */
+        .note-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .note-content p {
+            margin-bottom: 20px;
+            font-size: 17px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .note-content p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Map container */
+        .map-container {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 100%;
+            background-color: var(--bg-primary);
+            padding: 0;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            overflow: hidden;
+        }
+
+        .world-map-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            display: block;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .world-map-iframe {
+                height: 400px;
+            }
+        }
+
+        /* Footer link */
+        .view-all-link {
+            font-size: 15px;
+            color: var(--link-color);
+            display: inline-block;
+            margin-top: 32px;
+            cursor: default;
+            opacity: 0.6;
+            transition: opacity 0.2s ease, color 0.3s ease;
+        }
+
+        /* Quotes - matches landing page exactly */
+        .site-quote { 
+            margin-top: 12px; 
+            margin-bottom: 60px; 
+            padding-left: 24px; 
+        }
+
+        .site-quote-line { 
+            color: var(--text-tertiary); 
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        .site-quote-action { 
+            color: var(--text-faint); 
+            text-decoration: none; 
+            margin-left: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .site-quote-action:hover { 
+            opacity: 0.6; 
+            text-decoration: none; 
+        }
+
+        /* Responsive design - matches landing page */
+        @media (max-width: 1000px) {
+            .page-container { padding: 40px 24px; }
+            .note-section { 
+                gap: 20px; 
+            }
+        }
+        @media (max-width: 768px) {
+            .page-container { max-width: 100%; padding: 40px 24px; }
+            .site-title { font-size: 1.75rem; margin-bottom: 40px; }
+            .note-section { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 24px; 
+                margin-bottom: 60px; 
+            }
+            .section-label { 
+                min-width: auto; 
+                text-align: left;
+                padding-left: 0;
+            }
+        }
+        @media (min-width: 1400px) {
+            .note-section { gap: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header/Name Section - matches landing page -->
+        <header class="site-header">
+            <h1 class="site-title"><a href="../../">Antonio Franca</a></h1>
+        </header>
+
+        <!-- Note Section - uses same grid as landing page -->
+        <section class="note-section">
+            <h2 class="section-label">Note</h2>
+            <div class="section-content">
+                <div class="note-date">Mon, 10 Nov</div>
+                
+                <article class="note-content">
+                    <p>I value cultural exchange as one of life's most enriching experiences. Throughout my life, I've been fortunate to travel intensely, immersing myself in different cultures, perspectives, and ways of living. Here are some of the countries I've visited:</p>
+
+                    <div class="map-container">
+                        <!-- Interactive 3D Globe Map powered by VisitedPlaces.com -->
+                        <iframe 
+                            class="world-map-iframe"
+                            src="https://visitedplaces.com/embed/?map=world&projection=geoOrthographic&theme=dark-green&water=1&graticule=1&names=1&duration=2000&placeduration=50&slider=0&autoplay=0&autozoom=none&autostep=0&home=US&places=My%20home%20-%20US~US.daaa44~1_-100.1_30.6_100.1_-30.6*North%20America~CA_MX_BZ_CR_PA~1.9_-97.3_33.9_98.5_-28.7*South%20America~BR_AR_CL_VE~1.9_-63.6_-19.5_64.6_24.7*Europe~GB_FR_ES_IT_DE_PL_LT_LV_EE_FI~3_14.6_51.5_-15.6_-48.3*Africa~KE_TZ_MZ_ZA~2.2_29.7_-13.4_-30.2_14.5*Asia~JP_KR_CN_VN_KH_LA_TH_IN_NP~2.4_87_30_-87.6_-31.3*Oceania~AU_NZ~2.4_140_-29.6_-140.6_28.4"
+                            title="Countries I've Visited - Interactive 3D Globe">
+                        </iframe>
+                    </div>
+
+                    <span class="view-all-link">View all notes →</span>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <!-- Quotes - matches landing page position -->
+    <div id="site-quote" class="site-quote" hidden>
+        <p class="site-quote-line"><span data-quote-full></span><a href="#" class="site-quote-action" data-quote-next>View another</a></p>
+    </div>
+
+    <script>
+        // Time-based theme switching (6am-6pm = light, 6pm-6am = dark)
+        (function(){
+          function applyTheme(){
+            const hour = new Date().getHours();
+            const isDark = hour < 6 || hour >= 18;
+            document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+          }
+          applyTheme();
+          setInterval(applyTheme, 60000);
+        })();
+
+        /*
+         * To update the visited countries on the 3D globe map:
+         * 1. Visit https://visitedplaces.com to create your custom map
+         * 2. Add your visited countries and customize the appearance
+         * 3. Click "Get embed code" and replace the iframe src URL above
+         * 
+         * The current map shows:
+         * - North America: US, Canada, Mexico, Belize, Costa Rica, Panama
+         * - South America: Brazil, Argentina, Chile, Venezuela
+         * - Europe: UK, France, Spain, Italy, Germany, Poland, Lithuania, Latvia, Estonia, Finland
+         * - Africa: Kenya, Tanzania, Mozambique, South Africa
+         * - Asia: Japan, South Korea, China, Vietnam, Cambodia, Laos, Thailand, India, Nepal
+         * - Oceania: Australia, New Zealand
+         */
+    </script>
+    <script src="../../assets/js/quotes.js"></script>
+</body>
+</html>
+
