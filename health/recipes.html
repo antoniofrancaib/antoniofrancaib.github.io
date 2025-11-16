@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoothie Recipes - Health Dashboard</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Theme variables */
+        body {
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #fff;
+            --bg-tertiary: #fafafa;
+            --text-primary: #000;
+            --text-secondary: #333;
+            --text-tertiary: #666;
+            --text-muted: #999;
+            --border-color: #f0f0f0;
+            --border-color-medium: #e0e0e0;
+            --border-color-strong: #ddd;
+            --shadow-subtle: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-medium: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        body[data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #1f1f1f;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #b0b0b0;
+            --text-muted: #808080;
+            --border-color: #2a2a2a;
+            --border-color-medium: #333;
+            --border-color-strong: #3a3a3a;
+            --shadow-subtle: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-medium: 0 4px 16px rgba(0,0,0,0.4);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Links */
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        a:hover {
+            opacity: 0.6;
+            text-decoration: none;
+        }
+
+        /* Container */
+        .recipes-container {
+            max-width: none;
+            margin: 0;
+            padding: 24px;
+        }
+
+        /* Header */
+        .site-title {
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0 0 40px 0;
+            text-align: left;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text-secondary);
+        }
+
+        .page-header {
+            max-width: 800px;
+            margin: 0 auto 48px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        /* Recipe cards */
+        .recipes-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 32px;
+        }
+
+        .recipe-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color-medium);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .recipe-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+
+        .recipe-card::after {
+            content: '+ Add to Today';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            border: 1px solid var(--border-color-strong);
+        }
+
+        .recipe-card:hover::after {
+            opacity: 1;
+        }
+
+        .success-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: slideIn 0.3s ease, slideOut 0.3s ease 2.7s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .recipe-content {
+            padding: 24px;
+        }
+
+        .recipe-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .recipe-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .recipe-section-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ingredients-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 24px;
+        }
+
+        .ingredients-list li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            padding: 6px 0 6px 20px;
+            position: relative;
+        }
+
+        .ingredients-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+        }
+
+        /* Macros table */
+        .macros-table {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .macros-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .macro-item {
+            text-align: center;
+        }
+
+        .macro-value {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .macro-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .recipes-container {
+                padding: 40px 24px;
+            }
+
+            .recipes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .recipe-image {
+                height: 220px;
+            }
+
+            .macros-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="recipes-container">
+        <h1 class="site-title"><a href="/">Antonio Franca</a></h1>
+        
+        <a href="index.html" class="back-link">← Back to Health Dashboard</a>
+
+        <div class="page-header">
+            <h2 class="page-title">Electrolyte-Rich Smoothies</h2>
+            <p class="page-subtitle">Perfect for starting your morning hydrated and energized. These smoothies are packed with natural electrolytes to fuel your day.</p>
+        </div>
+
+        <div class="recipes-grid">
+            <!-- Recipe 1: Green Coconut & Banana -->
+            <div class="recipe-card" 
+                 data-recipe-name="Green Coconut & Banana Smoothie"
+                 data-calories="195"
+                 data-protein="4"
+                 data-carbs="45"
+                 data-fat="0.5"
+                 data-fiber="5"
+                 data-added-sugar="12"
+                 data-sodium="180"
+                 data-magnesium="78"
+                 data-iron="2"
+                 data-zinc="1"
+                 data-potassium="850"
+                 data-vitamin-b6="0.6">
+                <img src="../assets/images/Green Coconut & Banana Smoothie.jpg" alt="Green Coconut & Banana Smoothie" class="recipe-image">
+                <div class="recipe-content">
+                    <h3 class="recipe-title">Green Coconut & Banana Smoothie</h3>
+                    <p class="recipe-description">This smoothie is packed with potassium and magnesium from the banana, coconut water, and spinach, making it an excellent electrolyte replenisher.</p>
+                    
+                    <h4 class="recipe-section-title">Ingredients</h4>
+                    <ul class="ingredients-list">
+                        <li>1 cup coconut water (unsweetened)</li>
+                        <li>1 large handful of fresh baby spinach</li>
+                        <li>1 frozen banana</li>
+                        <li>½ cup frozen mango or pineapple</li>
+                        <li>1 scoop of vanilla or unflavored protein powder (optional)</li>
+                    </ul>
+
+                    <div class="macros-table">
+                        <div class="macros-grid">
+                            <div class="macro-item">
+                                <span class="macro-value">165</span>
+                                <span class="macro-label">Calories</span>
+                            </div>
+                            <div class="macro-item">
+                                <span class="macro-value">2g</span>
+                                <span class="macro-label">Protein</span>
+                            </div>
+                            <div class="macro-item">
+                                <span class="macro-value">40g</span>
+                                <span class="macro-label">Carbs</span>
+                            </div>
+                            <div class="macro-item">
+                                <span class="macro-value">0.5g</span>
+                                <span class="macro-label">Fat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recipe 2: Watermelon & Berry Recovery -->
+            <div class="recipe-card"
+                 data-recipe-name="Watermelon & Berry Recovery Smoothie"
+                 data-calories="170"
+                 data-protein="6"
+                 data-carbs="35"
+                 data-fat="1"
+                 data-fiber="4"
+                 data-added-sugar="8"
+                 data-sodium="120"
+                 data-magnesium="45"
+                 data-iron="1"
+                 data-zinc="1"
+                 data-potassium="620"
+                 data-vitamin-b6="0.4">
+                <img src="../assets/images/Watermelon & Berry Recovery Smoothie.jpeg" alt="Watermelon & Berry Recovery Smoothie" class="recipe-image">
+                <div class="recipe-content">
+                    <h3 class="recipe-title">Watermelon & Berry Recovery Smoothie</h3>
+                    <p class="recipe-description">Watermelon is incredibly hydrating and a natural source of electrolytes. Combined with berries and yogurt (which contains calcium), this makes for a refreshing morning drink.</p>
+                    
+                    <h4 class="recipe-section-title">Ingredients</h4>
+                    <ul class="ingredients-list">
+                        <li>1 cup coconut water (unsweetened)</li>
+                        <li>1 cup seedless watermelon chunks, frozen</li>
+                        <li>½ cup mixed berries (strawberries, blueberries), frozen</li>
+                        <li>½ cup plain Greek yogurt</li>
+                        <li>A small pinch of sea salt (optional, for extra sodium)</li>
+                    </ul>
+
+                    <div class="macros-table">
+                        <div class="macros-grid">
+                            <div class="macro-item">
+                                <span class="macro-value">185</span>
+                                <span class="macro-label">Calories</span>
+                            </div>
+                            <div class="macro-item">
+                                <span class="macro-value">10g</span>
+                                <span class="macro-label">Protein</span>
+                            </div>
+                            <div class="macro-item">
+                                <span class="macro-value">32g</span>
+                                <span class="macro-label">Carbs</span>
+                            </div>
+                            <div class="macro-item">
+                                <span class="macro-value">2g</span>
+                                <span class="macro-label">Fat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme switching based on time
+        (function(){
+            function applyTheme(){
+                const hour = new Date().getHours();
+                const isDark = hour < 6 || hour >= 18;
+                document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            }
+            applyTheme();
+            setInterval(applyTheme, 60000);
+        })();
+
+        // Recipe card click handling
+        document.querySelectorAll('.recipe-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const recipeData = {
+                    name: this.dataset.recipeName,
+                    calories: parseFloat(this.dataset.calories),
+                    protein: parseFloat(this.dataset.protein),
+                    carbs: parseFloat(this.dataset.carbs),
+                    fat: parseFloat(this.dataset.fat),
+                    fiber: parseFloat(this.dataset.fiber),
+                    addedSugar: parseFloat(this.dataset.addedSugar),
+                    sodium: parseFloat(this.dataset.sodium),
+                    magnesium: parseFloat(this.dataset.magnesium),
+                    iron: parseFloat(this.dataset.iron),
+                    zinc: parseFloat(this.dataset.zinc),
+                    potassium: parseFloat(this.dataset.potassium),
+                    vitaminB6: parseFloat(this.dataset.vitaminB6),
+                    timestamp: Date.now()
+                };
+
+                // Store in localStorage for the health dashboard to pick up
+                localStorage.setItem('pendingRecipe', JSON.stringify(recipeData));
+
+                // Show success toast
+                showSuccessToast(recipeData.name);
+
+                // Redirect back to health dashboard after a short delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            });
+        });
+
+        function showSuccessToast(recipeName) {
+            const toast = document.createElement('div');
+            toast.className = 'success-toast';
+            toast.textContent = `✓ Added ${recipeName} to today's meals`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+
