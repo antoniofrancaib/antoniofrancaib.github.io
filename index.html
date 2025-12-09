@@ -402,13 +402,10 @@
             line-height: 1.2;
             transition: color 0.3s ease;
         }
-        .problem-title { 
-            color: var(--text-primary); 
-            cursor: pointer; 
-            transition: opacity 0.2s ease, color 0.3s ease; 
-            border-bottom: 1px dotted var(--text-muted); 
+        .problem-title {
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
-        .problem-title:hover { opacity: 0.6; }
         .problem-note { 
             max-height: 0; 
             overflow: hidden; 
@@ -502,39 +499,32 @@
     <section class="about-section">
         <h2 class="section-label">About</h2>
         <div class="section-content">
+            <p>I am a PhD student at <a href="https://www.oeaw.ac.at/aithyra" target="_blank">AITHYRA</a> advised by <a href="https://www.alextong.net/" target="_blank">Alexander Tong</a>. AITHYRA is a new research institute at the intersection of machine learning and life sciences led by&nbsp;<a href="https://www.cs.ox.ac.uk/people/michael.bronstein/" target="_blank">Michael Bronstein</a>&nbsp;and funded by the Boehringer Ingelheim Foundation. My focus is on geometric deep learning and flow-based generative models for dynamics-informed molecular design. I hold an MPhil in Machine Learning from Cambridge (Distinction) and a BSc in Mathematics from VU Amsterdam (Cum Laude).</p>
 
-            <p>I'm an AI researcher working at the intersection of generative modeling, geometric deep learning, and molecular design. I build models that inverse-design molecules (proteins, drugs, materials) by learning to navigate high-dimensional chemical and biological spaces. I also do freelance engineering consulting. I hold an MPhil in Machine Learning from Cambridge (Distinction) and a BSc in Mathematics from VU Amsterdam (Cum Laude).</p>
-            
-            <p>Some problems I find interesting:</p>
-            
+            <p>My current interests include:</p>
+
             <ul class="problem-list">
                 <li class="problem-item">
-                    <span class="problem-title" data-note="data-distributions">Modeling and sampling arbitrary data distributions</span>
-                    <div class="problem-note" id="note-data-distributions">Generative modeling represents one of the most ambitious frontiers in AI. At its limit, it would enable generating anything on demand (images, video, proteins, molecular therapeutics) initially in simulation (bits), later translated to physical reality (atoms) through printer-like tech. I find this problem one of the most exciting ones because it can be hugely impactful and it is often mathematically elegant (think transport maps via diffusion or flows with strong physics inductive biases, and other clever sampling methods to overcome the curse of dimensionality, rather than just autoregressive models that work via scaling deep learning architectures).<br><br></div>
+                    <span class="problem-title">Mathematical foundations of geometric machine learning and generative models</span>
                 </li>
                 <li class="problem-item">
-                    <span class="problem-title" data-note="ai-science">How can we leverage AI to accelerate science</span>
-                    <div class="problem-note" id="note-ai-science">I see two main paths towards AI-accelerated science:<br><br><strong>Foundation models for science.</strong> In a world where scaling laws work, language was the low-hanging fruit (i.e. internet text made LLMs feasible). Now it is the time to apply the same playbook to data-scarce domains (genomes, molecules, proteins, materials), and build foundation models that do for biology and chemistry what GPT did for language.<br><br><strong>Agentic exploration of the hypothesis space.</strong> Einstein once supposedly said genius is 1% talent and 99% hard work. Suppose an autonomous agent that can take a high-level idea and then actually code, run experiments, debug, analyse results, scan research literature, and suggest what to try next. Even crazier, tie this with embodied AI, and it can even run wet lab experiments. Though I don't think we'll get fully autonomous researchers anytime soon, what's way more realistic in the near term are tireless research assistants that amplify the impact of a sharp PI who guides them appropriately. We're already seeing early sparks of this (see <a href="https://arxiv.org/pdf/2507.18074" target="_blank">research paper</a>, <a href="https://platform.futurehouse.org/" target="_blank">AI scientist startup</a>).<br><br></div>
+                    <span class="problem-title">Efficient and controllable generative modeling: methods with tractable likelihoods, fine-grained control, and discrete-continuous cogeneration</span>
                 </li>
                 <li class="problem-item">
-                    <span class="problem-title" data-note="verifiable-rewards">How we can leverage verifiable rewards to unlock RL at scale</span>
-                    <div class="problem-note" id="note-verifiable-rewards">The <em><a href="https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law" target="_blank">verifier's rule</a></em> states that the ease of training AI to solve a task is proportional to how verifiable the task is. This asymmetry (where verification is orders of magnitude easier than generation) is becoming one of the most powerful levers in AI. Think: Sudoku takes minutes to solve but seconds to verify; Instagram took years to build but anyone can check if it works; complex proofs are hard to discover but (relatively) straightforward to validate. What excites me: we're entering an era where any problem with <strong>objective truth</strong>, <strong>fast verification</strong>, and <strong>scalable feedback</strong> becomes tractable.<br><br></div>
+                    <span class="problem-title">Generative AI for molecular design: next-generation generative models (e.g., flow matching, diffusion) for dynamics-informed molecule design</span>
                 </li>
                 <li class="problem-item">
-                    <span class="problem-title" data-note="computational-intelligence">What are the computational principles of intelligence</span>
-                    <div class="problem-note" id="note-computational-intelligence">What does it take to explain abstraction, reasoning, even consciousness, in computational terms? Given neurons and synapses give rise to human-level cognition, what are the universal principles we need to capture to develop algorithms capable of autonomous abstraction (i.e. general intelligence).<br><br></div>
+                    <span class="problem-title">Efficient sampling: flow-based methods for high-dimensional Boltzmann distributions</span>
                 </li>
                 <li class="problem-item">
-                    <span class="problem-title" data-note="human-biology">How can we engineer human biology</span>
-                    <div class="problem-note" id="note-human-biology">Think of designing interventions to repair and improve our bodies, and monitor these satisfactorily once they are implemented. At the limit of <a href="https://pubmed.ncbi.nlm.nih.gov/26940610/" target="_blank">medicine 3.0</a>, I imagine nanorobots circulating through our bloodstream, constantly tracking cellular function and flagging risks before they become problems. These might interface with AI doctors capable of proposing personalized therapies (e.g. some of them drugs generated on demand). Building the hardware–software infrastructure for this will be <em>hard</em>, but so was sending humans to the Moon.<br><br></div>
+                    <span class="problem-title">Continual learning via PEFT (e.g. LoRA) for baking factual knowledge and personalization</span>
                 </li>
                 <li class="problem-item">
-                    <span class="problem-title" data-note="geopolitical-governance">How to redesign geopolitical governance to avoid wars, and promote economic prosperity</span>
-                    <div class="problem-note" id="note-geopolitical-governance">The Westphalian system of nation-states creates perverse incentives: wars emerge not from irrationality but from misaligned structures where conflict can be profitable. The question isn't "how do we find better leaders?" but "how do we design systems where rational actors can't profit from conflict?". Real progress requires mechanisms over mandates: network states that enable governance-as-a-service, forcing institutions to compete for citizens; asymmetric economic interdependence where warfare becomes suicidal for all parties; and algorithmic institutions (smart contracts, prediction markets, executable policy) that replace opacity with legibility. The uncomfortable truth is achieving this demands either voluntary adoption by existing powers (unlikely) or parallel institution-building that gradually outcompetes legacy systems (generational).<br><br></div>
+                    <span class="problem-title">Deep learning on weights: learning on model parameters, studying symmetries in weight space</span>
                 </li>
             </ul>
             
-            <p>I'm based in London, where it's currently <span data-london-time>00:00:00</span>.</p>
+            <p>I'm based in Vienna, where it's currently <span data-london-time>00:00:00</span>.</p>
             
             <p>In my spare time, I run, swim, surf, lift, explore nature, eat, code, travel, and read.</p>
         </div>
@@ -593,7 +583,7 @@
         </div>
     </section>
 
-    <!-- Posts Section -->
+    <!-- Posts Section
     <section class="notes-section">
         <h2 class="section-label">Posts</h2>
         <div class="section-content">
@@ -608,7 +598,7 @@
             
             <span class="view-all-link" style="cursor: default; opacity: 0.6;">View all posts →</span>
         </div>
-    </section>
+    </section> Posts Section -->
 
     <!-- Contact Section -->
     <section class="contact-section">
@@ -675,10 +665,10 @@
           setInterval(applyTheme, 60000);
         })();
 
-        // London time display
+        // Vienna time display
         (function(){
           function tick(el){
-            const f=new Intl.DateTimeFormat([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Europe/London'});
+            const f=new Intl.DateTimeFormat([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Europe/Vienna'});
             const run=()=>{ el.textContent=f.format(new Date()); };
             run(); setInterval(run, 1000);
           }
@@ -711,26 +701,6 @@
         })();
 
 
-        // Problem notes toggle
-        (function(){
-          const titles = document.querySelectorAll('.problem-title');
-          titles.forEach(title => {
-            title.addEventListener('click', function() {
-              const noteId = 'note-' + this.getAttribute('data-note');
-              const note = document.getElementById(noteId);
-              if (!note) return;
-              const willExpand = !note.classList.contains('expanded');
-              note.classList.toggle('expanded');
-              if (willExpand) {
-                // Expand to full content height
-                note.style.maxHeight = note.scrollHeight + 'px';
-              } else {
-                // Collapse smoothly
-                note.style.maxHeight = '0px';
-              }
-            });
-          });
-        })();
     </script>
     <script src="./assets/js/quotes.js"></script>
     <script src="./assets/js/guestbook.js"></script>
