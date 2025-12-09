@@ -2861,7 +2861,7 @@
                 showError('photo-error');
                 return;
             }
-
+            
             // Check if Supabase is configured
             if (!supabaseClient) {
                 errorDiv.textContent = 'Supabase is not configured. Please set SUPABASE_URL and SUPABASE_ANON_KEY in the code.';
@@ -2895,7 +2895,7 @@
                 let data, error;
                 
                 try {
-                    const result = await supabaseClient.functions.invoke('analyze-meal', {
+                    const result = await supabaseClient.functions.invoke('bright-api', {
                         body: { image: imageBase64 }
                     });
                     data = result.data;
@@ -2905,7 +2905,7 @@
                     // Try direct fetch as fallback
                     console.log('Trying direct fetch to Edge Function...');
                     try {
-                        const functionUrl = `${SUPABASE_URL}/functions/v1/analyze-meal`;
+                        const functionUrl = `${SUPABASE_URL}/functions/v1/bright-api`;
                         const response = await fetch(functionUrl, {
                             method: 'POST',
                             headers: {
@@ -2946,11 +2946,11 @@
                 }
 
                 const mealData = data.data;
-
-                // Add meal to list
+            
+            // Add meal to list
                 addMealToList(mealData);
-
-                // Update nutrition totals
+            
+            // Update nutrition totals
                 currentNutrition.calories += mealData.calories;
                 currentNutrition.protein += mealData.protein;
                 currentNutrition.carbs += mealData.carbs;
@@ -2963,17 +2963,17 @@
                 currentNutrition.zinc += (mealData.zinc || 0);
                 currentNutrition.potassium += (mealData.potassium || 0);
                 currentNutrition.vitaminB6 += (mealData.vitaminB6 || 0);
-
-                // Update dashboard
-                updateNutritionDashboard();
-
-                // Close modal and reset form
-                cameraModal.classList.remove('active');
-                cameraForm.reset();
+            
+            // Update dashboard
+            updateNutritionDashboard();
+            
+            // Close modal and reset form
+            cameraModal.classList.remove('active');
+            cameraForm.reset();
                 loadingDiv.style.display = 'none';
-
+            
                 // Show success message
-                alert('Meal analyzed and added to your daily nutrition!');
+            alert('Meal analyzed and added to your daily nutrition!');
 
             } catch (error) {
                 console.error('Error analyzing meal:', error);
