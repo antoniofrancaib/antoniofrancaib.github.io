@@ -13,16 +13,23 @@ serve(async (req) => {
   }
 
   try {
-    // Get Supabase URL and anon key from environment or request headers
-    const supabaseUrl = Deno.env.get('SUPABASE_URL') || 
-                       req.headers.get('x-supabase-url') ||
-                       'https://smuiaaeluqklideovsqn.supabase.co'
-    
-    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') ||
-                            req.headers.get('x-supabase-anon-key') ||
-                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtdWlhYWVsdXFrbGlkZW92c3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMDk0OTcsImV4cCI6MjA4MDg4NTQ5N30.SsAOS0HieZgNe5408udl8mjVT-4UqzfOIPy8k2O7aok'
+    // Get Supabase URL and anon key from environment variables
+    // These are automatically provided by Supabase Edge Functions
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')
 
-    console.log('Supabase URL:', supabaseUrl)
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.error('Missing Supabase environment variables')
+      return new Response(
+        JSON.stringify({ success: false, error: 'Server configuration error: Missing Supabase credentials' }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
+    }
+
+    console.log('Supabase URL configured')
     console.log('Request method:', req.method)
     console.log('Request URL:', req.url)
 
