@@ -13,10 +13,23 @@ serve(async (req) => {
   }
 
   try {
+    // Get Supabase URL and anon key from environment or request headers
+    const supabaseUrl = Deno.env.get('SUPABASE_URL') || 
+                       req.headers.get('x-supabase-url') ||
+                       'https://smuiaaeluqklideovsqn.supabase.co'
+    
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') ||
+                            req.headers.get('x-supabase-anon-key') ||
+                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtdWlhYWVsdXFrbGlkZW92c3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMDk0OTcsImV4cCI6MjA4MDg4NTQ5N30.SsAOS0HieZgNe5408udl8mjVT-4UqzfOIPy8k2O7aok'
+
+    console.log('Supabase URL:', supabaseUrl)
+    console.log('Request method:', req.method)
+    console.log('Request URL:', req.url)
+
     // Initialize Supabase client
     const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      supabaseUrl,
+      supabaseAnonKey,
       {
         auth: {
           persistSession: false
@@ -25,7 +38,22 @@ serve(async (req) => {
     )
 
     // Parse request body
-    const { image } = await req.json()
+    let requestBody
+    try {
+      requestBody = await req.json()
+    } catch (parseError) {
+      console.error('Failed to parse request body:', parseError)
+      return new Response(
+        JSON.stringify({ success: false, error: 'Invalid request body' }),
+        { 
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
+    }
+
+    const { image } = requestBody
+    console.log('Received image data, length:', image?.length || 0)
 
     if (!image) {
       return new Response(

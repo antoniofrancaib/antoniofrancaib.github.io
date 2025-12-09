@@ -2888,15 +2888,60 @@
                 });
 
                 // Call Supabase Edge Function
-                const { data, error } = await supabaseClient.functions.invoke('analyze-meal', {
-                    body: { image: imageBase64 }
-                });
-
-                if (error) {
-                    throw new Error(error.message || 'Failed to analyze image');
+                console.log('Calling Edge Function: analyze-meal');
+                console.log('Image size:', imageBase64.length, 'characters');
+                console.log('Supabase URL:', SUPABASE_URL);
+                
+                let data, error;
+                
+                try {
+                    const result = await supabaseClient.functions.invoke('analyze-meal', {
+                        body: { image: imageBase64 }
+                    });
+                    data = result.data;
+                    error = result.error;
+                } catch (invokeError) {
+                    console.error('Function invoke error:', invokeError);
+                    // Try direct fetch as fallback
+                    console.log('Trying direct fetch to Edge Function...');
+                    try {
+                        const functionUrl = `${SUPABASE_URL}/functions/v1/analyze-meal`;
+                        const response = await fetch(functionUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                                'apikey': SUPABASE_ANON_KEY
+                            },
+                            body: JSON.stringify({ image: imageBase64 })
+                        });
+                        
+                        if (!response.ok) {
+                            const errorText = await response.text();
+                            throw new Error(`Edge Function returned ${response.status}: ${errorText}`);
+                        }
+                        
+                        const result = await response.json();
+                        data = result;
+                        error = null;
+                    } catch (fetchError) {
+                        console.error('Direct fetch error:', fetchError);
+                        throw new Error(`Failed to reach Edge Function: ${fetchError.message}`);
+                    }
                 }
 
-                if (!data || !data.success) {
+                console.log('Edge Function response:', { data, error });
+
+                if (error) {
+                    console.error('Edge Function error details:', error);
+                    throw new Error(error.message || 'Failed to send a request to the Edge Function');
+                }
+
+                if (!data) {
+                    throw new Error('No data received from Edge Function');
+                }
+
+                if (!data.success) {
                     throw new Error(data?.error || 'Failed to analyze image');
                 }
 
