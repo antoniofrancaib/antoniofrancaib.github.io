@@ -6,6 +6,7 @@
     <title>Health Dashboard - Antonio Franca</title>
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         /* Reset and base styles matching main site */
         * {
@@ -380,6 +381,15 @@
 
         .btn-primary:hover {
             opacity: 0.85;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary:disabled:hover {
+            opacity: 0.5;
         }
 
         /* Protocols tab specific styles */
@@ -1719,18 +1729,29 @@
                 </div>
                 <div class="meal-form-group">
                     <p style="font-size: 14px; color: var(--text-tertiary); line-height: 1.7;">
-                        Upload a photo of your meal and our AI will analyze it to estimate the nutritional content. This feature is coming soon!
+                        Upload a photo of your meal and our AI will analyze it to estimate the nutritional content.
                     </p>
                 </div>
+                <div id="camera-loading" style="display: none; text-align: center; padding: 20px; color: var(--text-secondary);">
+                    <p>Analyzing your meal... This may take a few seconds.</p>
+                </div>
+                <div id="camera-error" style="display: none; padding: 12px; margin-bottom: 16px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; color: #ef4444; font-size: 14px;"></div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" id="camera-cancel-btn">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Analyze Photo</button>
+                    <button type="submit" class="btn btn-primary" id="camera-submit-btn">Analyze Photo</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://smuiaaeluqklideovsqn.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtdWlhYWVsdXFrbGlkZW92c3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMDk0OTcsImV4cCI6MjA4MDg4NTQ5N30.SsAOS0HieZgNe5408udl8mjVT-4UqzfOIPy8k2O7aok';
+
+        // Initialize Supabase client
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         // Theme switching based on time (matching main site)
         (function(){
             function applyTheme(){
@@ -1912,6 +1933,10 @@
             document.querySelectorAll('.form-error').forEach(error => {
                 error.classList.remove('active');
             });
+            const errorDiv = document.getElementById('camera-error');
+            if (errorDiv) {
+                errorDiv.style.display = 'none';
+            }
         }
 
         // Meal Modal functionality
@@ -2821,70 +2846,99 @@
         });
 
         // Handle camera form submission
-        cameraForm.addEventListener('submit', (e) => {
+        cameraForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const photoInput = document.getElementById('meal-photo-input');
+            const loadingDiv = document.getElementById('camera-loading');
+            const errorDiv = document.getElementById('camera-error');
+            const submitBtn = document.getElementById('camera-submit-btn');
             
             clearErrors();
+            errorDiv.style.display = 'none';
             
             if (!photoInput.files || photoInput.files.length === 0) {
                 showError('photo-error');
                 return;
             }
-            
-            // Mock AI analysis - in the future, this would send to backend
-            const calories = Math.floor(Math.random() * 400) + 300;
-            const protein = Math.floor(Math.random() * 30) + 20;
-            const carbs = Math.floor(Math.random() * 50) + 30;
-            const fat = Math.floor(Math.random() * 20) + 10;
-            
-            const mockMealData = {
-                name: 'AI Analyzed Meal',
-                calories: calories,
-                protein: protein,
-                carbs: carbs,
-                fat: fat,
-                // Add estimated micronutrients based on macros
-                fiber: Math.round(carbs * 0.15),
-                addedSugar: Math.round(carbs * 0.1),
-                sodium: Math.round(calories * 0.5),
-                magnesium: Math.round(calories * 0.15),
-                iron: Math.round(protein * 0.1),
-                zinc: Math.round(protein * 0.08),
-                potassium: Math.round(calories * 0.8),
-                vitaminB6: parseFloat((protein * 0.025).toFixed(1))
-            };
-            
-            console.log('Photo uploaded for AI analysis:', photoInput.files[0].name);
-            console.log('Mock AI result:', mockMealData);
-            
-            // Add meal to list
-            addMealToList(mockMealData);
-            
-            // Update nutrition totals
-            currentNutrition.calories += mockMealData.calories;
-            currentNutrition.protein += mockMealData.protein;
-            currentNutrition.carbs += mockMealData.carbs;
-            currentNutrition.fat += mockMealData.fat;
-            currentNutrition.fiber += (mockMealData.fiber || 0);
-            currentNutrition.addedSugar += (mockMealData.addedSugar || 0);
-            currentNutrition.sodium += (mockMealData.sodium || 0);
-            currentNutrition.magnesium += (mockMealData.magnesium || 0);
-            currentNutrition.iron += (mockMealData.iron || 0);
-            currentNutrition.zinc += (mockMealData.zinc || 0);
-            currentNutrition.potassium += (mockMealData.potassium || 0);
-            currentNutrition.vitaminB6 += (mockMealData.vitaminB6 || 0);
-            
-            // Update dashboard
-            updateNutritionDashboard();
-            
-            // Close modal and reset form
-            cameraModal.classList.remove('active');
-            cameraForm.reset();
-            
-            // Show success message (optional)
-            alert('Meal analyzed and added to your daily nutrition!');
+
+            // Check if Supabase is configured
+            if (!supabaseClient) {
+                errorDiv.textContent = 'Supabase is not configured. Please set SUPABASE_URL and SUPABASE_ANON_KEY in the code.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Show loading state
+            loadingDiv.style.display = 'block';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Analyzing...';
+
+            try {
+                // Convert image to base64
+                const file = photoInput.files[0];
+                const reader = new FileReader();
+                
+                const imageBase64 = await new Promise((resolve, reject) => {
+                    reader.onload = () => {
+                        resolve(reader.result);
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+
+                // Call Supabase Edge Function
+                const { data, error } = await supabaseClient.functions.invoke('analyze-meal', {
+                    body: { image: imageBase64 }
+                });
+
+                if (error) {
+                    throw new Error(error.message || 'Failed to analyze image');
+                }
+
+                if (!data || !data.success) {
+                    throw new Error(data?.error || 'Failed to analyze image');
+                }
+
+                const mealData = data.data;
+
+                // Add meal to list
+                addMealToList(mealData);
+
+                // Update nutrition totals
+                currentNutrition.calories += mealData.calories;
+                currentNutrition.protein += mealData.protein;
+                currentNutrition.carbs += mealData.carbs;
+                currentNutrition.fat += mealData.fat;
+                currentNutrition.fiber += (mealData.fiber || 0);
+                currentNutrition.addedSugar += (mealData.addedSugar || 0);
+                currentNutrition.sodium += (mealData.sodium || 0);
+                currentNutrition.magnesium += (mealData.magnesium || 0);
+                currentNutrition.iron += (mealData.iron || 0);
+                currentNutrition.zinc += (mealData.zinc || 0);
+                currentNutrition.potassium += (mealData.potassium || 0);
+                currentNutrition.vitaminB6 += (mealData.vitaminB6 || 0);
+
+                // Update dashboard
+                updateNutritionDashboard();
+
+                // Close modal and reset form
+                cameraModal.classList.remove('active');
+                cameraForm.reset();
+                loadingDiv.style.display = 'none';
+
+                // Show success message
+                alert('Meal analyzed and added to your daily nutrition!');
+
+            } catch (error) {
+                console.error('Error analyzing meal:', error);
+                errorDiv.textContent = error.message || 'Failed to analyze image. Please try again.';
+                errorDiv.style.display = 'block';
+                loadingDiv.style.display = 'none';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Analyze Photo';
+            }
         });
 
         // Set today's date
