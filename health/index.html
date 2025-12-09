@@ -1766,6 +1766,9 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
+        // Load persisted meals from Supabase on page load
+        loadMealsFromSupabase();
+
         // Check for pending recipe from localStorage
         (function checkPendingRecipe() {
             const pendingRecipe = localStorage.getItem('pendingRecipe');
@@ -2201,6 +2204,78 @@
             row.addEventListener('click', function() {
                 toggleMealDetails(this);
             });
+        }
+
+        // Load today's meals from Supabase to persist across refreshes
+        async function loadMealsFromSupabase() {
+            if (!supabaseClient) {
+                return;
+            }
+
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const { data, error } = await supabaseClient
+                    .from('meal_entries')
+                    .select('meal_name, calories, protein, carbs, fat, fiber, added_sugar, sodium, magnesium, iron, zinc, potassium, vitamin_b6, created_at')
+                    .eq('date', today)
+                    .order('created_at', { ascending: true });
+
+                if (error) {
+                    console.error('Failed to load meals from Supabase:', error);
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    console.log('No meals found for today in Supabase.');
+                    return;
+                }
+
+                // Reset local state and UI
+                mealsData = {};
+                nextMealId = 1;
+                Object.keys(currentNutrition).forEach(key => currentNutrition[key] = 0);
+                const mealsTbody = document.getElementById('meals-tbody');
+                if (mealsTbody) mealsTbody.innerHTML = '';
+
+                data.forEach(row => {
+                    const meal = {
+                        name: row.meal_name || 'Meal',
+                        calories: Number(row.calories) || 0,
+                        protein: Number(row.protein) || 0,
+                        carbs: Number(row.carbs) || 0,
+                        fat: Number(row.fat) || 0,
+                        fiber: Number(row.fiber) || 0,
+                        addedSugar: Number(row.added_sugar) || 0,
+                        sodium: Number(row.sodium) || 0,
+                        magnesium: Number(row.magnesium) || 0,
+                        iron: Number(row.iron) || 0,
+                        zinc: Number(row.zinc) || 0,
+                        potassium: Number(row.potassium) || 0,
+                        vitaminB6: Number(row.vitamin_b6) || 0
+                    };
+
+                    addMealToList(meal);
+
+                    // Update totals
+                    currentNutrition.calories += meal.calories;
+                    currentNutrition.protein += meal.protein;
+                    currentNutrition.carbs += meal.carbs;
+                    currentNutrition.fat += meal.fat;
+                    currentNutrition.fiber += meal.fiber;
+                    currentNutrition.addedSugar += meal.addedSugar;
+                    currentNutrition.sodium += meal.sodium;
+                    currentNutrition.magnesium += meal.magnesium;
+                    currentNutrition.iron += meal.iron;
+                    currentNutrition.zinc += meal.zinc;
+                    currentNutrition.potassium += meal.potassium;
+                    currentNutrition.vitaminB6 += meal.vitaminB6;
+                });
+
+                updateNutritionDashboard();
+                console.log('Loaded meals from Supabase for today:', data.length);
+            } catch (err) {
+                console.error('Unexpected error loading meals from Supabase:', err);
+            }
         }
 
         // Toggle meal details
