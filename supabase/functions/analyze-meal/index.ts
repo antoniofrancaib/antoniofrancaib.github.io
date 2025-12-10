@@ -59,8 +59,13 @@ serve(async (req) => {
       )
     }
 
-    const { image } = requestBody
+    let { image } = requestBody
     console.log('Received image data, length:', image?.length || 0)
+
+    // If image is raw base64 (no data URI), wrap it so OpenAI can fetch it
+    if (typeof image === 'string' && !image.startsWith('data:image/')) {
+      image = `data:image/jpeg;base64,${image}`
+    }
 
     if (!image) {
       return new Response(
@@ -290,13 +295,7 @@ Be realistic and accurate. If you cannot identify certain foods, estimate conser
 
     if (dbError) {
       console.error('Database insert error:', dbError)
-      return new Response(
-        JSON.stringify({ success: false, error: 'Failed to save meal to database' }),
-        {
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      )
+      // Don't fail the request if DB insert fails, still return the nutrition data
     }
 
     const insertedId = insertedRows?.id;
