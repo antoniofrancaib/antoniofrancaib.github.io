@@ -146,7 +146,14 @@
     }
 
     function openCamera() {
-      // Some browsers require a user gesture; keep the button visible as fallback.
+      try {
+        if (fileInput.showPicker) {
+          fileInput.showPicker();
+          return;
+        }
+      } catch (e) {
+        // fallback to click
+      }
       fileInput.click();
     }
 
@@ -156,8 +163,16 @@
     });
     fileInput.addEventListener('change', handleFileChange);
 
-    // Auto-trigger on load (after a tick to allow rendering)
-    setTimeout(openCamera, 400);
+    // Auto-trigger on load and on first touch/click as backup
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(openCamera, 50);
+    });
+    document.body.addEventListener('touchstart', () => {
+      openCamera();
+    }, { once: true });
+    document.body.addEventListener('click', () => {
+      openCamera();
+    }, { once: true });
   </script>
 </body>
 </html>
