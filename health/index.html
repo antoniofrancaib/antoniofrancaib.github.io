@@ -1,3 +1,54 @@
+        // Remove a meal from UI/state and Supabase if available
+        async function removeMeal(mealId) {
+            const meal = mealsData[mealId];
+            if (!meal) return;
+
+            // Remove from state and UI first
+            delete mealsData[mealId];
+
+            // Adjust totals
+            currentNutrition.calories -= (meal.calories || 0);
+            currentNutrition.protein -= (meal.protein || 0);
+            currentNutrition.carbs -= (meal.carbs || 0);
+            currentNutrition.fat -= (meal.fat || 0);
+            currentNutrition.fiber -= (meal.fiber || 0);
+            currentNutrition.addedSugar -= (meal.addedSugar || 0);
+            currentNutrition.sodium -= (meal.sodium || 0);
+            currentNutrition.magnesium -= (meal.magnesium || 0);
+            currentNutrition.iron -= (meal.iron || 0);
+            currentNutrition.zinc -= (meal.zinc || 0);
+            currentNutrition.potassium -= (meal.potassium || 0);
+            currentNutrition.vitaminB6 -= (meal.vitaminB6 || 0);
+
+            // Update dashboard
+            updateNutritionDashboard();
+
+            // Remove table row and any expanded details
+            const row = document.querySelector(`tr[data-meal-id="${mealId}"]`);
+            if (row) {
+                const detailsRow = row.nextElementSibling;
+                if (detailsRow && detailsRow.classList.contains('expanded-row')) {
+                    detailsRow.remove();
+                }
+                row.remove();
+            }
+
+            // Delete from Supabase if we have an id
+            if (meal.supabaseId && supabaseClient) {
+                try {
+                    const { error: deleteError } = await supabaseClient
+                        .from('meal_entries')
+                        .delete()
+                        .eq('id', meal.supabaseId);
+                    if (deleteError) {
+                        console.error('Failed to delete meal in Supabase:', deleteError);
+                    }
+                } catch (err) {
+                    console.error('Unexpected error deleting meal in Supabase:', err);
+                }
+            }
+        }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1768,6 +1819,8 @@
 
         // Load persisted meals from Supabase on page load
         loadMealsFromSupabase();
+        // Load past nutrition aggregation
+        loadPastNutritionFromSupabase();
 
         // Check for pending recipe from localStorage
         (function checkPendingRecipe() {
@@ -1981,84 +2034,8 @@
             vitaminB6: 4.4
         };
 
-        // Store meal data with micronutrients
-        let mealsData = {
-            '1': {
-                name: 'Breakfast: Oatmeal with berries',
-                calories: 520,
-                protein: 35,
-                carbs: 68,
-                fat: 18,
-                fiber: 12,
-                addedSugar: 5,
-                sodium: 180,
-                magnesium: 95,
-                iron: 6,
-                zinc: 3,
-                potassium: 450,
-                vitaminB6: 0.8
-            },
-            '2': {
-                name: 'Lunch: Grilled chicken salad',
-                calories: 615,
-                protein: 52,
-                carbs: 45,
-                fat: 28,
-                fiber: 8,
-                addedSugar: 2,
-                sodium: 520,
-                magnesium: 85,
-                iron: 4,
-                zinc: 5,
-                potassium: 680,
-                vitaminB6: 1.2
-            },
-            '3': {
-                name: 'Snack: Greek yogurt with almonds',
-                calories: 285,
-                protein: 18,
-                carbs: 22,
-                fat: 15,
-                fiber: 4,
-                addedSugar: 8,
-                sodium: 95,
-                magnesium: 78,
-                iron: 2,
-                zinc: 2,
-                potassium: 320,
-                vitaminB6: 0.3
-            },
-            '4': {
-                name: 'Dinner: Salmon with quinoa',
-                calories: 825,
-                protein: 45,
-                carbs: 95,
-                fat: 32,
-                fiber: 10,
-                addedSugar: 0,
-                sodium: 420,
-                magnesium: 125,
-                iron: 4,
-                zinc: 3,
-                potassium: 750,
-                vitaminB6: 1.5
-            },
-            '5': {
-                name: 'Evening snack: Protein shake',
-                calories: 200,
-                protein: 28,
-                carbs: 12,
-                fat: 6,
-                fiber: 2,
-                addedSugar: 3,
-                sodium: 160,
-                magnesium: 45,
-                iron: 2,
-                zinc: 2,
-                potassium: 280,
-                vitaminB6: 0.6
-            }
-        };
+        // Store meal data with micronutrients (will be loaded from Supabase)
+        let mealsData = {};
 
         let nextMealId = 6;
 
@@ -2184,8 +2161,9 @@
 
         // Add meal to the meals table
         function addMealToList(mealData) {
-            const mealId = nextMealId++;
-            mealsData[mealId] = mealData;
+            const mealId = mealData.id || `meal-${nextMealId++}`;
+            const supabaseId = mealData.supabaseId || mealData.id;
+            mealsData[mealId] = { ...mealData, id: mealId, supabaseId };
             
             const mealsTbody = document.getElementById('meals-tbody');
             const row = document.createElement('tr');
@@ -2197,6 +2175,11 @@
                 <td class="meal-value">${mealData.carbs}g</td>
                 <td class="meal-value">${mealData.fat}g</td>
                 <td class="meal-value">${mealData.calories} kcal</td>
+                <td class="meal-value" style="text-align: right;">
+                    <button class="icon-btn" data-delete-meal="${mealId}" title="Remove meal" aria-label="Remove meal" style="padding: 6px; border: 1px solid var(--border-color-medium);">
+                        <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
+                    </button>
+                </td>
             `;
             mealsTbody.appendChild(row);
             
@@ -2204,6 +2187,15 @@
             row.addEventListener('click', function() {
                 toggleMealDetails(this);
             });
+
+            // Delete handler
+            const deleteBtn = row.querySelector('[data-delete-meal]');
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    removeMeal(mealId);
+                });
+            }
         }
 
         // Load today's meals from Supabase to persist across refreshes
@@ -2216,7 +2208,7 @@
                 const today = new Date().toISOString().split('T')[0];
                 const { data, error } = await supabaseClient
                     .from('meal_entries')
-                    .select('meal_name, calories, protein, carbs, fat, fiber, added_sugar, sodium, magnesium, iron, zinc, potassium, vitamin_b6, created_at')
+                    .select('id, meal_name, calories, protein, carbs, fat, fiber, added_sugar, sodium, magnesium, iron, zinc, potassium, vitamin_b6, created_at, date')
                     .eq('date', today)
                     .order('created_at', { ascending: true });
 
@@ -2239,6 +2231,8 @@
 
                 data.forEach(row => {
                     const meal = {
+                        id: row.id,
+                        supabaseId: row.id,
                         name: row.meal_name || 'Meal',
                         calories: Number(row.calories) || 0,
                         protein: Number(row.protein) || 0,
@@ -2276,6 +2270,112 @@
             } catch (err) {
                 console.error('Unexpected error loading meals from Supabase:', err);
             }
+        }
+
+        // Load past nutrition aggregated by date (excluding today)
+        async function loadPastNutritionFromSupabase() {
+            if (!supabaseClient) return;
+
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const { data, error } = await supabaseClient
+                    .from('meal_entries')
+                    .select('id, meal_name, calories, protein, carbs, fat, fiber, added_sugar, sodium, magnesium, iron, zinc, potassium, vitamin_b6, date, created_at')
+                    .order('date', { ascending: false })
+                    .order('created_at', { ascending: true });
+
+                if (error) {
+                    console.error('Failed to load past nutrition from Supabase:', error);
+                    return;
+                }
+
+                const grouped = {};
+
+                (data || []).forEach(row => {
+                    if (!row.date || row.date === today) return;
+                    const key = row.date;
+                    if (!grouped[key]) {
+                        grouped[key] = {
+                            date: row.date,
+                            totals: {
+                                calories: 0, protein: 0, carbs: 0, fat: 0,
+                                fiber: 0, addedSugar: 0, sodium: 0, magnesium: 0,
+                                iron: 0, zinc: 0, potassium: 0, vitaminB6: 0
+                            },
+                            meals: []
+                        };
+                    }
+
+                    const meal = {
+                        id: row.id,
+                        name: row.meal_name || 'Meal',
+                        calories: Number(row.calories) || 0,
+                        protein: Number(row.protein) || 0,
+                        carbs: Number(row.carbs) || 0,
+                        fat: Number(row.fat) || 0,
+                        fiber: Number(row.fiber) || 0,
+                        addedSugar: Number(row.added_sugar) || 0,
+                        sodium: Number(row.sodium) || 0,
+                        magnesium: Number(row.magnesium) || 0,
+                        iron: Number(row.iron) || 0,
+                        zinc: Number(row.zinc) || 0,
+                        potassium: Number(row.potassium) || 0,
+                        vitaminB6: Number(row.vitamin_b6) || 0
+                    };
+
+                    grouped[key].meals.push(meal);
+                    const t = grouped[key].totals;
+                    t.calories += meal.calories;
+                    t.protein += meal.protein;
+                    t.carbs += meal.carbs;
+                    t.fat += meal.fat;
+                    t.fiber += meal.fiber;
+                    t.addedSugar += meal.addedSugar;
+                    t.sodium += meal.sodium;
+                    t.magnesium += meal.magnesium;
+                    t.iron += meal.iron;
+                    t.zinc += meal.zinc;
+                    t.potassium += meal.potassium;
+                    t.vitaminB6 += meal.vitaminB6;
+                });
+
+                pastDaysData = grouped;
+                renderPastNutritionTable();
+            } catch (err) {
+                console.error('Unexpected error loading past nutrition:', err);
+            }
+        }
+
+        function renderPastNutritionTable() {
+            const tbody = document.getElementById('past-nutrition-tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const dayKeys = Object.keys(pastDaysData).sort((a, b) => new Date(b) - new Date(a));
+            if (dayKeys.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="5" style="text-align:center; color: var(--text-muted); padding: 12px;">No past nutrition data yet.</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+
+            dayKeys.forEach(dayId => {
+                const dayData = pastDaysData[dayId];
+                const dateLabel = new Date(`${dayId}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                const row = document.createElement('tr');
+                row.className = 'past-day-row';
+                row.setAttribute('data-day-id', dayId);
+                row.style.cursor = 'pointer';
+                row.innerHTML = `
+                    <td>${dateLabel}</td>
+                    <td>${Math.round(dayData.totals.calories)} / ${nutritionGoals.calories} kcal</td>
+                    <td>${Math.round(dayData.totals.protein)} / ${nutritionGoals.protein} g</td>
+                    <td>${Math.round(dayData.totals.carbs)} / ${nutritionGoals.carbs} g</td>
+                    <td>${Math.round(dayData.totals.fat)} / ${nutritionGoals.fat} g</td>
+                `;
+                row.addEventListener('click', () => togglePastDayExpansion(dayId, row));
+                tbody.appendChild(row);
+            });
         }
 
         // Toggle meal details
@@ -2467,108 +2567,8 @@
             }
         });
 
-        // Past nutrition days data
-        const pastDaysData = {
-            'nov-9-2024': {
-                date: 'November 9, 2024',
-                totals: {
-                    calories: 3039,
-                    protein: 167,
-                    carbs: 391,
-                    fat: 115,
-                    fiber: 42,
-                    addedSugar: 22,
-                    sodium: 1850,
-                    magnesium: 485,
-                    iron: 21,
-                    zinc: 18,
-                    potassium: 3100,
-                    vitaminB6: 5.2
-                },
-                meals: [
-                    {
-                        id: 'past-1',
-                        name: 'Breakfast: Greek Yogurt Bowl',
-                        protein: 38,
-                        carbs: 72,
-                        fat: 22,
-                        calories: 590,
-                        fiber: 12,
-                        addedSugar: 8,
-                        sodium: 180,
-                        magnesium: 95,
-                        iron: 4,
-                        zinc: 3,
-                        potassium: 680,
-                        vitaminB6: 0.8
-                    },
-                    {
-                        id: 'past-2',
-                        name: 'Lunch: Grilled Chicken Salad',
-                        protein: 52,
-                        carbs: 85,
-                        fat: 28,
-                        calories: 752,
-                        fiber: 14,
-                        addedSugar: 3,
-                        sodium: 520,
-                        magnesium: 125,
-                        iron: 6,
-                        zinc: 5,
-                        potassium: 890,
-                        vitaminB6: 1.5
-                    },
-                    {
-                        id: 'past-3',
-                        name: 'Post-Workout Shake',
-                        protein: 28,
-                        carbs: 48,
-                        fat: 12,
-                        calories: 396,
-                        fiber: 5,
-                        addedSugar: 6,
-                        sodium: 220,
-                        magnesium: 85,
-                        iron: 3,
-                        zinc: 2,
-                        potassium: 520,
-                        vitaminB6: 0.9
-                    },
-                    {
-                        id: 'past-4',
-                        name: 'Dinner: Salmon with Quinoa',
-                        protein: 45,
-                        carbs: 118,
-                        fat: 38,
-                        calories: 966,
-                        fiber: 9,
-                        addedSugar: 2,
-                        sodium: 680,
-                        magnesium: 135,
-                        iron: 6,
-                        zinc: 6,
-                        potassium: 780,
-                        vitaminB6: 1.6
-                    },
-                    {
-                        id: 'past-5',
-                        name: 'Evening Snack: Almonds & Apple',
-                        protein: 4,
-                        carbs: 68,
-                        fat: 15,
-                        calories: 335,
-                        fiber: 2,
-                        addedSugar: 3,
-                        sodium: 250,
-                        magnesium: 45,
-                        iron: 2,
-                        zinc: 2,
-                        potassium: 230,
-                        vitaminB6: 0.4
-                    }
-                ]
-            }
-        };
+        // Past nutrition days data (loaded dynamically from Supabase)
+        let pastDaysData = {};
 
         // Create nutrition dashboard HTML (reusable component)
         function createNutritionDashboard(data, isModal = false) {
@@ -2706,6 +2706,7 @@
                                 <th>CARBS</th>
                                 <th>FAT</th>
                                 <th>CALORIES</th>
+                        <th style="width: 60px; text-align: right;"> </th>
                             </tr>
                         </thead>
                         <tbody id="${mealsTableId}">
@@ -3020,7 +3021,11 @@
                     throw new Error(data?.error || 'Failed to analyze image');
                 }
 
-                const mealData = data.data;
+                const mealData = {
+                    ...data.data,
+                    id: data.data.id,
+                    supabaseId: data.data.id
+                };
             
             // Add meal to list
                 addMealToList(mealData);

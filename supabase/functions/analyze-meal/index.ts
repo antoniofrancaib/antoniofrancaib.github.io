@@ -265,8 +265,8 @@ Be realistic and accurate. If you cannot identify certain foods, estimate conser
       vitamin_b6: Math.max(0, Number(nutritionData.vitamin_b6) || 0)
     }
 
-    // Store in database
-    const { error: dbError } = await supabaseClient
+    // Store in database and return the inserted row id
+    const { data: insertedRows, error: dbError } = await supabaseClient
       .from('meal_entries')
       .insert({
         image_url: imageUrl,
@@ -285,17 +285,22 @@ Be realistic and accurate. If you cannot identify certain foods, estimate conser
         vitamin_b6: mealData.vitamin_b6,
         date: new Date().toISOString().split('T')[0]
       })
+      .select('id')
+      .maybeSingle()
 
     if (dbError) {
       console.error('Database insert error:', dbError)
       // Don't fail the request if DB insert fails, still return the nutrition data
     }
 
+    const insertedId = insertedRows?.id;
+
     // Return success response with nutrition data
     return new Response(
       JSON.stringify({
         success: true,
         data: {
+          id: insertedId,
           name: mealData.meal_name,
           calories: mealData.calories,
           protein: mealData.protein,
