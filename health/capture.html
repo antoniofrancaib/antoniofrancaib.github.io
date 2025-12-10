@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Capture Meal - Health</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: #0d0d0d;
+      color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    p {
+      margin: 0 0 16px;
+      color: #d0d0d0;
+      line-height: 1.5;
+    }
+    .status {
+      font-size: 14px;
+      margin-top: 12px;
+      color: #c0c0c0;
+    }
+    .status.ok { color: #52d67a; }
+    .status.err { color: #ff7b7b; }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+      background: #f5f5f5;
+      color: #0d0d0d;
+    }
+    .btn.secondary {
+      background: transparent;
+      color: #f5f5f5;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Capture Meal</h1>
+    <p id="message">Opening camera… If it doesn’t open, tap “Open Camera”.</p>
+    <div class="status" id="status"></div>
+    <button class="btn" id="open-btn">Open Camera</button>
+    <button class="btn secondary" id="back-btn">Back to Dashboard</button>
+    <input type="file" accept="image/*" capture="environment" id="file-input" class="hidden">
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://smuiaaeluqklideovsqn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtdWlhYWVsdXFrbGlkZW92c3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMDk0OTcsImV4cCI6MjA4MDg4NTQ5N30.SsAOS0HieZgNe5408udl8mjVT-4UqzfOIPy8k2O7aok';
+    const FUNCTION_SLUG = 'bright-api';
+
+    const fileInput = document.getElementById('file-input');
+    const statusEl = document.getElementById('status');
+    const messageEl = document.getElementById('message');
+    const openBtn = document.getElementById('open-btn');
+    const backBtn = document.getElementById('back-btn');
+
+    function setStatus(msg, cls = '') {
+      statusEl.textContent = msg;
+      statusEl.className = 'status ' + cls;
+    }
+
+    async function uploadImage(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          try {
+            const base64 = reader.result;
+            setStatus('Uploading…');
+            const resp = await fetch(`${SUPABASE_URL}/functions/v1/${FUNCTION_SLUG}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+              },
+              body: JSON.stringify({ image: base64 })
+            });
+            const data = await resp.json();
+            if (!resp.ok || !data?.success) {
+              throw new Error(data?.error || `HTTP ${resp.status}`);
+            }
+            resolve(data);
+          } catch (err) {
+            reject(err);
+          }
+        };
+        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleFileChange(e) {
+      const file = e.target.files?.[0];
+      if (!file) {
+        setStatus('No file selected.', 'err');
+        return;
+      }
+      try {
+        await uploadImage(file);
+        setStatus('Uploaded! Redirecting…', 'ok');
+        messageEl.textContent = 'Meal uploaded. Returning to dashboard.';
+        setTimeout(() => {
+          window.location.href = '/health/';
+        }, 1200);
+      } catch (err) {
+        console.error(err);
+        setStatus(err.message || 'Upload failed', 'err');
+        messageEl.textContent = 'Upload failed. You can retry.';
+      }
+    }
+
+    function openCamera() {
+      // Some browsers require a user gesture; keep the button visible as fallback.
+      fileInput.click();
+    }
+
+    openBtn.addEventListener('click', openCamera);
+    backBtn.addEventListener('click', () => {
+      window.location.href = '/health/';
+    });
+    fileInput.addEventListener('change', handleFileChange);
+
+    // Auto-trigger on load (after a tick to allow rendering)
+    setTimeout(openCamera, 400);
+  </script>
+</body>
+</html>
+
