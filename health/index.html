@@ -2147,6 +2147,57 @@
             }
         }
 
+        // Remove a meal from UI/state and Supabase if available
+        async function removeMeal(mealId) {
+            const meal = mealsData[mealId];
+            if (!meal) return;
+
+            // Update state
+            delete mealsData[mealId];
+
+            // Adjust totals
+            currentNutrition.calories -= (meal.calories || 0);
+            currentNutrition.protein -= (meal.protein || 0);
+            currentNutrition.carbs -= (meal.carbs || 0);
+            currentNutrition.fat -= (meal.fat || 0);
+            currentNutrition.fiber -= (meal.fiber || 0);
+            currentNutrition.addedSugar -= (meal.addedSugar || 0);
+            currentNutrition.sodium -= (meal.sodium || 0);
+            currentNutrition.magnesium -= (meal.magnesium || 0);
+            currentNutrition.iron -= (meal.iron || 0);
+            currentNutrition.zinc -= (meal.zinc || 0);
+            currentNutrition.potassium -= (meal.potassium || 0);
+            currentNutrition.vitaminB6 -= (meal.vitaminB6 || 0);
+
+            // Update dashboard
+            updateNutritionDashboard();
+
+            // Remove table row and any expanded details
+            const row = document.querySelector(`tr[data-meal-id="${mealId}"]`);
+            if (row) {
+                const detailsRow = row.nextElementSibling;
+                if (detailsRow && detailsRow.classList.contains('expanded-row')) {
+                    detailsRow.remove();
+                }
+                row.remove();
+            }
+
+            // Delete from Supabase if we have an id
+            if (meal.supabaseId && supabaseClient) {
+                try {
+                    const { error: deleteError } = await supabaseClient
+                        .from('meal_entries')
+                        .delete()
+                        .eq('id', meal.supabaseId);
+                    if (deleteError) {
+                        console.error('Failed to delete meal in Supabase:', deleteError);
+                    }
+                } catch (err) {
+                    console.error('Unexpected error deleting meal in Supabase:', err);
+                }
+            }
+        }
+
         // Load today's meals from Supabase to persist across refreshes
         async function loadMealsFromSupabase() {
             if (!supabaseClient) {
