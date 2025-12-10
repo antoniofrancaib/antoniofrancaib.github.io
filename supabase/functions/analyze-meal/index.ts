@@ -290,7 +290,13 @@ Be realistic and accurate. If you cannot identify certain foods, estimate conser
 
     if (dbError) {
       console.error('Database insert error:', dbError)
-      // Don't fail the request if DB insert fails, still return the nutrition data
+      return new Response(
+        JSON.stringify({ success: false, error: 'Failed to save meal to database' }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
     }
 
     const insertedId = insertedRows?.id;
