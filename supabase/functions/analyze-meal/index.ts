@@ -133,6 +133,9 @@ serve(async (req) => {
 
     const imageUrl = urlData.publicUrl
 
+    // Use the uploaded public URL for AI (avoid sending data URLs to OpenAI)
+    const imageForAi = imageUrl
+
     // Call OpenAI API for food recognition
     const openaiApiKey = Deno.env.get('OPENAI_API_KEY')
     if (!openaiApiKey) {
@@ -198,7 +201,7 @@ Be realistic and accurate. If you cannot identify certain foods, estimate conser
               {
                 type: 'image_url',
                 image_url: {
-                  url: image
+                  url: imageForAi
                 }
               }
             ]
