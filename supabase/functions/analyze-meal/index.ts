@@ -126,12 +126,19 @@ serve(async (req) => {
       )
     }
 
-    // Get public URL for the uploaded image
-    const { data: urlData } = supabaseClient.storage
+    // Get a public/signed URL for the uploaded image (use signed to avoid access issues)
+    let imageUrl = ''
+    const { data: signed } = await supabaseClient.storage
       .from('meal-images')
-      .getPublicUrl(filePath)
-
-    const imageUrl = urlData.publicUrl
+      .createSignedUrl(filePath, 600) // 10 minutes
+    if (signed?.signedUrl) {
+      imageUrl = signed.signedUrl
+    } else {
+      const { data: urlData } = supabaseClient.storage
+        .from('meal-images')
+        .getPublicUrl(filePath)
+      imageUrl = urlData.publicUrl
+    }
 
     // Use the uploaded public URL for AI (avoid sending data URLs to OpenAI)
     const imageForAi = imageUrl
