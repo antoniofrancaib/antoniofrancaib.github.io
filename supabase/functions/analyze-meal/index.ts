@@ -139,6 +139,7 @@ serve(async (req) => {
         .getPublicUrl(filePath)
       imageUrl = urlData.publicUrl
     }
+    console.log('Using image URL (truncated):', imageUrl?.slice(0, 120) || 'none')
 
     // Use the uploaded public URL for AI (avoid sending data URLs to OpenAI)
     const imageForAi = imageUrl
@@ -248,6 +249,9 @@ Be realistic and accurate. If you cannot identify certain foods, estimate conser
       )
     }
 
+    console.log('OpenAI status:', openaiResponse.status)
+    console.log('aiContent (truncated):', aiContent?.slice(0, 200) || 'none')
+
     // Parse AI response
     let nutritionData: any
     try {
@@ -262,6 +266,8 @@ Be realistic and accurate. If you cannot identify certain foods, estimate conser
         }
       )
     }
+
+    console.log('Parsed meal_name:', nutritionData?.meal_name || 'none')
 
     // Validate and normalize nutrition data
     const mealData = {
