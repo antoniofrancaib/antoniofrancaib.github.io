@@ -508,34 +508,6 @@
             margin-bottom: 24px;
         }
 
-        .expand-nutrition-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 13px;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-bottom: 20px;
-        }
-
-        .expand-nutrition-btn:hover {
-            color: var(--text-primary);
-            border-color: var(--border-color-strong);
-        }
-
-        .expand-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .expand-icon.rotated {
-            transform: rotate(180deg);
-        }
 
         /* Protocols section within tabs */
         .protocols-link-wrapper {
@@ -592,18 +564,6 @@
             margin-bottom: 16px;
         }
 
-        .micronutrients-grid-daily {
-            display: none;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .micronutrients-grid-daily.expanded {
-            display: grid;
-        }
 
         .nutrition-metric {
             background: var(--bg-tertiary);
@@ -933,9 +893,6 @@
                 padding: 10px 8px;
             }
 
-            .micronutrients-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -1311,11 +1268,6 @@
                 </div>
                 </div>
 
-                <button class="expand-nutrition-btn" id="expand-nutrition-btn">
-                    <span id="expand-text">Show All Nutrients</span>
-                    <i data-lucide="chevron-down" class="expand-icon" id="expand-icon" style="width: 16px; height: 16px;"></i>
-                </button>
-
                 <div class="nutrition-grid">
                     <div class="nutrition-metric">
                         <div class="metric-header">
@@ -1358,96 +1310,6 @@
                         <div class="metric-target">Goal: 110g</div>
                         <div class="progress-bar">
                             <div class="progress-fill" id="fat-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="micronutrients-grid-daily" id="micronutrients-grid">
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Fiber</span>
-                        </div>
-                        <div class="metric-current" id="fiber-current">36g</div>
-                        <div class="metric-target">Goal: 30g</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="fiber-progress" style="width: 100%"></div>
-                        </div>
-                    </div>
-
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Added Sugar</span>
-                        </div>
-                        <div class="metric-current" id="addedSugar-current">18g</div>
-                        <div class="metric-target">Limit: 50g</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="addedSugar-progress" style="width: 36%"></div>
-                        </div>
-                    </div>
-
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Sodium</span>
-                        </div>
-                        <div class="metric-current" id="sodium-current">1375mg</div>
-                        <div class="metric-target">Limit: 2300mg</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="sodium-progress" style="width: 60%"></div>
-                        </div>
-                    </div>
-
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Magnesium</span>
-                        </div>
-                        <div class="metric-current" id="magnesium-current">428mg</div>
-                        <div class="metric-target">Goal: 400mg</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="magnesium-progress" style="width: 100%"></div>
-                        </div>
-                    </div>
-
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Iron</span>
-                        </div>
-                        <div class="metric-current" id="iron-current">18mg</div>
-                        <div class="metric-target">Goal: 18mg</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="iron-progress" style="width: 100%"></div>
-                        </div>
-                    </div>
-
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Zinc</span>
-                        </div>
-                        <div class="metric-current" id="zinc-current">15mg</div>
-                        <div class="metric-target">Goal: 11mg</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="zinc-progress" style="width: 100%"></div>
-                        </div>
-                    </div>
-
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Potassium</span>
-                        </div>
-                        <div class="metric-current" id="potassium-current">2480mg</div>
-                        <div class="metric-target">Goal: 3500mg</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="potassium-progress" style="width: 71%"></div>
-                        </div>
-                    </div>
-
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Vitamin B6</span>
-                        </div>
-                        <div class="metric-current" id="vitaminB6-current">4.4mg</div>
-                        <div class="metric-target">Goal: 1.7mg</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="vitaminB6-progress" style="width: 100%"></div>
                         </div>
                     </div>
                 </div>
@@ -1696,15 +1558,7 @@
                         protein: recipe.protein,
                         carbs: recipe.carbs,
                         fat: recipe.fat,
-                        calories: recipe.calories,
-                        fiber: recipe.fiber,
-                        addedSugar: recipe.addedSugar,
-                        sodium: recipe.sodium,
-                        magnesium: recipe.magnesium,
-                        iron: recipe.iron,
-                        zinc: recipe.zinc,
-                        potassium: recipe.potassium,
-                        vitaminB6: recipe.vitaminB6
+                        calories: recipe.calories
                     };
 
                     // Update current nutrition totals
@@ -1712,14 +1566,6 @@
                     currentNutrition.protein += recipe.protein;
                     currentNutrition.carbs += recipe.carbs;
                     currentNutrition.fat += recipe.fat;
-                    currentNutrition.fiber += recipe.fiber;
-                    currentNutrition.addedSugar += recipe.addedSugar;
-                    currentNutrition.sodium += recipe.sodium;
-                    currentNutrition.magnesium += recipe.magnesium;
-                    currentNutrition.iron += recipe.iron;
-                    currentNutrition.zinc += recipe.zinc;
-                    currentNutrition.potassium += recipe.potassium;
-                    currentNutrition.vitaminB6 += recipe.vitaminB6;
 
                     // Add to meals list in UI
                     addMealToList(
@@ -1867,15 +1713,7 @@
             calories: 3000,
             protein: 150,
             carbs: 330,
-            fat: 110,
-            fiber: 30,
-            addedSugar: 50,
-            sodium: 2300,
-            magnesium: 400,
-            iron: 18,
-            zinc: 11,
-            potassium: 3500,
-            vitaminB6: 1.7
+            fat: 110
         };
 
         // Current nutrition state (starts with mock data calculated from existing meals)
@@ -1883,15 +1721,7 @@
             calories: 2445,
             protein: 128,
             carbs: 285,
-            fat: 88,
-            fiber: 36,
-            addedSugar: 18,
-            sodium: 1375,
-            magnesium: 428,
-            iron: 18,
-            zinc: 15,
-            potassium: 2480,
-            vitaminB6: 4.4
+            fat: 88
         };
 
         // Store meal data with micronutrients (will be loaded from Supabase)
@@ -1979,34 +1809,17 @@
                     calories: parseInt(mealCaloriesInput.value),
                     protein: parseFloat(mealProteinInput.value),
                     carbs: parseFloat(mealCarbsInput.value),
-                    fat: parseFloat(mealFatInput.value),
-                    // Add default micronutrient values
-                    fiber: Math.round(parseFloat(mealCarbsInput.value) * 0.15),
-                    addedSugar: Math.round(parseFloat(mealCarbsInput.value) * 0.1),
-                    sodium: Math.round(parseInt(mealCaloriesInput.value) * 0.5),
-                    magnesium: Math.round(parseInt(mealCaloriesInput.value) * 0.15),
-                    iron: Math.round(parseFloat(mealProteinInput.value) * 0.1),
-                    zinc: Math.round(parseFloat(mealProteinInput.value) * 0.08),
-                    potassium: Math.round(parseInt(mealCaloriesInput.value) * 0.8),
-                    vitaminB6: parseFloat((parseFloat(mealProteinInput.value) * 0.025).toFixed(1))
+                    fat: parseFloat(mealFatInput.value)
                 };
-                
+
                 // Add meal to the list
                 addMealToList(mealData);
-                
+
                 // Update nutrition totals
                 currentNutrition.calories += mealData.calories;
                 currentNutrition.protein += mealData.protein;
                 currentNutrition.carbs += mealData.carbs;
                 currentNutrition.fat += mealData.fat;
-                currentNutrition.fiber += (mealData.fiber || 0);
-                currentNutrition.addedSugar += (mealData.addedSugar || 0);
-                currentNutrition.sodium += (mealData.sodium || 0);
-                currentNutrition.magnesium += (mealData.magnesium || 0);
-                currentNutrition.iron += (mealData.iron || 0);
-                currentNutrition.zinc += (mealData.zinc || 0);
-                currentNutrition.potassium += (mealData.potassium || 0);
-                currentNutrition.vitaminB6 += (mealData.vitaminB6 || 0);
                 
                 // Update dashboard
                 updateNutritionDashboard();
@@ -2071,14 +1884,6 @@
             currentNutrition.protein -= (meal.protein || 0);
             currentNutrition.carbs -= (meal.carbs || 0);
             currentNutrition.fat -= (meal.fat || 0);
-            currentNutrition.fiber -= (meal.fiber || 0);
-            currentNutrition.addedSugar -= (meal.addedSugar || 0);
-            currentNutrition.sodium -= (meal.sodium || 0);
-            currentNutrition.magnesium -= (meal.magnesium || 0);
-            currentNutrition.iron -= (meal.iron || 0);
-            currentNutrition.zinc -= (meal.zinc || 0);
-            currentNutrition.potassium -= (meal.potassium || 0);
-            currentNutrition.vitaminB6 -= (meal.vitaminB6 || 0);
 
             // Update dashboard
             updateNutritionDashboard();
@@ -2119,7 +1924,7 @@
                 const today = new Date().toISOString().split('T')[0];
                 const { data, error } = await supabaseClient
                     .from('meal_entries')
-                    .select('id, meal_name, calories, protein, carbs, fat, fiber, added_sugar, sodium, magnesium, iron, zinc, potassium, vitamin_b6, created_at, date')
+                    .select('id, meal_name, calories, protein, carbs, fat, created_at, date')
                     .eq('date', today)
                     .order('created_at', { ascending: true });
 
@@ -2136,7 +1941,10 @@
                 // Reset local state and UI
                 mealsData = {};
                 nextMealId = 1;
-                Object.keys(currentNutrition).forEach(key => currentNutrition[key] = 0);
+                currentNutrition.calories = 0;
+                currentNutrition.protein = 0;
+                currentNutrition.carbs = 0;
+                currentNutrition.fat = 0;
                 const mealsTbody = document.getElementById('meals-tbody');
                 if (mealsTbody) mealsTbody.innerHTML = '';
 
@@ -2148,15 +1956,7 @@
                         calories: Number(row.calories) || 0,
                         protein: Number(row.protein) || 0,
                         carbs: Number(row.carbs) || 0,
-                        fat: Number(row.fat) || 0,
-                        fiber: Number(row.fiber) || 0,
-                        addedSugar: Number(row.added_sugar) || 0,
-                        sodium: Number(row.sodium) || 0,
-                        magnesium: Number(row.magnesium) || 0,
-                        iron: Number(row.iron) || 0,
-                        zinc: Number(row.zinc) || 0,
-                        potassium: Number(row.potassium) || 0,
-                        vitaminB6: Number(row.vitamin_b6) || 0
+                        fat: Number(row.fat) || 0
                     };
 
                     addMealToList(meal);
@@ -2166,14 +1966,6 @@
                     currentNutrition.protein += meal.protein;
                     currentNutrition.carbs += meal.carbs;
                     currentNutrition.fat += meal.fat;
-                    currentNutrition.fiber += meal.fiber;
-                    currentNutrition.addedSugar += meal.addedSugar;
-                    currentNutrition.sodium += meal.sodium;
-                    currentNutrition.magnesium += meal.magnesium;
-                    currentNutrition.iron += meal.iron;
-                    currentNutrition.zinc += meal.zinc;
-                    currentNutrition.potassium += meal.potassium;
-                    currentNutrition.vitaminB6 += meal.vitaminB6;
                 });
 
                 updateNutritionDashboard();
@@ -2191,7 +1983,7 @@
                 const today = new Date().toISOString().split('T')[0];
                 const { data, error } = await supabaseClient
                     .from('meal_entries')
-                    .select('id, meal_name, calories, protein, carbs, fat, fiber, added_sugar, sodium, magnesium, iron, zinc, potassium, vitamin_b6, date, created_at')
+                    .select('id, meal_name, calories, protein, carbs, fat, date, created_at')
                     .order('date', { ascending: false })
                     .order('created_at', { ascending: true });
 
@@ -2209,9 +2001,7 @@
                         grouped[key] = {
                             date: row.date,
                             totals: {
-                                calories: 0, protein: 0, carbs: 0, fat: 0,
-                                fiber: 0, addedSugar: 0, sodium: 0, magnesium: 0,
-                                iron: 0, zinc: 0, potassium: 0, vitaminB6: 0
+                                calories: 0, protein: 0, carbs: 0, fat: 0
                             },
                             meals: []
                         };
@@ -2223,15 +2013,7 @@
                         calories: Number(row.calories) || 0,
                         protein: Number(row.protein) || 0,
                         carbs: Number(row.carbs) || 0,
-                        fat: Number(row.fat) || 0,
-                        fiber: Number(row.fiber) || 0,
-                        addedSugar: Number(row.added_sugar) || 0,
-                        sodium: Number(row.sodium) || 0,
-                        magnesium: Number(row.magnesium) || 0,
-                        iron: Number(row.iron) || 0,
-                        zinc: Number(row.zinc) || 0,
-                        potassium: Number(row.potassium) || 0,
-                        vitaminB6: Number(row.vitamin_b6) || 0
+                        fat: Number(row.fat) || 0
                     };
 
                     grouped[key].meals.push(meal);
@@ -2240,14 +2022,6 @@
                     t.protein += meal.protein;
                     t.carbs += meal.carbs;
                     t.fat += meal.fat;
-                    t.fiber += meal.fiber;
-                    t.addedSugar += meal.addedSugar;
-                    t.sodium += meal.sodium;
-                    t.magnesium += meal.magnesium;
-                    t.iron += meal.iron;
-                    t.zinc += meal.zinc;
-                    t.potassium += meal.potassium;
-                    t.vitaminB6 += meal.vitaminB6;
                 });
 
                 pastDaysData = grouped;
@@ -2320,48 +2094,16 @@
                                 <span class="micronutrient-value">${meal.calories}</span>
                             </div>
                             <div class="micronutrient-item">
-                                <span class="micronutrient-label">Fiber</span>
-                                <span class="micronutrient-value">${meal.fiber || 0}g</span>
-                            </div>
-                            <div class="micronutrient-item">
                                 <span class="micronutrient-label">Protein</span>
                                 <span class="micronutrient-value">${meal.protein}g</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Added Sugar</span>
-                                <span class="micronutrient-value">${meal.addedSugar || 0}g</span>
                             </div>
                             <div class="micronutrient-item">
                                 <span class="micronutrient-label">Carbs</span>
                                 <span class="micronutrient-value">${meal.carbs}g</span>
                             </div>
                             <div class="micronutrient-item">
-                                <span class="micronutrient-label">Sodium</span>
-                                <span class="micronutrient-value">${meal.sodium || 0}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
                                 <span class="micronutrient-label">Fat</span>
                                 <span class="micronutrient-value">${meal.fat}g</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Magnesium</span>
-                                <span class="micronutrient-value">${meal.magnesium || 0}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Iron</span>
-                                <span class="micronutrient-value">${meal.iron || 0}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Zinc</span>
-                                <span class="micronutrient-value">${meal.zinc || 0}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Potassium</span>
-                                <span class="micronutrient-value">${meal.potassium || 0}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Vitamin B6</span>
-                                <span class="micronutrient-value">${meal.vitaminB6 || 0}mg</span>
                             </div>
                         </div>
                     </div>
@@ -2406,50 +2148,8 @@
             updateMetric('protein', 'g');
             updateMetric('carbs', 'g');
             updateMetric('fat', 'g');
-            
-            // Update micronutrients
-            updateMetric('fiber', 'g');
-            updateMetric('addedSugar', 'g');
-            updateMetric('sodium', 'mg');
-            updateMetric('magnesium', 'mg');
-            updateMetric('iron', 'mg');
-            updateMetric('zinc', 'mg');
-            updateMetric('potassium', 'mg');
-            
-            // Update Vitamin B6 with decimal
-            const vitaminB6Percent = (currentNutrition.vitaminB6 / nutritionGoals.vitaminB6) * 100;
-            document.getElementById('vitaminB6-current').textContent = `${currentNutrition.vitaminB6.toFixed(1)}mg`;
-            const vitaminB6Progress = document.getElementById('vitaminB6-progress');
-            vitaminB6Progress.style.width = `${Math.min(vitaminB6Percent, 100)}%`;
-            vitaminB6Progress.className = 'progress-fill';
-            if (vitaminB6Percent > 100) vitaminB6Progress.classList.add('over');
-            else if (vitaminB6Percent > 95) vitaminB6Progress.classList.add('warning');
         }
 
-        // Expand/collapse micronutrients
-        const expandNutritionBtn = document.getElementById('expand-nutrition-btn');
-        const micronutrientsGrid = document.getElementById('micronutrients-grid');
-        const expandText = document.getElementById('expand-text');
-        const expandIcon = document.getElementById('expand-icon');
-
-        if (expandNutritionBtn) {
-            expandNutritionBtn.addEventListener('click', () => {
-                const isExpanded = micronutrientsGrid.classList.contains('expanded');
-                
-                if (isExpanded) {
-                    micronutrientsGrid.classList.remove('expanded');
-                    expandText.textContent = 'Show All Nutrients';
-                    expandIcon.classList.remove('rotated');
-                } else {
-                    micronutrientsGrid.classList.add('expanded');
-                    expandText.textContent = 'Hide Nutrients';
-                    expandIcon.classList.add('rotated');
-                }
-                
-                // Reinitialize icons after DOM change
-                lucide.createIcons();
-            });
-        }
 
         // Past nutrition days data (loaded dynamically from Supabase)
         let pastDaysData = {};
@@ -2477,11 +2177,6 @@
                         </div>
                         ` : ''}
                     </div>
-
-                    <button class="expand-nutrition-btn" id="expand-nutrition-btn-${dashboardId}">
-                        <span id="expand-text-${dashboardId}">Show All Nutrients</span>
-                        <i data-lucide="chevron-down" class="expand-icon" id="expand-icon-${dashboardId}" style="width: 16px; height: 16px;"></i>
-                    </button>
 
                     <!-- Macros Grid -->
                     <div class="nutrition-grid">
@@ -2536,48 +2231,6 @@
                                      style="width: ${Math.min((data.nutrition.fat / data.goals.fat) * 100, 100)}%"></div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Micronutrients Grid (hidden by default) -->
-                    <div class="micronutrients-grid-daily" id="micronutrients-grid-${dashboardId}">
-                        ${['fiber', 'addedSugar', 'sodium', 'magnesium', 'iron', 'zinc', 'potassium', 'vitaminB6'].map(nutrient => {
-                            const labels = {
-                                fiber: 'Fiber',
-                                addedSugar: 'Added Sugar',
-                                sodium: 'Sodium',
-                                magnesium: 'Magnesium',
-                                iron: 'Iron',
-                                zinc: 'Zinc',
-                                potassium: 'Potassium',
-                                vitaminB6: 'Vitamin B6'
-                            };
-                            const units = {
-                                fiber: 'g',
-                                addedSugar: 'g',
-                                sodium: 'mg',
-                                magnesium: 'mg',
-                                iron: 'mg',
-                                zinc: 'mg',
-                                potassium: 'mg',
-                                vitaminB6: 'mg'
-                            };
-                            const value = nutrient === 'vitaminB6' ? data.nutrition[nutrient].toFixed(1) : data.nutrition[nutrient];
-                            const percent = (data.nutrition[nutrient] / data.goals[nutrient]) * 100;
-                            const progressClass = percent > 100 ? 'over' : (percent > 95 ? 'warning' : '');
-                            
-                            return `
-                                <div class="nutrition-metric">
-                                    <div class="metric-header">
-                                        <span class="metric-label">${labels[nutrient].toUpperCase()}</span>
-                                    </div>
-                                    <div class="metric-value">${value}${units[nutrient]}</div>
-                                    <div class="metric-goal">Goal: ${data.goals[nutrient]}${units[nutrient]}</div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill ${progressClass}" style="width: ${Math.min(percent, 100)}%"></div>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
                     </div>
 
                     <!-- Today's Meals -->
@@ -2658,29 +2311,6 @@
             // Reinitialize icons
             lucide.createIcons();
 
-            // Setup expand button
-            const expandBtn = document.getElementById('expand-nutrition-btn-modal');
-            const micronutrientsGrid = document.getElementById('micronutrients-grid-modal');
-            const expandText = document.getElementById('expand-text-modal');
-            const expandIcon = document.getElementById('expand-icon-modal');
-
-            if (expandBtn) {
-                expandBtn.addEventListener('click', () => {
-                    const isExpanded = micronutrientsGrid.classList.contains('expanded');
-                    
-                    if (isExpanded) {
-                        micronutrientsGrid.classList.remove('expanded');
-                        expandText.textContent = 'Show All Nutrients';
-                        expandIcon.classList.remove('rotated');
-                    } else {
-                        micronutrientsGrid.classList.add('expanded');
-                        expandText.textContent = 'Hide Nutrients';
-                        expandIcon.classList.add('rotated');
-                    }
-                    
-                    lucide.createIcons();
-                });
-            }
 
             // Setup meal click handlers
             dayData.meals.forEach(meal => {
@@ -2714,39 +2344,23 @@
             detailsRow.innerHTML = `
                 <td colspan="5">
                     <div class="meal-details">
-                        <div class="meal-details-header">Micronutrients</div>
+                        <div class="meal-details-header">Nutritional Details</div>
                         <div class="micronutrients-grid">
                             <div class="micronutrient-item">
-                                <span class="micronutrient-label">Fiber</span>
-                                <span class="micronutrient-value">${mealData.fiber}g</span>
+                                <span class="micronutrient-label">Calories</span>
+                                <span class="micronutrient-value">${mealData.calories}</span>
                             </div>
                             <div class="micronutrient-item">
-                                <span class="micronutrient-label">Added Sugar</span>
-                                <span class="micronutrient-value">${mealData.addedSugar}g</span>
+                                <span class="micronutrient-label">Protein</span>
+                                <span class="micronutrient-value">${mealData.protein}g</span>
                             </div>
                             <div class="micronutrient-item">
-                                <span class="micronutrient-label">Sodium</span>
-                                <span class="micronutrient-value">${mealData.sodium}mg</span>
+                                <span class="micronutrient-label">Carbs</span>
+                                <span class="micronutrient-value">${mealData.carbs}g</span>
                             </div>
                             <div class="micronutrient-item">
-                                <span class="micronutrient-label">Magnesium</span>
-                                <span class="micronutrient-value">${mealData.magnesium}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Iron</span>
-                                <span class="micronutrient-value">${mealData.iron}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Zinc</span>
-                                <span class="micronutrient-value">${mealData.zinc}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Potassium</span>
-                                <span class="micronutrient-value">${mealData.potassium}mg</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Vitamin B6</span>
-                                <span class="micronutrient-value">${mealData.vitaminB6}mg</span>
+                                <span class="micronutrient-label">Fat</span>
+                                <span class="micronutrient-value">${mealData.fat}g</span>
                             </div>
                         </div>
                     </div>
@@ -2919,14 +2533,6 @@
                 currentNutrition.protein += mealData.protein;
                 currentNutrition.carbs += mealData.carbs;
                 currentNutrition.fat += mealData.fat;
-                currentNutrition.fiber += (mealData.fiber || 0);
-                currentNutrition.addedSugar += (mealData.addedSugar || 0);
-                currentNutrition.sodium += (mealData.sodium || 0);
-                currentNutrition.magnesium += (mealData.magnesium || 0);
-                currentNutrition.iron += (mealData.iron || 0);
-                currentNutrition.zinc += (mealData.zinc || 0);
-                currentNutrition.potassium += (mealData.potassium || 0);
-                currentNutrition.vitaminB6 += (mealData.vitaminB6 || 0);
             
             // Update dashboard
             updateNutritionDashboard();
