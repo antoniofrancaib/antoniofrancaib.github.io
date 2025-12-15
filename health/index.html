@@ -1327,41 +1327,6 @@
                             </tr>
                         </thead>
                         <tbody id="meals-tbody">
-                            <tr class="meal-row" data-meal-id="1">
-                                <td class="meal-name-cell">Breakfast: Oatmeal with berries</td>
-                                <td class="meal-value">35g</td>
-                                <td class="meal-value">68g</td>
-                                <td class="meal-value">18g</td>
-                                <td class="meal-value">520 kcal</td>
-                            </tr>
-                            <tr class="meal-row" data-meal-id="2">
-                                <td class="meal-name-cell">Lunch: Grilled chicken salad</td>
-                                <td class="meal-value">52g</td>
-                                <td class="meal-value">45g</td>
-                                <td class="meal-value">28g</td>
-                                <td class="meal-value">615 kcal</td>
-                            </tr>
-                            <tr class="meal-row" data-meal-id="3">
-                                <td class="meal-name-cell">Snack: Greek yogurt with almonds</td>
-                                <td class="meal-value">18g</td>
-                                <td class="meal-value">22g</td>
-                                <td class="meal-value">15g</td>
-                                <td class="meal-value">285 kcal</td>
-                            </tr>
-                            <tr class="meal-row" data-meal-id="4">
-                                <td class="meal-name-cell">Dinner: Salmon with quinoa</td>
-                                <td class="meal-value">45g</td>
-                                <td class="meal-value">95g</td>
-                                <td class="meal-value">32g</td>
-                                <td class="meal-value">825 kcal</td>
-                            </tr>
-                            <tr class="meal-row" data-meal-id="5">
-                                <td class="meal-name-cell">Evening snack: Protein shake</td>
-                                <td class="meal-value">28g</td>
-                                <td class="meal-value">12g</td>
-                                <td class="meal-value">6g</td>
-                                <td class="meal-value">200 kcal</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -2161,12 +2126,12 @@
             
             return `
                 <div class="nutrition-dashboard">
+                    ${!isModal ? `
                     <div class="dashboard-header">
                         <div>
                             <h3 class="dashboard-title">${data.title}</h3>
                             ${data.title !== data.date ? `<p class="dashboard-date">${data.date}</p>` : ''}
                         </div>
-                        ${!isModal ? `
                         <div class="dashboard-buttons">
                             <a href="recipes.html" class="icon-btn" title="Add Preset Meal">
                                 <i data-lucide="book-marked" style="width: 20px; height: 20px;"></i>
@@ -2175,8 +2140,8 @@
                                 <i data-lucide="camera" style="width: 20px; height: 20px;"></i>
                             </button>
                         </div>
-                        ` : ''}
                     </div>
+                    ` : ''}
 
                     <!-- Macros Grid -->
                     <div class="nutrition-grid">
@@ -2233,8 +2198,8 @@
                         </div>
                     </div>
 
-                    <!-- Today's Meals -->
-                    <div class="meals-header">Today's Meals</div>
+                    <!-- Meals List -->
+                    ${!isModal ? `<div class="meals-header">Today's Meals</div>` : ''}
                     <table class="meals-table">
                         <thead>
                             <tr>
@@ -2310,64 +2275,6 @@
 
             // Reinitialize icons
             lucide.createIcons();
-
-
-            // Setup meal click handlers
-            dayData.meals.forEach(meal => {
-                const mealRow = expandedRow.querySelector(`tr[data-meal-id="${meal.id}"]`);
-                if (mealRow) {
-                    mealRow.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        togglePastDayMealDetails(meal.id, meal, mealRow);
-                    });
-                }
-            });
-        }
-
-        // Toggle meal details within expanded past day
-        function togglePastDayMealDetails(mealId, mealData, row) {
-            const existingDetailsRow = row.nextElementSibling;
-            if (existingDetailsRow && existingDetailsRow.classList.contains('expanded-row')) {
-                existingDetailsRow.remove();
-                row.classList.remove('active');
-                return;
-            }
-
-            const tbody = row.parentElement;
-            tbody.querySelectorAll('.expanded-row').forEach(er => er.remove());
-            tbody.querySelectorAll('.meal-row').forEach(r => r.classList.remove('active'));
-
-            row.classList.add('active');
-
-            const detailsRow = document.createElement('tr');
-            detailsRow.className = 'expanded-row';
-            detailsRow.innerHTML = `
-                <td colspan="5">
-                    <div class="meal-details">
-                        <div class="meal-details-header">Nutritional Details</div>
-                        <div class="micronutrients-grid">
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Calories</span>
-                                <span class="micronutrient-value">${mealData.calories}</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Protein</span>
-                                <span class="micronutrient-value">${mealData.protein}g</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Carbs</span>
-                                <span class="micronutrient-value">${mealData.carbs}g</span>
-                            </div>
-                            <div class="micronutrient-item">
-                                <span class="micronutrient-label">Fat</span>
-                                <span class="micronutrient-value">${mealData.fat}g</span>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            `;
-
-            row.after(detailsRow);
         }
 
         // Initialize past day click handlers
