@@ -1154,6 +1154,105 @@
             100% { opacity: 1; }
         }
 
+        /* Heatmap Styles */
+        .heatmap-container {
+            max-width: 600px;
+        }
+
+        .heatmap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .heatmap-month {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .heatmap-legend {
+            display: flex;
+            gap: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .legend-color.hit-macros {
+            background: #22c55e;
+        }
+
+        .legend-color.missed-macros {
+            background: #ef4444;
+        }
+
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            max-width: 400px;
+        }
+
+        .heatmap-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .heatmap-day.hit-macros {
+            background: #22c55e;
+        }
+
+        .heatmap-day.missed-macros {
+            background: #ef4444;
+        }
+
+        .heatmap-day:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        /* Sparkline Styles */
+        .metric-current-with-sparkline {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sparkline-container {
+            flex-shrink: 0;
+        }
+
+        .sparkline {
+            width: 60px;
+            height: 20px;
+        }
+
+        .sparkline path {
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         .secondary-btn {
             display: inline-flex;
             align-items: center;
@@ -1827,9 +1926,6 @@
                     <a href="recipes.html" class="icon-btn" title="Add Preset Meal">
                         <i data-lucide="book-marked" style="width: 20px; height: 20px;"></i>
                     </a>
-                    <button class="icon-btn" id="camera-upload-btn" title="Upload Photo">
-                        <i data-lucide="camera" style="width: 20px; height: 20px;"></i>
-                    </button>
                 </div>
                 </div>
 
@@ -1855,7 +1951,14 @@
                         <div class="metric-header">
                             <span class="metric-label">Calories</span>
                         </div>
-                        <div class="metric-current" id="calories-current">2445</div>
+                        <div class="metric-current-with-sparkline">
+                            <div class="metric-current" id="calories-current">2445</div>
+                            <div class="sparkline-container">
+                                <svg class="sparkline" viewBox="0 0 80 20">
+                                    <path d="M0,15 L10,12 L20,18 L30,8 L40,14 L50,6 L60,16 L70,10 L80,12" stroke="#22c55e" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                        </div>
                         <div class="metric-target">Goal: 3000 kcal</div>
                         <div class="progress-bar">
                             <div class="progress-fill" id="calories-progress" style="width: 81.5%"></div>
@@ -1949,6 +2052,59 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- Nutrition Heatmap -->
+            <div class="card" style="margin-top: 32px;">
+                <h3 class="dashboard-title" style="margin-bottom: 20px;">Monthly Progress</h3>
+                <div class="heatmap-container">
+                    <div class="heatmap-header">
+                        <span class="heatmap-month">November 2024</span>
+                        <div class="heatmap-legend">
+                            <div class="legend-item">
+                                <div class="legend-color hit-macros"></div>
+                                <span>Hit Macros</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color missed-macros"></div>
+                                <span>Missed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heatmap-grid">
+                        <!-- Days 1-30 -->
+                        <div class="heatmap-day missed-macros" data-day="1" title="Nov 1: 2800/3000 kcal">1</div>
+                        <div class="heatmap-day hit-macros" data-day="2" title="Nov 2: 3100/3000 kcal">2</div>
+                        <div class="heatmap-day hit-macros" data-day="3" title="Nov 3: 3050/3000 kcal">3</div>
+                        <div class="heatmap-day missed-macros" data-day="4" title="Nov 4: 2750/3000 kcal">4</div>
+                        <div class="heatmap-day hit-macros" data-day="5" title="Nov 5: 3120/3000 kcal">5</div>
+                        <div class="heatmap-day hit-macros" data-day="6" title="Nov 6: 2980/3000 kcal">6</div>
+                        <div class="heatmap-day missed-macros" data-day="7" title="Nov 7: 2850/3000 kcal">7</div>
+                        <div class="heatmap-day hit-macros" data-day="8" title="Nov 8: 3075/3000 kcal">8</div>
+                        <div class="heatmap-day hit-macros" data-day="9" title="Nov 9: 3039/3000 kcal">9</div>
+                        <div class="heatmap-day hit-macros" data-day="10" title="Nov 10: 2950/3000 kcal">10</div>
+                        <div class="heatmap-day missed-macros" data-day="11" title="Nov 11: 2780/3000 kcal">11</div>
+                        <div class="heatmap-day hit-macros" data-day="12" title="Nov 12: 3105/3000 kcal">12</div>
+                        <div class="heatmap-day hit-macros" data-day="13" title="Nov 13: 3020/3000 kcal">13</div>
+                        <div class="heatmap-day missed-macros" data-day="14" title="Nov 14: 2720/3000 kcal">14</div>
+                        <div class="heatmap-day hit-macros" data-day="15" title="Nov 15: 3080/3000 kcal">15</div>
+                        <div class="heatmap-day hit-macros" data-day="16" title="Nov 16: 2995/3000 kcal">16</div>
+                        <div class="heatmap-day missed-macros" data-day="17" title="Nov 17: 2810/3000 kcal">17</div>
+                        <div class="heatmap-day hit-macros" data-day="18" title="Nov 18: 3060/3000 kcal">18</div>
+                        <div class="heatmap-day hit-macros" data-day="19" title="Nov 19: 3010/3000 kcal">19</div>
+                        <div class="heatmap-day hit-macros" data-day="20" title="Nov 20: 2975/3000 kcal">20</div>
+                        <div class="heatmap-day missed-macros" data-day="21" title="Nov 21: 2690/3000 kcal">21</div>
+                        <div class="heatmap-day hit-macros" data-day="22" title="Nov 22: 3090/3000 kcal">22</div>
+                        <div class="heatmap-day hit-macros" data-day="23" title="Nov 23: 3040/3000 kcal">23</div>
+                        <div class="heatmap-day missed-macros" data-day="24" title="Nov 24: 2760/3000 kcal">24</div>
+                        <div class="heatmap-day hit-macros" data-day="25" title="Nov 25: 3070/3000 kcal">25</div>
+                        <div class="heatmap-day hit-macros" data-day="26" title="Nov 26: 2985/3000 kcal">26</div>
+                        <div class="heatmap-day missed-macros" data-day="27" title="Nov 27: 2830/3000 kcal">27</div>
+                        <div class="heatmap-day hit-macros" data-day="28" title="Nov 28: 3055/3000 kcal">28</div>
+                        <div class="heatmap-day hit-macros" data-day="29" title="Nov 29: 3005/3000 kcal">29</div>
+                        <div class="heatmap-day missed-macros" data-day="30" title="Nov 30: 2790/3000 kcal">30</div>
+                    </div>
                 </div>
             </div>
 
@@ -3092,6 +3248,22 @@
         // Update sync status on load and every minute
         updateSyncStatus();
         setInterval(updateSyncStatus, 60000);
+
+        // Heatmap day click functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const heatmapDays = document.querySelectorAll('.heatmap-day');
+            heatmapDays.forEach(day => {
+                day.addEventListener('click', function() {
+                    const dayNumber = this.getAttribute('data-day');
+                    const title = this.getAttribute('title');
+
+                    // Simple alert for now - can be enhanced to show modal with details
+                    alert(`Day ${dayNumber} Details:\n${title}`);
+
+                    // TODO: Implement modal with full day details
+                });
+            });
+        });
     </script>
 
     <!-- Sync Status Footer -->
