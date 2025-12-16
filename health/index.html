@@ -559,7 +559,7 @@
 
         .nutrition-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 20px;
             margin-bottom: 16px;
         }
@@ -796,6 +796,364 @@
             opacity: 0.85;
         }
 
+        /* Wellness Triad Styles */
+        .wellness-triad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .wellness-metric {
+            text-align: center;
+            padding: 24px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .wellness-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .wellness-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .wellness-value {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .wellness-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .wellness-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .wellness-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .energy-fill {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+        }
+
+        .mood-fill {
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+        }
+
+        .clarity-fill {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+        }
+
+        .wellness-range {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Insights Section */
+        .insights-section {
+            max-width: 800px;
+        }
+
+        .insight-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .insight-icon {
+            font-size: 24px;
+        }
+
+        .insight-content {
+            flex: 1;
+        }
+
+        .insight-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .insight-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .correlation-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .correlation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .correlation-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .correlation-value {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .correlation-value.positive {
+            color: #22c55e;
+        }
+
+        .correlation-value.negative {
+            color: #ef4444;
+        }
+
+        /* Fasting Window Styles */
+        .fasting-window {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .fasting-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .fasting-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .fasting-status {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .fasting-timeline {
+            position: relative;
+        }
+
+        .fasting-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--border-color);
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fasting-eating {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+            border-radius: 6px;
+        }
+
+        .fasting-times {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Mind Tab Styles */
+        .mind-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .mind-metric {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .mental-state {
+            max-width: 400px;
+        }
+
+        .mental-metric {
+            margin-bottom: 16px;
+        }
+
+        .mental-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .mental-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .mental-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .mental-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Sleep Header Styles */
+        .sleep-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sleep-metrics {
+            display: flex;
+            gap: 24px;
+        }
+
+        .recovery-score {
+            text-align: center;
+        }
+
+        .recovery-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .recovery-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .recovery-status {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .recovery-status.good {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .device-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+        }
+
+        .whoop-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.8;
+        }
+
+        .device-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Sync Status Styles */
+        .sync-status-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .sync-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .sync-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
         .secondary-btn {
             display: inline-flex;
             align-items: center;
@@ -906,7 +1264,11 @@
         <!-- Tabs Navigation -->
         <div class="tabs-container">
             <div class="tabs">
-                <div class="tab active" data-tab="food">
+                <div class="tab active" data-tab="overview">
+                    <i data-lucide="home" class="tab-icon"></i>
+                    <span class="tab-label">Overview</span>
+                </div>
+                <div class="tab" data-tab="food">
                     <i data-lucide="utensils" class="tab-icon"></i>
                     <span class="tab-label">Food</span>
                 </div>
@@ -914,14 +1276,207 @@
                     <i data-lucide="moon" class="tab-icon"></i>
                     <span class="tab-label">Sleep</span>
                 </div>
-                <div class="tab" data-tab="exercise">
+                <div class="tab" data-tab="body">
                     <i data-lucide="dumbbell" class="tab-icon"></i>
-                    <span class="tab-label">Exercise</span>
+                    <span class="tab-label">Body</span>
+                </div>
+                <div class="tab" data-tab="mind">
+                    <i data-lucide="brain" class="tab-icon"></i>
+                    <span class="tab-label">Mind</span>
                 </div>
                 <div class="tab" data-tab="blood">
                     <i data-lucide="droplet" class="tab-icon"></i>
                     <span class="tab-label">Blood</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Overview Tab -->
+        <div class="content active" id="overview-content">
+            <div class="card">
+                <div class="dashboard-header">
+                    <div>
+                        <h3 class="dashboard-title">Today's Wellness</h3>
+                        <p class="dashboard-date" id="overview-today-date">November 9, 2024</p>
+                    </div>
+                </div>
+
+                <!-- Wellness Triad -->
+                <div class="wellness-triad">
+                    <div class="wellness-metric">
+                        <div class="wellness-icon">⚡</div>
+                        <div class="wellness-label">Energy</div>
+                        <div class="wellness-value" id="energy-value">7</div>
+                        <div class="wellness-scale">
+                            <div class="wellness-bar">
+                                <div class="wellness-fill energy-fill" style="width: 70%"></div>
+                            </div>
+                            <div class="wellness-range">1-10</div>
+                        </div>
+                    </div>
+
+                    <div class="wellness-metric">
+                        <div class="wellness-icon">🙂</div>
+                        <div class="wellness-label">Mood</div>
+                        <div class="wellness-value" id="mood-value">8</div>
+                        <div class="wellness-scale">
+                            <div class="wellness-bar">
+                                <div class="wellness-fill mood-fill" style="width: 80%"></div>
+                            </div>
+                            <div class="wellness-range">1-10</div>
+                        </div>
+                    </div>
+
+                    <div class="wellness-metric">
+                        <div class="wellness-icon">👁️</div>
+                        <div class="wellness-label">Clarity</div>
+                        <div class="wellness-value" id="clarity-value">5</div>
+                        <div class="wellness-scale">
+                            <div class="wellness-bar">
+                                <div class="wellness-fill clarity-fill" style="width: 50%"></div>
+                            </div>
+                            <div class="wellness-range">1-10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Causality Insights -->
+            <div class="card" style="margin-top: 32px;">
+                <h3 class="dashboard-title" style="margin-bottom: 20px;">Causality & Insights</h3>
+
+                <div class="insights-section">
+                    <div class="insight-card">
+                        <div class="insight-icon">📉</div>
+                        <div class="insight-content">
+                            <div class="insight-title">Low Clarity Detected</div>
+                            <div class="insight-description">Potential cause: High Screen Time (6h) yesterday</div>
+                        </div>
+                    </div>
+
+                    <div class="correlation-matrix" style="margin-top: 24px;">
+                        <h4 style="font-size: 16px; font-weight: 500; margin-bottom: 16px; color: var(--text-primary);">30-Day Correlations</h4>
+                        <div class="correlation-grid">
+                            <div class="correlation-item">
+                                <span class="correlation-label">Sleep → Energy</span>
+                                <span class="correlation-value positive">+0.72</span>
+                            </div>
+                            <div class="correlation-item">
+                                <span class="correlation-label">Protein → Mood</span>
+                                <span class="correlation-value positive">+0.58</span>
+                            </div>
+                            <div class="correlation-item">
+                                <span class="correlation-label">Screen Time → Clarity</span>
+                                <span class="correlation-value negative">-0.65</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="protocols-link-wrapper">
+                <a class="protocols-link" href="https://www.notion.so/Health-Protocols-Overview-2c6e5960818f80f6a8c4e8f4b8a8f4a5?source=copy_link" target="_blank" rel="noopener noreferrer">
+                    <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
+                    <span>View Health Protocols</span>
+                </a>
+            </div>
+            </div>
+
+        <!-- Mind Tab -->
+        <div class="content" id="mind-content">
+            <div class="card">
+                <div class="mind-header">
+                    <h3 class="dashboard-title">Cognitive Load</h3>
+                </div>
+
+                <div class="mind-grid">
+                    <div class="mind-metric">
+                        <div class="metric-header">
+                            <span class="metric-label">Deep Work</span>
+                        </div>
+                        <div class="metric-current" id="deepwork-current">4h 12m</div>
+                        <div class="metric-target">Goal: 5h</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="deepwork-progress" style="width: 82.4%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mind-metric">
+                        <div class="metric-header">
+                            <span class="metric-label">Screen Time</span>
+                        </div>
+                        <div class="metric-current" id="screentime-current">3h 05m</div>
+                        <div class="metric-target">Limit: 4h</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill warning" id="screentime-progress" style="width: 76.25%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mind-metric">
+                        <div class="metric-header">
+                            <span class="metric-label">Focus Ratio</span>
+                        </div>
+                        <div class="metric-current" id="focusratio-current">58%</div>
+                        <div class="metric-target">Target: >70%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="focusratio-progress" style="width: 58%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 32px;">
+                <h3 class="dashboard-title" style="margin-bottom: 20px;">Mental State</h3>
+
+                <div class="mental-state">
+                    <div class="mental-metric">
+                        <div class="mental-label">Social Battery</div>
+                        <div class="mental-value">73%</div>
+                        <div class="mental-bar">
+                            <div class="mental-fill" style="width: 73%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container" style="margin-top: 32px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>ACTIVITY</th>
+                                <th>DURATION</th>
+                                <th>CONTEXT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nov 9, 2024</td>
+                                <td>Writing Article</td>
+                                <td>2h 30m</td>
+                                <td>Deep Work</td>
+                            </tr>
+                            <tr>
+                                <td>Nov 9, 2024</td>
+                                <td>Code Review</td>
+                                <td>1h 45m</td>
+                                <td>Deep Work</td>
+                            </tr>
+                            <tr>
+                                <td>Nov 8, 2024</td>
+                                <td>Meditation</td>
+                                <td>20m</td>
+                                <td>Recovery</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="protocols-link-wrapper">
+                <a class="protocols-link" href="https://www.notion.so/Cognitive-Protocols-2c6e5960818f80a8a8c4e8f4b8a8f4a5?source=copy_link" target="_blank" rel="noopener noreferrer">
+                    <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
+                    <span>View Cognitive Protocols</span>
+                </a>
             </div>
         </div>
 
@@ -1133,8 +1688,8 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
             </div>
+        </div>
 
             <div class="protocols-link-wrapper">
                 <a class="protocols-link" href="https://www.notion.so/Blood-Protocols-2c6e5960818f8090983df89692f4f525?source=copy_link" target="_blank" rel="noopener noreferrer">
@@ -1142,17 +1697,31 @@
                     <span>View Blood Protocols</span>
                 </a>
             </div>
-        </div>
+            </div>
 
         <!-- Sleep Tab -->
         <div class="content" id="sleep-content">
             <div class="card">
+                <div class="sleep-header">
+                    <div class="sleep-metrics">
+                        <div class="recovery-score">
+                            <div class="recovery-label">Recovery Score</div>
+                            <div class="recovery-value">87%</div>
+                            <div class="recovery-status good">Good</div>
+                        </div>
+                    </div>
+                    <div class="device-badge">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDMTMuMSAyIDE0IDIuOSAxNCA0VjE4QzE0IDE5LjEgMTMuMSAyMCAxMiAyMEMxMC45IDIwIDEwIDE5LjEgMTAgMThWNFY0QzEwIDIuOSAxMC45IDIgMTIgMlpNMTIgNEMxMi40IDQgMTIgNC40IDEyIDRDMTIgMy42IDEyLjQgNCAxMiA0Wk0xMiAyMEMxMi40IDIwIDEyIDIwLjQgMTIgMjBDMTIgMTkuNiAxMi40IDIwIDEyIDIwWiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K" alt="WHOOP" class="whoop-icon">
+                        <span class="device-label">WHOOP Verified</span>
+                    </div>
+                </div>
                 <div class="table-container">
                     <table>
                         <thead>
                             <tr>
                                 <th>DATE</th>
                                 <th>TIME ASLEEP</th>
+                                <th>EFFICIENCY</th>
                                 <th>SCORE</th>
                                 <th>HRV</th>
                                 <th>RHR</th>
@@ -1162,6 +1731,7 @@
                             <tr>
                                 <td>Aug 26, 2024</td>
                                 <td>7h 56m</td>
+                                <td>89%</td>
                                 <td>95%</td>
                                 <td>102</td>
                                 <td>41</td>
@@ -1169,6 +1739,7 @@
                             <tr>
                                 <td>Aug 25, 2024</td>
                                 <td>7h 55m</td>
+                                <td>94%</td>
                                 <td>98%</td>
                                 <td>108</td>
                                 <td>41</td>
@@ -1176,14 +1747,15 @@
                             <tr>
                                 <td>Aug 24, 2024</td>
                                 <td>8h 12m</td>
+                                <td>87%</td>
                                 <td>92%</td>
                                 <td>95</td>
                                 <td>43</td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
             </div>
+        </div>
 
             <div class="protocols-link-wrapper">
                 <a class="protocols-link" href="https://www.notion.so/Sleep-Protocol-2c6e5960818f80618a0fc48de1481bd2?source=copy_link" target="_blank" rel="noopener noreferrer">
@@ -1191,10 +1763,10 @@
                     <span>View Sleep Protocols</span>
                 </a>
             </div>
-        </div>
+            </div>
 
-        <!-- Exercise Tab -->
-        <div class="content" id="exercise-content">
+        <!-- Body Tab -->
+        <div class="content" id="body-content">
             <div class="card">
                 <div class="table-container">
                     <table>
@@ -1204,7 +1776,7 @@
                                 <th>ACTIVITY</th>
                                 <th>DURATION</th>
                                 <th>CALORIES</th>
-                                <th>AVG HR</th>
+                                <th>STRAIN</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1213,26 +1785,26 @@
                                 <td>🏋️ Weightlifting</td>
                                 <td>55m</td>
                                 <td>312</td>
-                                <td>92 bpm</td>
+                                <td>14.2</td>
                             </tr>
                             <tr>
                                 <td>Nov 9, 2024</td>
                                 <td>🏃 Running</td>
                                 <td>22m</td>
                                 <td>198</td>
-                                <td>128 bpm</td>
+                                <td>16.8</td>
                             </tr>
                             <tr>
                                 <td>Nov 8, 2024</td>
                                 <td>🏊 Swimming</td>
                                 <td>45m</td>
                                 <td>385</td>
-                                <td>115 bpm</td>
+                                <td>12.1</td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
             </div>
+        </div>
 
             <div class="protocols-link-wrapper">
                 <a class="protocols-link" href="https://www.notion.so/Workout-Protocols-3ad2c0569e56435cb1f32272d5ace599?source=copy_link" target="_blank" rel="noopener noreferrer">
@@ -1240,7 +1812,7 @@
                     <span>View Exercise Protocols</span>
                 </a>
             </div>
-        </div>
+            </div>
 
         <!-- Food Tab -->
         <div class="content active" id="food-content">
@@ -1258,6 +1830,23 @@
                     <button class="icon-btn" id="camera-upload-btn" title="Upload Photo">
                         <i data-lucide="camera" style="width: 20px; height: 20px;"></i>
                     </button>
+                </div>
+                </div>
+
+                <!-- Fasting Window -->
+                <div class="fasting-window" style="margin-bottom: 32px;">
+                    <div class="fasting-header">
+                        <span class="fasting-label">Fasting Window</span>
+                        <span class="fasting-status">16h Fast Completed</span>
+                    </div>
+                    <div class="fasting-timeline">
+                        <div class="fasting-bar">
+                            <div class="fasting-eating" style="left: 50%; width: 33.3%;"></div>
+                        </div>
+                        <div class="fasting-times">
+                            <span>12 PM</span>
+                            <span>8 PM</span>
+                        </div>
                 </div>
                 </div>
 
@@ -1303,6 +1892,17 @@
                         <div class="metric-target">Goal: 110g</div>
                         <div class="progress-bar">
                             <div class="progress-fill" id="fat-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+
+                    <div class="nutrition-metric">
+                        <div class="metric-header">
+                            <span class="metric-label">Caffeine</span>
+                        </div>
+                        <div class="metric-current" id="caffeine-current">245mg</div>
+                        <div class="metric-target">Limit: 400mg</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="caffeine-progress" style="width: 61.25%"></div>
                         </div>
                     </div>
                 </div>
@@ -2470,7 +3070,37 @@
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             todayDateElement.textContent = today.toLocaleDateString('en-US', options);
         }
+
+        // Sync Status Indicator
+        function updateSyncStatus() {
+            const syncIndicator = document.getElementById('sync-status');
+            if (syncIndicator) {
+                const now = new Date();
+                const lastSync = new Date(now.getTime() - 10 * 60 * 1000); // 10 minutes ago
+                const timeString = lastSync.toLocaleTimeString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                });
+                syncIndicator.innerHTML = `
+                    <div class="sync-dot"></div>
+                    <span>Auto-synced: ${timeString}</span>
+                `;
+            }
+        }
+
+        // Update sync status on load and every minute
+        updateSyncStatus();
+        setInterval(updateSyncStatus, 60000);
     </script>
+
+    <!-- Sync Status Footer -->
+    <div class="sync-status-container">
+        <div id="sync-status" class="sync-status">
+            <div class="sync-dot"></div>
+            <span>Auto-synced: 10m ago</span>
+        </div>
+    </div>
 </body>
 </html>
 
