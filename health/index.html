@@ -997,6 +997,180 @@
             color: var(--text-muted);
         }
 
+        /* Fiber Sub-Metric */
+        .fiber-sub-metric {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .fiber-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .fiber-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .fiber-target {
+            color: var(--text-muted);
+        }
+
+        .fiber-indicator {
+            display: flex;
+            align-items: center;
+        }
+
+        .fiber-check {
+            color: #22c55e;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Modulators Section */
+        .modulators-section {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .modulator-metric {
+            flex: 1;
+            text-align: center;
+        }
+
+        .modulator-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .modulator-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .modulator-limit {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .sugar-limit-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .sugar-limit-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b, #ef4444);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .alcohol-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .alcohol-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .alcohol-unit {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .alcohol-warning {
+            display: flex;
+            align-items: center;
+        }
+
+        .warning-icon {
+            font-size: 16px;
+        }
+
+        /* Hydration Section */
+        .hydration-section {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .hydration-metric {
+            flex: 1;
+            padding: 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .hydration-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .hydration-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .hydration-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .hydration-fill.stimulation {
+            background: linear-gradient(90deg, #a855f7, #7c3aed);
+        }
+
+        .hydration-fill.hydration {
+            background: linear-gradient(90deg, #06b6d4, #0891b2);
+        }
+
+        .hydration-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
         /* Mind Tab Styles */
         .mind-grid {
             display: grid;
@@ -1952,7 +2126,7 @@
                             <span class="metric-label">Calories</span>
                         </div>
                         <div class="metric-current-with-sparkline">
-                            <div class="metric-current" id="calories-current">2445</div>
+                        <div class="metric-current" id="calories-current">2445</div>
                             <div class="sparkline-container">
                                 <svg class="sparkline" viewBox="0 0 80 20">
                                     <path d="M0,15 L10,12 L20,18 L30,8 L40,14 L50,6 L60,16 L70,10 L80,12" stroke="#22c55e" stroke-width="2" fill="none"/>
@@ -1985,6 +2159,15 @@
                         <div class="progress-bar">
                             <div class="progress-fill" id="carbs-progress" style="width: 86.4%"></div>
                         </div>
+                        <!-- Fiber Sub-Metric -->
+                        <div class="fiber-sub-metric">
+                            <span class="fiber-label">Fiber</span>
+                            <span class="fiber-value" id="fiber-current">24g</span>
+                            <span class="fiber-target">/ 30g</span>
+                            <div class="fiber-indicator">
+                                <span class="fiber-check">✓</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="nutrition-metric">
@@ -1998,14 +2181,45 @@
                         </div>
                     </div>
 
-                    <div class="nutrition-metric">
-                        <div class="metric-header">
-                            <span class="metric-label">Caffeine</span>
+                    <!-- Modulators Section -->
+                    <div class="modulators-section">
+                        <div class="modulator-metric">
+                            <div class="modulator-label">Sugar</div>
+                            <div class="modulator-value" id="sugar-current">12g</div>
+                            <div class="modulator-limit">/ 40g</div>
+                            <div class="sugar-limit-bar">
+                                <div class="sugar-limit-fill" id="sugar-limit-progress" style="width: 30%"></div>
+                            </div>
                         </div>
-                        <div class="metric-current" id="caffeine-current">245mg</div>
-                        <div class="metric-target">Limit: 400mg</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="caffeine-progress" style="width: 61.25%"></div>
+
+                        <div class="modulator-metric">
+                            <div class="modulator-label">Alcohol</div>
+                            <div class="alcohol-counter">
+                                <span class="alcohol-value" id="alcohol-current">0</span>
+                                <span class="alcohol-unit">units</span>
+                                <div class="alcohol-warning" id="alcohol-warning" style="display: none;">
+                                    <span class="warning-icon">🚩</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hydration Section -->
+                    <div class="hydration-section">
+                        <div class="hydration-metric">
+                            <div class="hydration-label">Caffeine</div>
+                            <div class="hydration-bar">
+                                <div class="hydration-fill stimulation" id="caffeine-hydration-progress" style="width: 61.25%"></div>
+                            </div>
+                            <div class="hydration-value">245mg</div>
+                        </div>
+
+                        <div class="hydration-metric">
+                            <div class="hydration-label">Water</div>
+                            <div class="hydration-bar">
+                                <div class="hydration-fill hydration" id="water-progress" style="width: 60%"></div>
+                            </div>
+                            <div class="hydration-value">1.5L</div>
                         </div>
                     </div>
                 </div>
@@ -2434,7 +2648,11 @@
             calories: 3000,
             protein: 150,
             carbs: 330,
-            fat: 110
+            fat: 110,
+            fiber: 30,
+            sugar: 40,
+            caffeine: 400,
+            water: 2.5
         };
 
         // Current nutrition state (starts with mock data calculated from existing meals)
@@ -2442,7 +2660,12 @@
             calories: 2445,
             protein: 128,
             carbs: 285,
-            fat: 88
+            fat: 88,
+            fiber: 24,
+            sugar: 12,
+            alcohol: 0,
+            caffeine: 245,
+            water: 1.5
         };
 
         // Store meal data with micronutrients (will be loaded from Supabase)
@@ -2537,10 +2760,13 @@
                 addMealToList(mealData);
 
                 // Update nutrition totals
-                currentNutrition.calories += mealData.calories;
-                currentNutrition.protein += mealData.protein;
-                currentNutrition.carbs += mealData.carbs;
-                currentNutrition.fat += mealData.fat;
+                currentNutrition.calories += mealData.calories || 0;
+                currentNutrition.protein += mealData.protein || 0;
+                currentNutrition.carbs += mealData.carbs || 0;
+                currentNutrition.fat += mealData.fat || 0;
+                currentNutrition.fiber += mealData.fiber || 0;
+                currentNutrition.sugar += mealData.sugar || 0;
+                currentNutrition.alcohol += mealData.alcohol || 0;
                 
                 // Update dashboard
                 updateNutritionDashboard();
@@ -2605,6 +2831,9 @@
             currentNutrition.protein -= (meal.protein || 0);
             currentNutrition.carbs -= (meal.carbs || 0);
             currentNutrition.fat -= (meal.fat || 0);
+            currentNutrition.fiber -= (meal.fiber || 0);
+            currentNutrition.sugar -= (meal.sugar || 0);
+            currentNutrition.alcohol -= (meal.alcohol || 0);
 
             // Update dashboard
             updateNutritionDashboard();
@@ -2666,6 +2895,9 @@
                 currentNutrition.protein = 0;
                 currentNutrition.carbs = 0;
                 currentNutrition.fat = 0;
+                currentNutrition.fiber = 0;
+                currentNutrition.sugar = 0;
+                currentNutrition.alcohol = 0;
                 const mealsTbody = document.getElementById('meals-tbody');
                 if (mealsTbody) mealsTbody.innerHTML = '';
 
@@ -2677,7 +2909,10 @@
                         calories: Number(row.calories) || 0,
                         protein: Number(row.protein) || 0,
                         carbs: Number(row.carbs) || 0,
-                        fat: Number(row.fat) || 0
+                        fat: Number(row.fat) || 0,
+                        fiber: Number(row.fiber) || 0,
+                        sugar: Number(row.sugar) || 0,
+                        alcohol: Number(row.alcohol) || 0
                     };
 
                     addMealToList(meal);
@@ -2687,6 +2922,9 @@
                     currentNutrition.protein += meal.protein;
                     currentNutrition.carbs += meal.carbs;
                     currentNutrition.fat += meal.fat;
+                    currentNutrition.fiber += meal.fiber;
+                    currentNutrition.sugar += meal.sugar;
+                    currentNutrition.alcohol += meal.alcohol;
                 });
 
                 updateNutritionDashboard();
@@ -2869,6 +3107,58 @@
             updateMetric('protein', 'g');
             updateMetric('carbs', 'g');
             updateMetric('fat', 'g');
+
+            // Update modulators
+            updateMetric('fiber', 'g');
+            updateSugarMetric();
+            updateAlcoholMetric();
+            updateCaffeineMetric();
+            updateWaterMetric();
+        }
+
+        // Update sugar limit bar (inverse progress)
+        function updateSugarMetric() {
+            const sugarValue = currentNutrition.sugar;
+            const sugarLimit = nutritionGoals.sugar;
+            const percent = Math.min((sugarValue / sugarLimit) * 100, 100);
+
+            document.getElementById('sugar-current').textContent = `${sugarValue}g`;
+            const sugarProgress = document.getElementById('sugar-limit-progress');
+            sugarProgress.style.width = `${percent}%`;
+        }
+
+        // Update alcohol counter and warning
+        function updateAlcoholMetric() {
+            const alcoholValue = currentNutrition.alcohol;
+            document.getElementById('alcohol-current').textContent = alcoholValue;
+
+            const warningElement = document.getElementById('alcohol-warning');
+            if (alcoholValue > 0) {
+                warningElement.style.display = 'flex';
+            } else {
+                warningElement.style.display = 'none';
+            }
+        }
+
+        // Update caffeine in hydration section
+        function updateCaffeineMetric() {
+            const caffeineValue = currentNutrition.caffeine;
+            const caffeineLimit = nutritionGoals.caffeine;
+            const percent = Math.min((caffeineValue / caffeineLimit) * 100, 100);
+
+            document.getElementById('caffeine-current').textContent = `${caffeineValue}mg`;
+            const caffeineProgress = document.getElementById('caffeine-hydration-progress');
+            caffeineProgress.style.width = `${percent}%`;
+        }
+
+        // Update water metric
+        function updateWaterMetric() {
+            const waterValue = currentNutrition.water;
+            const waterGoal = nutritionGoals.water;
+            const percent = Math.min((waterValue / waterGoal) * 100, 100);
+
+            document.getElementById('water-progress').style.width = `${percent}%`;
+            // You might want to update a display value here if added
         }
 
 
@@ -3189,10 +3479,13 @@
                 addMealToList(mealData);
             
             // Update nutrition totals
-                currentNutrition.calories += mealData.calories;
-                currentNutrition.protein += mealData.protein;
-                currentNutrition.carbs += mealData.carbs;
-                currentNutrition.fat += mealData.fat;
+                currentNutrition.calories += mealData.calories || 0;
+                currentNutrition.protein += mealData.protein || 0;
+                currentNutrition.carbs += mealData.carbs || 0;
+                currentNutrition.fat += mealData.fat || 0;
+                currentNutrition.fiber += mealData.fiber || 0;
+                currentNutrition.sugar += mealData.sugar || 0;
+                currentNutrition.alcohol += mealData.alcohol || 0;
             
             // Update dashboard
             updateNutritionDashboard();
