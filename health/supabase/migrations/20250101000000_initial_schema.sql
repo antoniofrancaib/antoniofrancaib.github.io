@@ -11,7 +11,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- Users table (for future multi-user support)
 CREATE TABLE IF NOT EXISTS users (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email TEXT UNIQUE NOT NULL,
     full_name TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Meal entries with comprehensive nutritional data
 CREATE TABLE IF NOT EXISTS meal_entries (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     meal_name TEXT NOT NULL,
     calories DECIMAL(8,2),
     protein DECIMAL(8,2), -- grams
@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS meal_entries (
 
 -- Meal presets for quick entry
 CREATE TABLE IF NOT EXISTS meal_presets (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
     category TEXT CHECK (category IN ('breakfast', 'lunch', 'dinner', 'snack', 'drink')),
     calories DECIMAL(8,2),
@@ -83,8 +83,8 @@ CREATE TABLE IF NOT EXISTS meal_presets (
 
 -- Daily wellness metrics (Energy, Mood, Clarity)
 CREATE TABLE IF NOT EXISTS wellness_entries (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     energy_score INTEGER CHECK (energy_score >= 1 AND energy_score <= 10),
     mood_score INTEGER CHECK (mood_score >= 1 AND mood_score <= 10),
@@ -104,8 +104,8 @@ CREATE TABLE IF NOT EXISTS wellness_entries (
 
 -- Daily activity summary
 CREATE TABLE IF NOT EXISTS activity_entries (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     steps INTEGER DEFAULT 0,
     active_calories INTEGER DEFAULT 0,
@@ -126,8 +126,8 @@ CREATE TABLE IF NOT EXISTS activity_entries (
 
 -- Individual workout sessions
 CREATE TABLE IF NOT EXISTS workout_entries (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     activity_type TEXT NOT NULL, -- e.g., 'running', 'weightlifting', 'swimming'
     duration_minutes INTEGER,
@@ -148,8 +148,8 @@ CREATE TABLE IF NOT EXISTS workout_entries (
 
 -- Sleep sessions from WHOOP/Apple Health
 CREATE TABLE IF NOT EXISTS sleep_entries (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     date DATE NOT NULL,
     time_asleep_minutes INTEGER,
     time_in_bed_minutes INTEGER,
@@ -185,8 +185,8 @@ CREATE TABLE IF NOT EXISTS sleep_entries (
 
 -- Daily cognitive metrics
 CREATE TABLE IF NOT EXISTS cognitive_entries (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     deep_work_minutes INTEGER DEFAULT 0,
     screen_time_minutes INTEGER DEFAULT 0,
@@ -210,8 +210,8 @@ CREATE TABLE IF NOT EXISTS cognitive_entries (
 
 -- Individual work sessions
 CREATE TABLE IF NOT EXISTS work_sessions (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     start_time TIME NOT NULL,
     end_time TIME,
@@ -230,8 +230,8 @@ CREATE TABLE IF NOT EXISTS work_sessions (
 
 -- Blood test results
 CREATE TABLE IF NOT EXISTS blood_tests (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     test_date DATE NOT NULL,
     lab_name TEXT,
     provider TEXT, -- e.g., 'labcorp', 'quest', 'private_lab'
@@ -308,8 +308,8 @@ CREATE TABLE IF NOT EXISTS blood_tests (
 
 -- User goals and targets
 CREATE TABLE IF NOT EXISTS user_goals (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     metric_type TEXT NOT NULL, -- 'calories', 'protein', 'steps', etc.
     target_value DECIMAL(8,2) NOT NULL,
     unit TEXT, -- 'kcal', 'g', 'steps', etc.
@@ -322,8 +322,8 @@ CREATE TABLE IF NOT EXISTS user_goals (
 
 -- Integration settings for external services
 CREATE TABLE IF NOT EXISTS integrations (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE DEFAULT gen_random_uuid(),
     service_name TEXT NOT NULL, -- 'whoop', 'rescue_time', 'google_calendar', 'apple_health'
     service_user_id TEXT,
     access_token TEXT, -- Encrypted in production
@@ -404,22 +404,22 @@ FROM wellness_entries;
 -- Weekly averages view
 CREATE OR REPLACE VIEW weekly_health_summary AS
 SELECT
-    user_id,
-    DATE_TRUNC('week', date) as week_start,
-    AVG(energy_score) as avg_energy,
-    AVG(mood_score) as avg_mood,
-    AVG(clarity_score) as avg_clarity,
-    SUM(total_calories) as weekly_calories,
-    SUM(total_protein) as weekly_protein,
-    SUM(steps) as weekly_steps,
-    AVG(recovery_score) as avg_recovery_score,
-    AVG(deep_work_minutes) as weekly_deep_work_minutes
+    COALESCE(dns.user_id, we.user_id, ae.user_id, se.user_id, ce.user_id) as user_id,
+    DATE_TRUNC('week', COALESCE(dns.date, we.date, ae.date, se.date, ce.date)) as week_start,
+    AVG(we.energy_score) as avg_energy,
+    AVG(we.mood_score) as avg_mood,
+    AVG(we.clarity_score) as avg_clarity,
+    SUM(dns.total_calories) as weekly_calories,
+    SUM(dns.total_protein) as weekly_protein,
+    SUM(ae.steps) as weekly_steps,
+    AVG(se.recovery_score) as avg_recovery_score,
+    AVG(ce.deep_work_minutes) as weekly_deep_work_minutes
 FROM daily_nutrition_summary dns
 FULL OUTER JOIN wellness_entries we ON dns.user_id = we.user_id AND dns.date = we.date
-FULL OUTER JOIN activity_entries ae ON dns.user_id = ae.user_id AND dns.date = ae.date
-FULL OUTER JOIN sleep_entries se ON dns.user_id = se.user_id AND dns.date = se.date
-FULL OUTER JOIN cognitive_entries ce ON dns.user_id = ce.user_id AND dns.date = ce.date
-GROUP BY user_id, DATE_TRUNC('week', date);
+FULL OUTER JOIN activity_entries ae ON COALESCE(dns.user_id, we.user_id) = ae.user_id AND COALESCE(dns.date, we.date) = ae.date
+FULL OUTER JOIN sleep_entries se ON COALESCE(dns.user_id, we.user_id, ae.user_id) = se.user_id AND COALESCE(dns.date, we.date, ae.date) = se.date
+FULL OUTER JOIN cognitive_entries ce ON COALESCE(dns.user_id, we.user_id, ae.user_id, se.user_id) = ce.user_id AND COALESCE(dns.date, we.date, ae.date, se.date) = ce.date
+GROUP BY COALESCE(dns.user_id, we.user_id, ae.user_id, se.user_id, ce.user_id), DATE_TRUNC('week', COALESCE(dns.date, we.date, ae.date, se.date, ce.date));
 
 -- ===========================================
 -- ROW LEVEL SECURITY (RLS) POLICIES

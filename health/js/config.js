@@ -1,9 +1,13 @@
 // Configuration constants for the Health Dashboard
 
 const CONFIG = {
-    // Supabase configuration
+    // Supabase configuration - Production URLs
     SUPABASE_URL: 'https://smuiaaeluqklideovsqn.supabase.co',
     SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtdWlhYWVsdXFrbGlkZW92c3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMDk0OTcsImV4cCI6MjA4MDg4NTQ5N30.SsAOS0HieZgNe5408udl8mjVT-4UqzfOIPy8k2O7aok',
+
+    // For local development, uncomment these lines:
+    // SUPABASE_URL: 'http://127.0.0.1:54321',
+    // SUPABASE_ANON_KEY: 'your-local-anon-key',
 
     // Nutrition goals
     NUTRITION_GOALS: {
