@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The best way to predict the future is to think about desire - Antonio Franca</title>
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* CSS Custom Properties for Theming */
+        body {
+            /* Light theme (default) */
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #fff;
+            --bg-tertiary: #fafafa;
+            --text-primary: #000;
+            --text-secondary: #333;
+            --text-tertiary: #666;
+            --text-muted: #999;
+            --text-faint: #888;
+            --border-color: #f0f0f0;
+            --border-color-medium: #e0e0e0;
+            --border-color-strong: #ddd;
+            --border-color-subtle: #ccc;
+            --link-color: #000;
+        }
+
+        /* Dark theme */
+        body[data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #1f1f1f;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #b0b0b0;
+            --text-muted: #808080;
+            --text-faint: #707070;
+            --border-color: #2a2a2a;
+            --border-color-medium: #333;
+            --border-color-strong: #3a3a3a;
+            --border-color-subtle: #444;
+            --link-color: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Links */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: opacity 0.2s ease, color 0.3s ease;
+        }
+        a:hover { opacity: 0.6; text-decoration: none; }
+
+        /* Page container - matches landing page */
+        .page-container {
+            max-width: none;
+            margin: 0;
+            padding: 24px;
+        }
+
+        /* Site title - matches landing page exactly */
+        .site-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0 0 60px 0;
+            text-align: left;
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .site-header {
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Note section - uses same grid as landing page */
+        .note-section {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            margin-bottom: 80px;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .section-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-muted);
+            grid-column: 1;
+            margin: 0;
+            text-align: left;
+            padding-left: 0;
+            transition: color 0.3s ease;
+        }
+
+        .section-content {
+            grid-column: 2;
+            max-width: none;
+        }
+
+        .note-date {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 24px;
+            transition: color 0.3s ease;
+        }
+
+        /* Note content */
+        .note-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .note-content p {
+            margin-bottom: 20px;
+            font-size: 17px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .note-content p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Blockquote styling */
+        .note-content blockquote {
+            border-left: 4px solid var(--border-color-medium);
+            padding-left: 20px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--text-tertiary);
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .note-content blockquote p {
+            margin-bottom: 12px;
+        }
+
+        .note-content blockquote p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Horizontal divider */
+        .note-content hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 32px 0;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Footer link */
+        .view-all-link {
+            font-size: 15px;
+            color: var(--link-color);
+            display: inline-block;
+            margin-top: 32px;
+            cursor: default;
+            opacity: 0.6;
+            transition: opacity 0.2s ease, color 0.3s ease;
+        }
+
+        /* Quotes - matches landing page exactly */
+        .site-quote {
+            margin-top: 12px;
+            margin-bottom: 60px;
+            padding-left: 24px;
+        }
+
+        .site-quote-line {
+            color: var(--text-tertiary);
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        .site-quote-action {
+            color: var(--text-faint);
+            text-decoration: none;
+            margin-left: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .site-quote-action:hover {
+            opacity: 0.6;
+            text-decoration: none;
+        }
+
+        /* Responsive design - matches landing page */
+        @media (max-width: 1000px) {
+            .page-container { padding: 40px 24px; }
+            .note-section {
+                gap: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-container { max-width: 100%; padding: 40px 24px; }
+            .site-title { font-size: 1.75rem; margin-bottom: 40px; }
+            .note-section {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                margin-bottom: 60px;
+            }
+            .section-label {
+                min-width: auto;
+                text-align: left;
+                padding-left: 0;
+            }
+        }
+        @media (min-width: 1400px) {
+            .note-section { gap: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header/Name Section - matches landing page -->
+        <header class="site-header">
+            <h1 class="site-title"><a href="../../">Antonio Franca</a></h1>
+        </header>
+
+        <!-- Note Section - uses same grid as landing page -->
+        <section class="note-section">
+            <h2 class="section-label">Note</h2>
+            <div class="section-content">
+                <div class="note-date">Mon, 21 Jul</div>
+
+                <article class="note-content">
+                    <p>My take on a <a href="http://dcurt.is/the-future" target="_blank">@dcurtis blog post</a> of the same title and topic.</p>
+
+                    <blockquote>
+                        <p>The best way to predict the future is to think about desire. The problem with desire is that it tends to be bounded by what's actually possible; as we grow older, our imaginations seem to develop artificial caps that limit our ideas to things that are reasonably achievable in the short term. But who cares about what is reasonable? Here's what I want.</p>
+                    </blockquote>
+
+                    <p>So, ignoring physics and politics for a second, here is what I actually want.</p>
+
+                    <p>I want biology to be totally programmable. Whether it's an internal bug (e.g. cancer), or a malicious code injection (e.g. a virus), it shouldn't matter. I want to get to a point where curing a disease is an information problem. No one dies from disease, we just need to patch that particular biological system. I want to live past 100, and without the decline.</p>
+
+                    <p>I want the cost of basic needs to hit zero, and retire the concept of money. Money is just a way to allocate scarce resources. But if artificial machines handle the marginal cost of production (e.g. energy, food, goods) scarcity is replaced by abundance. "Work" is just what we call it when we're working on something we're curious about, not something we do to pay rent.</p>
+
+                    <p>I want to travel anywhere on Earth in under an hour. And I want it to be totally frictionless: no lines, no cramped seats. It should be as comfortable as sitting in my own living room. Geography is no bottleneck on what and who we can see or where we can work.</p>
+
+                    <p>I want to sleep for four hours and wake up feeling like I slept for ten. It feels like a design flaw that we spend a third of our lives unconscious just to function.</p>
+
+                    <p>I want computing interfaces so intuitive and fluid that they feel like an extension of the real world. I don't want to type on a keyboard or tap glass. I want a JARVIS-like layer over reality that provides context and meaning without me having to ask. It shouldn't distract me from the real world; it should make the real world higher resolution.</p>
+
+                    <p>I want governance to function like open-source software. Right now, politics feels like running legacy code from the 19th century. I want to replace bureaucracy with transparent algorithms. I want a world where coordination problems are solved by math, not by committees, and where the state is a thin, efficient platform rather than a bloated operating system.</p>
+
+                    <p>I want to make war structurally impossible. Violence is usually just a fight over resources or a failure of communication. If resources are infinite and we're all connected, war becomes unfeasible. I want a world where attacking a neighbor makes as little sense as attacking yourself.</p>
+
+                    <p>I want high-bandwidth learning. If I want to learn algebraic topology or global geopolitics, I don't want to spend six months reading linearly. I want to download the context directly.</p>
+
+                    <p>I want a search engine for people. Right now, finding the five other people on earth who are obsessed with the exact same niche things as I am is a bottleneck. It should be as easy as googling a syntax question.</p>
+
+                    <p>I want a truth filter. A way to strip out the signaling, the ads, and the noise from the internet, so I'm left with just the raw signal.</p>
+
+                    <span class="view-all-link">View all notes →</span>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <!-- Quotes - matches landing page position -->
+    <div id="site-quote" class="site-quote" hidden>
+        <p class="site-quote-line"><span data-quote-full></span><a href="#" class="site-quote-action" data-quote-next>View another</a></p>
+    </div>
+
+    <script>
+        // Time-based theme switching (6am-6pm = light, 6pm-6am = dark)
+        (function(){
+          function applyTheme(){
+            const hour = new Date().getHours();
+            const isDark = hour < 6 || hour >= 18;
+            document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+          }
+          applyTheme();
+          setInterval(applyTheme, 60000);
+        })();
+    </script>
+    <script src="../../assets/js/quotes.js"></script>
+</body>
+</html>
