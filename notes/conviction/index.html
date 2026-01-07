@@ -290,11 +290,11 @@
                 <div class="note-date">Thu, 23 Oct</div>
                 
                 <article class="note-content">
-                    <p>There's something devastating about a man who fights without conviction.</p>
+                    <p>It’s hard to watch a man fight a war he doesn’t believe in. It feels like a waste.</p>
 
-                    <p>It's not nihilism exactly, but rather an acceptance that meaning might not come from causes or outcomes, but from the fleeting "impulse of delight" that drives us toward our fates.</p>
+                    <p>But in this elegy, Yeats suggests it might actually be the only way to be free. The airman isn't driven by hate for the enemy or love for his country. He's driven by something much simpler: the fun of flying.</p>
 
-                    <p>What follows is a reminder to confront life with intention, and not only momentum: an elegy set against the backdrop of World War I, inspired by the real-life death of Major Robert Gregory, Yeats's close friend.</p>
+                    <p>He's balanced his life, the past and the future, and decided none of it matters as much as this one specific "impulse of delight." Most of us drift through life on momentum, doing what we're told. This guy is doing exactly what he wants, even if it kills him.</p>
 
                     <hr>
 
@@ -318,7 +318,64 @@ The years to come seemed waste of breath,
 A waste of breath the years behind
 In balance with this life, this death.</div>
                     </div>
+                    Considering your goal is to find causality between what you input (food) and how you feel (wellness/clarity), you are missing two critical "Modulator" metrics.
 
+                    You currently track Fuel (Macros), but you aren't tracking Stabilizers or Disruptors.
+                    
+                    Here are the top 3 additions to make your data rigorous:
+                    
+                    1. Fiber (The "Mood" Stabilizer)
+                    Why: There is a direct link between gut health and serotonin (Mood). Also, high fiber blunts the insulin spike from carbs, preventing the "afternoon crash" (Energy).
+                    
+                    The Causality Test: You might find that High Carbs + Low Fiber = Low Clarity (Brain Fog), whereas High Carbs + High Fiber = High Energy.
+                    
+                    Implementation: Your Edge Function is already collecting this (I included fiber in the schema/AI prompt). You just need to display it.
+                    
+                    UI Idea: A small "sub-bar" underneath Carbs.
+                    
+                    2. Sugar (The "Energy" Disruptor)
+                    Why: High sugar intake is the strongest predictor of energy variability. If you eat high sugar at 1:00 PM, you will likely see a drop in your "Clarity" score at 3:00 PM.
+                    
+                    The Causality Test: Correlate Sugar > 50g with Next Day Energy.
+                    
+                    Implementation: The AI Vision prompt already asks for added_sugar.
+                    
+                    UI Idea: A "Limit" bar (inverse progress bar). It starts empty and fills up to red.
+                    
+                    3. Alcohol (The "Sleep" Killer)
+                    Why: This is statistically the single most significant variable for HRV and Sleep Quality. If you don't track this separately from "Carbs," your "Wellness" model will be noisy.
+                    
+                    The Causality Test: Even 1 unit of alcohol often drops Recovery Score by 10-15%.
+                    
+                    Implementation: Add a preset to your Shortcut menu: 🍷 Wine/Beer.
+                    
+                    UI Idea: A "Red Flag" counter. If > 0, show a small warning icon on the Overview tab for "Expected low recovery tomorrow."
+                    
+                    4. Water (The "Clarity" Base)
+                    Why: Dehydration is the #1 cause of acute brain fog (low Clarity).
+                    
+                    Implementation: A simple "+" counter on your dashboard (like your Coffee counter).
+                    
+                    UI Idea: Place it right next to Caffeine. "Hydration vs. Stimulation."
+                    
+                    Recommended UI Layout Update
+                    Don't add 4 big new cards (it will look cluttered). Group them logically.
+                    
+                    Group 1: Fuel (The Big Cards)
+                    
+                    Calories, Protein, Carbs, Fat.
+                    
+                    Group 2: Modulators (Small "Pill" Metrics below macros)
+                    
+                    Fiber: "24g / 30g" (Green check)
+                    
+                    Sugar: "12g / 40g" (Yellow warning)
+                    
+                    Group 3: Hydration (Side-by-Side Panel)
+                    
+                    Caffeine: [====--] 245mg (Limit)
+                    
+                    Water: [💧💧💧-] 1.5L (Goal)
                     <div class="note-image">
                         <img src="../../assets/images/yeats.jpeg" alt="William Butler Yeats">
                         <div class="image-caption">DN-0071801, Chicago Daily News negatives collection, Chicago History Museum</div>
