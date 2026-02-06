@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>There's something devastating about a man who fights without conviction - Antonio Franca</title>
-    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+    <title>Notes - Antonio Franca</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
     <style>
         /* Reset and base styles */
         * {
@@ -66,10 +66,10 @@
         }
 
         /* Links */
-        a { 
-            color: var(--link-color); 
-            text-decoration: none; 
-            transition: opacity 0.2s ease, color 0.3s ease; 
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: opacity 0.2s ease, color 0.3s ease;
         }
         a:hover { opacity: 0.6; text-decoration: none; }
 
@@ -100,8 +100,8 @@
             box-shadow: none !important;
         }
 
-        /* Note section - uses same grid as landing page */
-        .note-section {
+        /* Notes section - uses same grid as landing page */
+        .notes-section {
             display: grid;
             grid-template-columns: 1fr 3fr 1fr;
             margin-bottom: 80px;
@@ -126,153 +126,110 @@
             max-width: none;
         }
 
+        /* Notes list */
+        .notes-list {
+            margin-bottom: 32px;
+        }
+
+        .note-item {
+            display: flex;
+            margin-bottom: 40px;
+            align-items: flex-start;
+            gap: 20px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
+        }
+
+        .note-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
         .note-date {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             font-size: 13px;
             color: var(--text-muted);
             font-weight: 400;
-            margin-bottom: 24px;
+            white-space: nowrap;
+            min-width: 100px;
             transition: color 0.3s ease;
         }
 
-        /* Note content */
         .note-content {
-            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .note-content h3 {
+            font-size: 17px;
+            font-weight: 400;
             line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-
-        .note-content p {
-            margin-bottom: 20px;
-            font-size: 17px;
             color: var(--text-secondary);
+            margin: 0;
             transition: color 0.3s ease;
         }
 
-        .note-content p:last-of-type {
-            margin-bottom: 0;
-        }
-
-        /* Horizontal divider */
-        .note-content hr {
-            border: none;
-            border-top: 1px solid var(--border-color);
-            margin: 32px 0;
-            transition: border-color 0.3s ease;
-        }
-
-        /* Poem section */
-        .poem-section {
-            margin-top: 32px;
-        }
-
-        .poem-section h3 {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            transition: color 0.3s ease;
-        }
-
-        .poem-author {
-            font-size: 15px;
-            color: var(--text-muted);
-            font-style: italic;
-            margin-bottom: 32px;
-            transition: color 0.3s ease;
-        }
-
-        .poem-text {
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: 17px;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            font-style: italic;
-            white-space: pre-line;
-            transition: color 0.3s ease;
-        }
-
-        /* Image section */
-        .note-image {
-            margin-top: 48px;
-        }
-
-        .note-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 12px;
-        }
-
-        .image-caption {
-            font-size: 13px;
-            color: var(--text-muted);
-            font-style: italic;
-            text-align: center;
-            transition: color 0.3s ease;
-        }
-
-        /* Footer link */
-        .view-all-link {
-            font-size: 15px;
+        .note-content h3 a {
             color: var(--link-color);
-            display: inline-block;
-            margin-top: 32px;
-            cursor: default;
-            opacity: 0.6;
-            transition: opacity 0.2s ease, color 0.3s ease;
         }
 
         /* Quotes - matches landing page exactly */
-        .site-quote { 
-            margin-top: 12px; 
-            margin-bottom: 60px; 
-            padding-left: 24px; 
+        .site-quote {
+            margin-top: 12px;
+            margin-bottom: 60px;
+            padding-left: 24px;
         }
 
-        .site-quote-line { 
-            color: var(--text-tertiary); 
+        .site-quote-line {
+            color: var(--text-tertiary);
             font-style: italic;
             transition: color 0.3s ease;
         }
 
-        .site-quote-action { 
-            color: var(--text-faint); 
-            text-decoration: none; 
+        .site-quote-action {
+            color: var(--text-faint);
+            text-decoration: none;
             margin-left: 24px;
             transition: color 0.3s ease;
         }
 
-        .site-quote-action:hover { 
-            opacity: 0.6; 
-            text-decoration: none; 
+        .site-quote-action:hover {
+            opacity: 0.6;
+            text-decoration: none;
         }
 
         /* Responsive design - matches landing page */
         @media (max-width: 1000px) {
             .page-container { padding: 40px 24px; }
-            .note-section { 
-                gap: 20px; 
+            .notes-section {
+                gap: 20px;
             }
         }
         @media (max-width: 768px) {
             .page-container { max-width: 100%; padding: 40px 24px; }
             .site-title { font-size: 1.75rem; margin-bottom: 40px; }
-            .note-section { 
-                display: flex; 
-                flex-direction: column; 
-                gap: 24px; 
-                margin-bottom: 60px; 
+            .notes-section {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                margin-bottom: 60px;
             }
-            .section-label { 
-                min-width: auto; 
+            .section-label {
+                min-width: auto;
                 text-align: left;
                 padding-left: 0;
             }
+            .note-item {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .note-date {
+                min-width: auto;
+            }
         }
         @media (min-width: 1400px) {
-            .note-section { gap: 60px; }
+            .notes-section { gap: 60px; }
         }
     </style>
 </head>
@@ -280,47 +237,33 @@
     <div class="page-container">
         <!-- Header/Name Section - matches landing page -->
         <header class="site-header">
-            <h1 class="site-title"><a href="../../">Antonio Franca</a></h1>
+            <h1 class="site-title"><a href="../">Antonio Franca</a></h1>
         </header>
 
-        <!-- Note Section - uses same grid as landing page -->
-        <section class="note-section">
-            <h2 class="section-label">Note</h2>
+        <!-- Notes Section - uses same grid as landing page -->
+        <section class="notes-section">
+            <h2 class="section-label">Notes</h2>
             <div class="section-content">
-                <div class="note-date">Thu, 6 Feb</div>
-                
-                <article class="note-content">
-                    <p>It’s hard to watch a man fight a war he doesn’t believe in. It feels like a waste.</p>
-
-                    <p>But in this elegy, Yeats suggests it might actually be the only way to be free. The airman isn't driven by hate for the enemy or love for his country. He's driven by something much simpler: the fun of flying.</p>
-
-                    <p>He's balanced his life, the past and the future, and decided none of it matters as much as this one specific "impulse of delight." Most of us drift through life on momentum, doing what we're told. This guy is doing exactly what he wants, even if it kills him.</p>
-
-                    <hr>
-
-                    <div class="poem-section">
-                        <h3>An Irish Airman Foresees His Death</h3>
-                        <div class="poem-author">By William Butler Yeats</div>
-                        <div class="poem-text">I know that I shall meet my fate
-Somewhere among the clouds above;
-Those that I fight I do not hate,
-Those that I guard I do not love;
-My country is Kiltartan Cross,
-My countrymen Kiltartan's poor,
-No likely end could bring them loss
-Or leave them happier than before.
-Nor law, nor duty bade me fight,
-Nor public men, nor cheering crowds,
-A lonely impulse of delight
-Drove to this tumult in the clouds;
-I balanced all, brought all to mind,
-The years to come seemed waste of breath,
-A waste of breath the years behind
-In balance with this life, this death.</div>
+                <div class="notes-list">
+                    <div class="note-item">
+                        <span class="note-date">Thu, 6 Feb</span>
+                        <div class="note-content">
+                            <h3><a href="conviction/">There's something devastating about a man who fights without conviction, accepting that meaning might just come from the fleeting "impulse of delight" that drives us toward our fates.</a></h3>
+                        </div>
                     </div>
-                    
-                    <a href="../" class="view-all-link">View all notes →</a>
-                </article>
+                    <div class="note-item">
+                        <span class="note-date">Wed, 11 Dec</span>
+                        <div class="note-content">
+                            <h3><a href="future/">The best way to predict the future is to think about desire. The problem with desire is that it tends to be bounded by what's actually possible. But who cares about what is reasonable?</a></h3>
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-date">Thu, 23 Oct</span>
+                        <div class="note-content">
+                            <h3><a href="about/">A few glimpses of who I am, what I like, and what you can expect from an interaction with me, personally or professionally.</a></h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -342,7 +285,6 @@ In balance with this life, this death.</div>
           setInterval(applyTheme, 60000);
         })();
     </script>
-    <script src="../../assets/js/quotes.js"></script>
+    <script src="../assets/js/quotes.js"></script>
 </body>
 </html>
-
