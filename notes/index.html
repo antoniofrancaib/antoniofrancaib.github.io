@@ -262,6 +262,14 @@
             transition: opacity 0.2s ease, color 0.3s ease;
         }
 
+        .clickable-para {
+            cursor: pointer;
+        }
+
+        .toggleable-note[hidden] {
+            display: none;
+        }
+
         /* Quotes - matches landing page exactly */
         .site-quote {
             margin-top: 12px;
@@ -404,13 +412,13 @@ In balance with this life, this death.</div>
 
                         <p>I've always loved building things and understanding the world around us. At 12, my cousin and I built tree houses in the forest. I'd also collect things from nature and study them under my microscope (I did some terrifying experiments).</p>
 
-                        <p>I've <em>always</em> loved sports. At 14, I played football at Athletic Bilbao's (pic) youth academy. Now I enjoy swimming, tennis, running, surfing, and HIIT. Sports are my most important source of energy.</p>
+                        <p>I've <em>always</em> loved sports. At 14, I played football at Athletic Bilbao's (<a href="../assets/images/athletic.jpg" target="_blank">spot who I am</a>) youth academy. Now I enjoy swimming, tennis, running, surfing, and HIIT. Sports are my most important source of energy.</p>
 
                         <p>I love exploring new cultures and spending time in nature. I've traveled to over 40 countries across every continent except Antarctica.</p>
 
                         <p>I love music. My Spotify listening age is 84 years. I lean toward old music and used to make <a href="https://www.youtube.com/watch?v=a-MlkkkLWGg&list=RDa-MlkkkLWGg&start_radio=1" target="_blank">my own</a>.</p>
 
-                        <p>Some top outdoor picks: surfing Cloud 9 in Siargao (video), spending a week in the Balearic Islands sleeping in hammocks in the pine forests, and getting stranded deep in the Andes with a flat tire on the Chile-Argentina border (Sunday night, zero battery, and speeding trucks).</p>
+                        <p>Some top outdoor picks: surfing <a href="https://open.spotify.com/track/1A8gqfrso63AC4XVW6DTTw?si=09ab0499db3a48b5" target="_blank">Cloud 9</a> in Siargao (video), spending a week in the Balearic Islands sleeping in hammocks in the pine forests, and getting stranded deep in the Andes with a flat tire on the Chile-Argentina border (Sunday night, zero battery, and speeding trucks).</p>
 
                         <h3><strong>How I Confront Life</strong></h3>
 
@@ -418,9 +426,9 @@ In balance with this life, this death.</div>
 
                         <p>I value health and wellness. I monitor my body through Whoop and blood testing. I eat food that comes from nature and use products as close to nature as possible.</p>
 
-                        <p>I'm a techno-optimist and a libertarian. I believe capitalism, defined by respect for private property, contracts, and free trade, is humanity's greatest engine for prosperity. We solve problems through innovation and freedom.</p>
+                        <p id="libertarian-para-all" class="clickable-para">I'm a techno-optimist and a libertarian. I believe capitalism, defined by respect for private property, contracts, and free trade, is humanity's greatest engine for prosperity. We solve problems through innovation and freedom.</p>
 
-                        <div class="nested-note">
+                        <div id="government-note-all" class="nested-note toggleable-note" hidden>
                             <p>I believe the role of government should be limited to guaranteeing stability: maintaining currency and ensuring the principles of capitalism are respected. Their budget should cover military, national security, and little else. I'd love to see my country (Spain) align more closely with traditional Western values, maintain strong relationships with countries committed to democracy, and move away from postmodernist trends like forced multiculturalism.</p>
                         </div>
 
@@ -464,6 +472,17 @@ In balance with this life, this death.</div>
           }
           applyTheme();
           setInterval(applyTheme, 60000);
+        })();
+
+        // Toggle government note when libertarian paragraph is clicked
+        (function(){
+          var para = document.getElementById('libertarian-para-all');
+          var note = document.getElementById('government-note-all');
+          if (para && note) {
+            para.addEventListener('click', function(){
+              note.hidden = !note.hidden;
+            });
+          }
         })();
     </script>
     <script src="../assets/js/quotes.js"></script>
