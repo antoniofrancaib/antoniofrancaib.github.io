@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Antonio Franca</title>
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* CSS Custom Properties for Theming */
+        body {
+            /* Light theme (default) */
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #fff;
+            --bg-tertiary: #fafafa;
+            --text-primary: #000;
+            --text-secondary: #333;
+            --text-tertiary: #666;
+            --text-muted: #999;
+            --text-faint: #888;
+            --border-color: #f0f0f0;
+            --border-color-medium: #e0e0e0;
+            --border-color-strong: #ddd;
+            --border-color-subtle: #ccc;
+            --link-color: #000;
+        }
+
+        /* Dark theme */
+        body[data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #1f1f1f;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #b0b0b0;
+            --text-muted: #808080;
+            --text-faint: #707070;
+            --border-color: #2a2a2a;
+            --border-color-medium: #333;
+            --border-color-strong: #3a3a3a;
+            --border-color-subtle: #444;
+            --link-color: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Links */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: opacity 0.2s ease, color 0.3s ease;
+        }
+        a:hover { opacity: 0.6; text-decoration: none; }
+
+        /* Page container - matches landing page */
+        .page-container {
+            max-width: none;
+            margin: 0;
+            padding: 24px;
+        }
+
+        /* Site title - matches landing page exactly */
+        .site-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0 0 60px 0;
+            text-align: left;
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .site-header {
+            border: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Note section - uses same grid as landing page */
+        .note-section {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            margin-bottom: 80px;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .section-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-muted);
+            grid-column: 1;
+            margin: 0;
+            text-align: left;
+            padding-left: 0;
+            transition: color 0.3s ease;
+        }
+
+        .section-content {
+            grid-column: 2;
+            max-width: none;
+        }
+
+        .note-date {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 24px;
+            transition: color 0.3s ease;
+        }
+
+        /* Note content */
+        .note-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .note-content p {
+            margin-bottom: 20px;
+            font-size: 17px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .note-content p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .note-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .note-content h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .note-content strong {
+            font-weight: 600;
+        }
+
+        .note-content em {
+            font-style: italic;
+        }
+
+        /* Blockquote styling */
+        .note-content blockquote {
+            border-left: 4px solid var(--border-color-medium);
+            padding-left: 20px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--text-tertiary);
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .note-content blockquote p {
+            margin-bottom: 12px;
+        }
+
+        .note-content blockquote p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Horizontal divider */
+        .note-content hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 32px 0;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Footer link */
+        .view-all-link {
+            font-size: 15px;
+            color: var(--link-color);
+            display: inline-block;
+            margin-top: 32px;
+            cursor: default;
+            opacity: 0.6;
+            transition: opacity 0.2s ease, color 0.3s ease;
+        }
+
+        /* Quotes - matches landing page exactly */
+        .site-quote {
+            margin-top: 12px;
+            margin-bottom: 60px;
+            padding-left: 24px;
+        }
+
+        .site-quote-line {
+            color: var(--text-tertiary);
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        .site-quote-action {
+            color: var(--text-faint);
+            text-decoration: none;
+            margin-left: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .site-quote-action:hover {
+            opacity: 0.6;
+            text-decoration: none;
+        }
+
+        /* Responsive design - matches landing page */
+        @media (max-width: 1000px) {
+            .page-container { padding: 40px 24px; }
+            .note-section {
+                gap: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-container { max-width: 100%; padding: 40px 24px; }
+            .site-title { font-size: 1.75rem; margin-bottom: 40px; }
+            .note-section {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                margin-bottom: 60px;
+            }
+            .section-label {
+                min-width: auto;
+                text-align: left;
+                padding-left: 0;
+            }
+        }
+        @media (min-width: 1400px) {
+            .note-section { gap: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header/Name Section - matches landing page -->
+        <header class="site-header">
+            <h1 class="site-title"><a href="../../">Antonio Franca</a></h1>
+        </header>
+
+        <!-- Note Section - uses same grid as landing page -->
+        <section class="note-section">
+            <h2 class="section-label">Note</h2>
+            <div class="section-content">
+                <div class="note-date">Fri, 29 Aug</div>
+
+                <article class="note-content">
+                    <p>Hi, I'm Antonio. A few <strong>facts</strong> about me:</p>
+
+                    <p>I'm Spanish, from a small rural town in Zaragoza. I've also lived in Barcelona, Amsterdam, Singapore, Cambridge, Buenos Aires, and now Vienna.</p>
+
+                    <p>I've always loved building things and understanding the world around us. At 12, my cousin and I built tree houses in the forest. I'd also collect things from nature and study them under my microscope (I did some terrifying experiments).</p>
+
+                    <p>I've <em>always</em> loved sports. At 14, I played football at Athletic Bilbao's (pic) youth academy. Now I enjoy swimming, tennis, running, surfing, and HIIT. Sports are my most important source of energy.</p>
+
+                    <p>I love exploring new cultures and spending time in nature. I've traveled to over 40 countries across every continent except Antarctica.</p>
+
+                    <p>I love music. My Spotify listening age is 84 years. I lean toward old music and used to make my own music for some time.</p>
+
+                    <p>Some top outdoor picks: surfing Cloud 9 in Siargao (video), spending a week in the Balearic Islands sleeping in hammocks in the pine forests, and getting stranded deep in the Andes with a flat tire on the Chile-Argentina border (Sunday night, zero battery, and speeding trucks).</p>
+
+                    <h3><strong>How I Confront Life</strong></h3>
+
+                    <p>I intend to live with <em>purpose</em>. My life mission is to live with integrity, push our understanding of the universe forward, and make a positive impact on the lives of others.</p>
+
+                    <p>I value health and wellness. I monitor my body through Whoop and blood testing. I eat food that comes from nature and use products as close to nature as possible.</p>
+
+                    <p>I'm a techno-optimist and a libertarian. I believe capitalism, defined by respect for private property, contracts, and free trade, is humanity's greatest engine for prosperity. We solve problems through innovation and freedom.</p>
+
+                    <p>I believe the role of government should be limited to guaranteeing stability: maintaining currency and ensuring the principles of capitalism are respected. Their budget should cover military, national security, and little else. I'd love to see my country (Spain) align more closely with traditional Western values, maintain strong relationships with countries committed to democracy, and move away from postmodernist trends like forced multiculturalism.</p>
+
+                    <p>I try to live in the "fullness of rationality" (copy from ). I hate drama. My goal in human interaction is to find the non-zero-sum game where everyone wins the most.</p>
+
+                    <p>I'm curious and interdisciplinary. I love reading non-fiction: philosophy, ethics, economics, geopolitics. I've tried fiction multiple times, but it doesn't stick. This world is already too interesting.</p>
+
+                    <p>I believe suffering is always going to be present throughout our lives. We can't avoid it. I've learned to take the pain upfront. It is always better to get the hard part over with early rather than letting it hang over me.</p>
+
+                    <h3>What I look for in people</h3>
+
+                    <p>I'm pretty easy to get along with. Honestly, your chances are good that I'll be nice to you, whoever you are. But there are a few things that matter to me when choosing who to get around with:</p>
+
+                    <p>I like people who are <em>ambitious</em>. Not in the status-seeking way, but in the "I want to do something that matters" way. People who act in good faith and have a good heart. This sounds abstract, but you can actually spot it when you interact with someone. It's hard to fake.</p>
+
+                    <p>I like people who are genuinely <em>self-fulfilled</em>. The best relationships happen between people who are already whole on their own. This is when interdependence (in the Covey sense) can only happen.</p>
+
+                    <p>I value humility, curiosity, and simplicity (making things 'as simple as possible, but no simpler'). I dislike artificial complexity and arrogance. I respect people who take serious care of themselves, because you can't treat others well if you don't start with yourself.</p>
+
+                    <p>I don't do well with disloyalty. I'm deeply loyal, and breaking integrity (this has many shapes) is the one thing that is almost impossible to come back from.</p>
+
+                    <span class="view-all-link">View all notes →</span>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <!-- Quotes - matches landing page position -->
+    <div id="site-quote" class="site-quote" hidden>
+        <p class="site-quote-line"><span data-quote-full></span><a href="#" class="site-quote-action" data-quote-next>View another</a></p>
+    </div>
+
+    <script>
+        // Time-based theme switching (6am-6pm = light, 6pm-6am = dark)
+        (function(){
+          function applyTheme(){
+            const hour = new Date().getHours();
+            const isDark = hour < 6 || hour >= 18;
+            document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+          }
+          applyTheme();
+          setInterval(applyTheme, 60000);
+        })();
+    </script>
+    <script src="../../assets/js/quotes.js"></script>
+</body>
+</html>
