@@ -191,6 +191,19 @@
             margin-bottom: 0;
         }
 
+        /* Nested note styling - for related thoughts that expand on a point */
+        .note-content .nested-note {
+            margin-left: 24px;
+            margin-top: 12px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color-medium);
+            color: var(--text-tertiary);
+            font-size: 16px;
+            line-height: 1.6;
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
         /* Horizontal divider */
         .note-content hr {
             border: none;
@@ -273,7 +286,7 @@
         <section class="note-section">
             <h2 class="section-label">Note</h2>
             <div class="section-content">
-                <div class="note-date">Fri, 29 Aug</div>
+                <div class="note-date">Thu, 23 Oct</div>
 
                 <article class="note-content">
                     <p>Hi, I'm Antonio. A few <strong>facts</strong> about me:</p>
@@ -286,7 +299,7 @@
 
                     <p>I love exploring new cultures and spending time in nature. I've traveled to over 40 countries across every continent except Antarctica.</p>
 
-                    <p>I love music. My Spotify listening age is 84 years. I lean toward old music and used to make my own music for some time.</p>
+                    <p>I love music. My Spotify listening age is 84 years. I lean toward old music and used to make <a href="https://www.youtube.com/watch?v=a-MlkkkLWGg&list=RDa-MlkkkLWGg&start_radio=1" target="_blank">my own music</a>.</p>
 
                     <p>Some top outdoor picks: surfing Cloud 9 in Siargao (video), spending a week in the Balearic Islands sleeping in hammocks in the pine forests, and getting stranded deep in the Andes with a flat tire on the Chile-Argentina border (Sunday night, zero battery, and speeding trucks).</p>
 
@@ -298,9 +311,11 @@
 
                     <p>I'm a techno-optimist and a libertarian. I believe capitalism, defined by respect for private property, contracts, and free trade, is humanity's greatest engine for prosperity. We solve problems through innovation and freedom.</p>
 
-                    <p>I believe the role of government should be limited to guaranteeing stability: maintaining currency and ensuring the principles of capitalism are respected. Their budget should cover military, national security, and little else. I'd love to see my country (Spain) align more closely with traditional Western values, maintain strong relationships with countries committed to democracy, and move away from postmodernist trends like forced multiculturalism.</p>
+                    <div class="nested-note">
+                        <p>I believe the role of government should be limited to guaranteeing stability: maintaining currency and ensuring the principles of capitalism are respected. Their budget should cover military, national security, and little else. I'd love to see my country (Spain) align more closely with traditional Western values, maintain strong relationships with countries committed to democracy, and move away from postmodernist trends like forced multiculturalism.</p>
+                    </div>
 
-                    <p>I try to live in the "fullness of rationality" (copy from ). I hate drama. My goal in human interaction is to find the non-zero-sum game where everyone wins the most.</p>
+                    <p>I try to live in the fullness of rationality. I hate drama. My goal in human interaction is to find the non-zero-sum game where everyone wins the most.</p>
 
                     <p>I'm curious and interdisciplinary. I love reading non-fiction: philosophy, ethics, economics, geopolitics. I've tried fiction multiple times, but it doesn't stick. This world is already too interesting.</p>
 
